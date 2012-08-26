@@ -24,6 +24,13 @@ You need to define the supported version numbers in the application
 configuration ```view_versions```. Use this config to set the range of supported API
 versions, for instance [5..1], or [5..3].
 
+## Development Work
+
+1. Set the initial version list to a configuration parameter when
+   registerting the detail in lookup_context.rb
+2. Detect if there is an API_VERSION header and set the lookup context
+   versions to that value
+
 # License
 
-Rockit is released under the MIT license: www.opensource.org/licenses/MIT
+RenderVersion is released under the MIT license: www.opensource.org/licenses/MIT
