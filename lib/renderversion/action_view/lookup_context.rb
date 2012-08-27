@@ -1,3 +1,4 @@
+require 'renderversion/action_view/versions'
 require 'action_view'
 
 ActionView::LookupContext.class_eval do
@@ -5,6 +6,6 @@ ActionView::LookupContext.class_eval do
   # register an addition detail for the lookup context to understand,
   # this will allow us to have the versions available upon lookup in
   # the resolver.
-  register_detail(:versions){ [:v3, :v2, :v1] }
+  register_detail(:versions){ ActionView::Template::Versions.supported_versions }
 
 end

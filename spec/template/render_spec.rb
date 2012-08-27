@@ -11,6 +11,7 @@ describe "RenderTestCases" do
     path = ActionView::FileSystemResolver.new(FIXTURE_LOAD_PATH)
     view_paths = ActionView::PathSet.new([path])
     @view = ActionView::Base.new(view_paths,{})
+    ActionView::Template::Versions.supported_versions = [3,2,1]
   end
 
   it "renders the legacy version of the partial" do
@@ -27,7 +28,7 @@ describe "RenderTestCases" do
     @view.render(:template => "partials/versioned_partial").should == "partial version 3"
   end
 
-  it "renders the unversioned partial" do
+  it "renders the unversioned partial (regression)" do
     @view.render(:template => "partials/partial").should == "partial"
   end
 

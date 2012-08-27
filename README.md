@@ -26,9 +26,7 @@ versions, for instance [5..1], or [5..3].
 
 ## Development Work
 
-1. Set the initial version list to a configuration parameter when
-   registerting the detail in lookup_context.rb
-2. Detect if there is an API_VERSION header and set the lookup context
+1. Detect if there is an API_VERSION header and set the lookup context
    versions to that value
 
 # License
