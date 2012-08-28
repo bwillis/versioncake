@@ -2,6 +2,7 @@ source "http://rubygems.org"
 
 gemspec
 
+gem 'rack'
 gem 'actionpack'
 
 group :development do

@@ -4,6 +4,7 @@ module ActionView
     module Versions
 
       @@versions = []
+      @@current_version = nil
 
       def self.supported_versions=(versions)
         @@versions = versions.collect { |x| "v#{x}" }
@@ -11,6 +12,14 @@ module ActionView
 
       def self.supported_versions
         @@versions
+      end
+
+      def self.current_version
+        @@current_version
+      end
+
+      def self.current_version=(version)
+        @@current_version = version
       end
     end
   end

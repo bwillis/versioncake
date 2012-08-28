@@ -58,6 +58,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack
   mocha
+  rack
   rake
   renderversion!
   rspec
