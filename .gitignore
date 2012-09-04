@@ -1,2 +1,4 @@
 .idea
 .rvmrc
+spec/log
+log/

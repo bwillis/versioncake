@@ -39,9 +39,4 @@ describe "RenderTestCases" do
     @view.render(:template => "partials/versioned_partial", :versions => :v1).should == "partial version 1"
   end
 
-  it "render the specified version of the partial" do
-    controller.request.stub(:headers).returns({"version" => "1"})
-    get :versioned_partial
-    response.should render_template("versioned_partial.v1")
-  end
 end
