@@ -39,4 +39,28 @@ describe "RenderTestCases" do
     @view.render(:template => "partials/versioned_partial", :versions => :v1).should == "partial version 1"
   end
 
+  describe "when given an api version from a client" do
+    before do
+      ActionView::Template::Versions.current_version = 3
+    end
+
+    it "renders the requested version of the partial" do
+      @view.render(:template => "partials/versioned_partial").should == "partial version 3"
+    end
+
+    it "renders the latest supported version of the partial" do
+      ActionView::Template::Versions.supported_versions = [1]
+      @view.render(:template => "partials/versioned_partial").should == "partial version 1"
+    end
+
+    it "renders the latest available version of the partial" do
+      @view.render(:template => "partials/another_versioned_partial").should == "another versioned partial v1"
+    end
+
+    it "renders the legacy version of the partial" do
+      ActionView::Template::Versions.current_version = 2
+      @view.render(:template => "partials/versioned_partial").should == "partial version 2"
+    end
+  end
+
 end
