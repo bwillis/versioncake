@@ -17,6 +17,8 @@ root = File.expand_path(File.dirname(__FILE__))
 # Initialize the application
 RendersTest::Application.initialize!
 
+#ActionController::Base.view_paths = File.join(root, "/app/views")
+
 RSpec.configure do |config|
   config.mock_with :mocha
 end

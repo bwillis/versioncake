@@ -1,5 +1,6 @@
 require "bundler/gem_tasks"
 
+require 'rake/dsl_definition'
 require "bundler"
 Bundler.setup
 
