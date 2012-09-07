@@ -7,12 +7,10 @@ module ActionView
       @@current_version = nil
 
       def self.supported_versions=(versions)
-        puts "supported_versions being set: #{versions}"
         @@versions = versions.collect { |x| "v#{x}" }
       end
 
       def self.supported_versions
-        puts "supported_versions being called: #{@@versions}"
         @@versions
       end
 

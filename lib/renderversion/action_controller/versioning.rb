@@ -9,7 +9,6 @@ require 'action_dispatch/http/mime_negotiation'
 require 'action_dispatch/http/request'
 require 'abstract_controller'
 require 'action_controller'
-require 'renderversion/action_view/versions'
 
 module ActionController #:nodoc:
   module Versioning
@@ -22,9 +21,8 @@ module ActionController #:nodoc:
     protected
       def set_version
         if request.headers.has_key?("version")
-          puts ActionView::Template::Versions.supported_versions
           ActionView::Template::Versions.supported_versions = [request.headers["version"].to_i]
-          puts ActionView::Template::Versions.supported_versions
+          puts "assigning supported_versions to : #{ActionView::Template::Versions.supported_versions}"
         end
       end
   end

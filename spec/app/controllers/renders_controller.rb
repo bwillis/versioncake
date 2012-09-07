@@ -1,6 +1,5 @@
 class RendersController < ActionController::Base
   def index
-    puts "RendersController#index"
-    render "index"
+    puts "about to render!!!!!!!!!!!!!!!!!!!!!!!!!"
   end
 end
