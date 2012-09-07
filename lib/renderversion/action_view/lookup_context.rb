@@ -7,6 +7,5 @@ ActionView::LookupContext.class_eval do
   # this will allow us to have the versions available upon lookup in
   # the resolver.
   register_detail(:versions){ ActionView::Template::Versions.supported_versions }
-  #register_detail(:version){ [] }
 
 end
