@@ -1,26 +1,19 @@
+require 'active_support/core_ext/module/attribute_accessors.rb'
+
 module ActionView
 
   class Template
     module Versions
 
-      @@versions = []
-      @@current_version = nil
+      mattr_accessor :supported_versions
+      self.supported_versions = []
 
-      def self.supported_versions=(versions)
-        puts "setting supported versions to #{versions}"
-        @@versions = versions.collect { |x| "v#{x}" }
-      end
-
-      def self.supported_versions
-        @@versions
-      end
-
-      def self.current_version
-        @@current_version
-      end
-
-      def self.current_version=(version)
-        @@current_version = version
+      def self.supported_versions_for(requested_version=0)
+        self.supported_versions.select do |supported_version|
+          if supported_version <= requested_version
+            return :"v#{supported_version}"
+          end
+        end
       end
     end
   end

@@ -9,11 +9,9 @@ describe "RenderTestCases" do
     path = ActionView::FileSystemResolver.new(FIXTURE_LOAD_PATH)
     view_paths = ActionView::PathSet.new([path])
     @view = ActionView::Base.new(view_paths,{})
-    ActionView::Template::Versions.supported_versions = [3,2,1]
   end
 
   it "renders the unversioned template (regression)" do
-    ActionView::Template::Versions.supported_versions = []
     @view.render(:template => "templates/versioned").should == "template"
   end
 
