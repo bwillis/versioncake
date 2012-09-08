@@ -7,6 +7,6 @@ module RendersTest
     config.assets.enabled = true
     config.assets.version = '1.0'
     config.active_support.deprecation = :stderr
-    config.view_versions = [3,2,1]
+    config.view_versions = (1..3)
   end
 end
