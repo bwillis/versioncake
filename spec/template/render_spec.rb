@@ -12,6 +12,7 @@ describe "RenderTestCases" do
   end
 
   it "renders the unversioned template (regression)" do
+    @view.lookup_context.versions = [:v0]
     @view.render(:template => "templates/versioned").should == "template"
   end
 
