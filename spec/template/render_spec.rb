@@ -1,7 +1,4 @@
 require "spec_helper"
-require 'action_controller'
-require 'action_view'
-require 'action_dispatch'
 
 describe "RenderTestCases" do
 

@@ -1,6 +1,5 @@
 require 'action_view'
 
-
 ActionView::PathResolver.class_eval do
 
   # not sure why we are doing this yet, but looks like a good idea

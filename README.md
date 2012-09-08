@@ -1,7 +1,7 @@
 # Render Version
 
 Render version is a way to easily enable versioned views to support
-mulitple clients.
+mulitple clients in Rails.
 
 ## Install
 
@@ -11,23 +11,45 @@ gem install renderversion # TBD
 
 ## How to use
 
-When installed, render version will hook into the render function. When
-a client requests a version it will automatically look for that version
-by the file name. If the client requests version 2, it will attempt to
-render  ```show.html.erb.v2```. It will gracefully degrade to a lower
-version number or to the default base template without a version number.
+### Configure
+You need to define the supported versions in your Rails application.rb file as
+```view_versions```. Use this config to set the range of supported API
+versions:
+```ruby
+config.view_versions = [1,3,4,5] # or (1...5)
+```
 
-The client requests for a version based on an HTTP Header API_VERSION.
-Without this the rendering will default to the latest version.
+### Version your views
+When a client makes a request to your controller the latest version of the
+view will be rendered. The latest version is determined by naming the template
+or partial with a version number that you configured to support.
+```
+- app/views/posts
+    - index.html.erb
+    - edit.html.erb
+    - show.html.erb
+    - show.json.jbuilder
+    - show.json.jbuilder.v1
+    - show.json.jbuilder.v2
+    - new.html.erb
+    - _form.html.erb
+```
+If you start supporting a newer version, v3 for instance, a request for the latest
+version of posts/show will gracefully degrade to the latest support available
+version, in this case posts/show.json.jbuilder.v2.
 
-You need to define the supported version numbers in the application
-configuration ```view_versions```. Use this config to set the range of supported API
-versions, for instance [5..1], or [5..3].
+### Client requests
+When a client requests a version it will automatically receieve the view of the latest
+supported version. The client can also request for a specific version based on an
+HTTP Header version.
 
 ## Development Work
 
-1. Detect if there is an API_VERSION header and set the lookup context
-   versions to that value
+1. Expose helpers in the controller to detect the version
+ - is_view_v1?
+2. Log the version requested in the logs
+3. Allow version to be set through parameters
+4. Allow version to be set in Accept header (http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned)
 
 # License
 

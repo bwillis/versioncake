@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'action_view'
 
 describe RendersController do
 

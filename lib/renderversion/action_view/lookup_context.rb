@@ -1,4 +1,3 @@
-require 'renderversion/action_view/versions'
 require 'action_view'
 
 ActionView::LookupContext.class_eval do
