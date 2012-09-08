@@ -1,4 +1,4 @@
-# Render Version
+# Render Version [![Build Status](https://secure.travis-ci.org/bwillis/renderversion.png?branch=master)](http://travis-ci.org/bwillis/renderversion)
 
 Render version is a way to easily enable versioned views to support
 mulitple clients in Rails.
