@@ -1,0 +1,1 @@
+<%= controller.action_name %>.html.erb.v2

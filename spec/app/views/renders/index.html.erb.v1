@@ -1,1 +1,1 @@
-index.html.erb.v1!!!
+<%= controller.action_name %>.html.erb.v1

@@ -17,3 +17,4 @@ module ActionController #:nodoc:
       end
   end
 end
+ActionController::Base.send(:include, ActionController::Versioning)
