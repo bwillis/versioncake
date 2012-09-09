@@ -12,8 +12,8 @@ module ActionController #:nodoc:
 
     protected
       def set_version
-        if request.headers.has_key?("version")
-          @requested_version = request.headers["version"].to_i
+        if request.headers.has_key?("HTTP_API_VERSION")
+          @requested_version = request.headers["HTTP_API_VERSION"].to_i
           @_lookup_context.versions = ActionView::Template::Versions.supported_versions(@requested_version)
         else
           @requested_version = nil
