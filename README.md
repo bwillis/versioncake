@@ -28,14 +28,14 @@ or partial with a version number that you configured to support.
     - edit.html.erb
     - show.html.erb
     - show.json.jbuilder
-    - show.json.jbuilder.v1
-    - show.json.jbuilder.v2
+    - show.v1.json.jbuilder
+    - show.v2.json.jbuilder
     - new.html.erb
     - _form.html.erb
 ```
 If you start supporting a newer version, v3 for instance, a request for the latest
 version of posts/show will gracefully degrade to the latest support available
-version, in this case posts/show.json.jbuilder.v2.
+version, in this case posts/show.v2.json.jbuilder.
 
 ### Client requests
 When a client requests a version it will automatically receieve the view of the latest
