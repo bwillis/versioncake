@@ -2,7 +2,7 @@
 
 Render version is a way to easily version views in your Rails app.
 
-## Install
+## Install - not release yet
 
 ```
 gem install renderversion # TBD
@@ -19,6 +19,7 @@ config.view_versions = [1,3,4,5] # or (1...5)
 ```
 
 ### Version your views
+
 When a client makes a request to your controller the latest version of the
 view will be rendered. The latest version is determined by naming the template
 or partial with a version number that you configured to support.
@@ -38,7 +39,8 @@ version of posts/show will gracefully degrade to the latest support available
 version, in this case posts/show.v2.json.jbuilder.
 
 ### Client requests
-When a client requests a version it will automatically receieve the view of the latest
+
+When a client requests a version it will automatically receive the view of the latest
 supported version. The client can also request for a specific version based on an
 HTTP Header version.
 
