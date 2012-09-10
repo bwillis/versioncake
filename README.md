@@ -40,9 +40,13 @@ version, in this case posts/show.v2.json.jbuilder.
 
 ### Client requests
 
-When a client requests a version it will automatically receive the view of the latest
-supported version. The client can also request for a specific version based on an
-HTTP Header version.
+When a client makes a request it will automatically receive the latest supported
+version of the view. The client can also request for a specific version by one of three
+strategies:
+
+ - Api version HTTP header ```API-Version: 1```
+ - HTTP Accept header ``Accept: application/xml; version=1``
+ - parameter based ``?_api_version=1``
 
 ## Development Work
 
