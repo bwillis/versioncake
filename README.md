@@ -54,6 +54,9 @@ strategies:
 2. Expose helpers in the controller to detect the version
  - is_view_v1?
 3. Log the version requested in the logs
+4. Allow turning on/off the strategies
+5. Allow renaming of some string constants in strategies
+6. Think of a better name for the gem
 
 # License
 
