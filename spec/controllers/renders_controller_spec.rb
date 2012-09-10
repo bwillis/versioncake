@@ -64,5 +64,11 @@ describe RendersController do
       get :index
       response.body.should == "index.v2.html.erb"
     end
+
+    it "render the latest version of the partial" do
+      controller.request.stubs(:headers).returns({"HTTP_ACCEPT" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8;version=abc"})
+      get :index
+      response.body.should == "index.v2.html.erb"
+    end
   end
 end
