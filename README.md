@@ -45,16 +45,15 @@ version of the view. The client can also request for a specific version by one o
 strategies:
 
  - Api version HTTP header ```API-Version: 1```
- - HTTP Accept header ``Accept: application/xml; version=1``
+ - HTTP Accept header ``Accept: application/xml; version=1`` - http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned
  - parameter based ``?_api_version=1``
 
 ## Development Work
 
-1. Expose helpers in the controller to detect the version
+1. Ensure controller tests are Rails like
+2. Expose helpers in the controller to detect the version
  - is_view_v1?
-2. Log the version requested in the logs
-3. Allow version to be set through parameters
-4. Allow version to be set in Accept header (http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned)
+3. Log the version requested in the logs
 
 # License
 
