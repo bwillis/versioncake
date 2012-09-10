@@ -27,6 +27,14 @@ module ActionView
         end
       end
 
+      def self.supports_version?(version)
+        ActionView::Template::Versions.supported_version_numbers.include? version
+      end
+
+      def self.latest_version
+        ActionView::Template::Versions.supported_version_numbers.first
+      end
+
     end
   end
 end
