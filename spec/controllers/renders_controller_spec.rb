@@ -4,9 +4,28 @@ describe RendersController do
 
   render_views
 
+  before do
+    ActionView::Template::Versions.extraction_strategy = :query_parameter
+  end
+
   it "render the latest version of the partial" do
     get :index
     response.body.should == "index.v2.html.erb"
+  end
+
+  it "exposes the requested version" do
+    get :index, "api_version" => "1"
+    controller.requested_version.should == 1
+  end
+
+  it "exposes latest version when requesting the latest" do
+    get :index, "api_version" => "4"
+    controller.is_latest_version.should be
+  end
+
+  it "reports not the latest version" do
+    get :index, "api_version" => "1"
+    controller.is_latest_version.should_not be
   end
 
   context "parameter strategy" do
@@ -83,4 +102,5 @@ describe RendersController do
       response.body.should == "index.v2.html.erb"
     end
   end
+
 end
