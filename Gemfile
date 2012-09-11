@@ -13,4 +13,5 @@ gem 'sqlite3'
 group :development do
   # for travis-ci.org
   gem "rake"
+  gem 'test-unit'
 end
