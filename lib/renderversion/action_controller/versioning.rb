@@ -4,7 +4,7 @@ module ActionController #:nodoc:
   module Versioning
     extend ActiveSupport::Concern
 
-    attr_accessor :requested_version
+    attr_accessor :requested_version, :is_latest_version
 
     included do
       prepend_before_filter :set_version
@@ -19,6 +19,7 @@ module ActionController #:nodoc:
         else
           @requested_version = ActionView::Template::Versions.latest_version
         end
+        @is_latest_version = @requested_version == ActionView::Template::Versions.latest_version
       end
   end
 end
