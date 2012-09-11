@@ -10,6 +10,10 @@ describe RendersController do
   end
 
   context "parameter strategy" do
+    before do
+      ActionView::Template::Versions.extraction_strategy = :query_parameter
+    end
+
     it "render version 1 of the partial based on the parameter _api_version" do
       get :index, "api_version" => "1"
       response.body.should == "index.v1.html.erb"
@@ -27,6 +31,10 @@ describe RendersController do
   end
 
   context "custom header strategy" do
+    before do
+      ActionView::Template::Versions.extraction_strategy = :http_header
+    end
+
     it "render version 1 of the partial based on the header API-Version" do
       controller.request.stubs(:headers).returns({"HTTP_API_VERSION" => "1"})
       get :index
@@ -47,6 +55,10 @@ describe RendersController do
   end
 
   context "accept header strategy" do
+    before do
+      ActionView::Template::Versions.extraction_strategy = :http_accept_parameter
+    end
+
     it "render version 1 of the partial based on the header Accept" do
       controller.request.stubs(:headers).returns({"HTTP_ACCEPT" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8;api_version=1"})
       get :index

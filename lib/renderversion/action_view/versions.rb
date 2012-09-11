@@ -10,15 +10,26 @@ module ActionView
       self.supported_version_numbers = []
 
       mattr_accessor :extraction_strategy
-      self.extraction_strategy = :all
+      self.extraction_strategy = :query_parameter
 
       def self.extract_version(request)
-        if request.query_parameters.has_key? VERSION_STRING.to_sym
-          request.query_parameters[VERSION_STRING.to_sym].to_i
-        elsif request.headers.has_key?("HTTP_#{VERSION_STRING.upcase}")
-          request.headers["HTTP_#{VERSION_STRING.upcase}"].to_i
-        elsif request.headers.has_key?("HTTP_ACCEPT") && match = request.headers["HTTP_ACCEPT"].match(%{#{VERSION_STRING}=([0-9])})
-          match[1].to_i
+        case extraction_strategy
+          when Proc
+            extraction_strategy.call(request)
+          when :query_parameter
+            if request.query_parameters.has_key? VERSION_STRING.to_sym
+              request.query_parameters[VERSION_STRING.to_sym].to_i
+            end
+          when :http_header
+            if request.headers.has_key? "HTTP_#{VERSION_STRING.upcase}"
+              request.headers["HTTP_#{VERSION_STRING.upcase}"].to_i
+            end
+          when :http_accept_parameter
+            if request.headers.has_key?("HTTP_ACCEPT") && match = request.headers["HTTP_ACCEPT"].match(%{#{VERSION_STRING}=([0-9])})
+              match[1].to_i
+            end
+          else
+            raise "Unknown extraction strategy"
         end
       end
 
@@ -35,7 +46,7 @@ module ActionView
       end
 
       def self.supported_versions(requested_version_number=nil)
-        self.supported_version_numbers.collect do |supported_version_number|
+        supported_version_numbers.collect do |supported_version_number|
           if requested_version_number.nil? || supported_version_number <= requested_version_number
             :"v#{supported_version_number}"
           end
@@ -43,11 +54,11 @@ module ActionView
       end
 
       def self.supports_version?(version)
-        self.supported_version_numbers.include? version
+        supported_version_numbers.include? version
       end
 
       def self.latest_version
-        self.supported_version_numbers.first
+        supported_version_numbers.first
       end
 
     end

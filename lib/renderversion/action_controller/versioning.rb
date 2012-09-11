@@ -19,7 +19,6 @@ module ActionController #:nodoc:
         else
           @requested_version = ActionView::Template::Versions.latest_version
         end
-
       end
   end
 end

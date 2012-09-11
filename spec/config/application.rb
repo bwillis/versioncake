@@ -8,5 +8,6 @@ module RendersTest
     config.assets.version = '1.0'
     config.active_support.deprecation = :stderr
     config.view_versions = (1..3)
+    config.view_version_extraction_strategy = :http_header
   end
 end
