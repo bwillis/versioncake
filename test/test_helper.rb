@@ -3,16 +3,17 @@ Bundler.require
 
 require 'renderversion'
 
+ENV["RAILS_ENV"] = 'test'
+
 require 'rails/all'
 require 'rails/test_help'
 require 'test/unit'
-ENV["RAILS_ENV"] = "test"
+
+
 require File.expand_path('../config/application', __FILE__)
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-
-ENV["RAILS_ENV"] ||= 'test'
 
 root = File.expand_path(File.dirname(__FILE__))
 

@@ -4,9 +4,7 @@ require "action_controller"
 require "action_controller/test_case"
 
 class RendersControllerTest < ActionController::TestCase
-  #render_views
-
-  def render_latest_version_of_partial
+  test "render latest version of partial" do
     get :index
     assert_equal @response.body, "index.v2.html.erb"
   end

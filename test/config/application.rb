@@ -1,3 +1,5 @@
+require 'rails/all'
+
 module RendersTest
   class Application < Rails::Application
     config.encoding = "utf-8"
