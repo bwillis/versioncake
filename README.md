@@ -66,6 +66,9 @@ Proc.new { |request| request.headers["HTTP_X_API_MAGIC"].to_i }
 1. Ensure controller tests are Rails like
 2. Expose helpers in the controller to detect the version
  - is_view_v1?
+ - api_v2- for requested versions two or less
+ - api_v3+ for requested versions three or more
+ - api_v(2..1) for versions 2 through 1   ( http://stackoverflow.com/questions/2070574/is-there-a-reason-that-we-cannot-iterate-on-reverse-range-in-ruby )
 3. Log the version requested in the logs
 4. Allow renaming of some string constants in strategies
 5. Think of a better name for the gem
