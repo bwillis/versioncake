@@ -1,11 +1,11 @@
-# Render Version [![Build Status](https://secure.travis-ci.org/bwillis/renderversion.png?branch=master)](http://travis-ci.org/bwillis/renderversion)
+# Version Cake [![Build Status](https://secure.travis-ci.org/bwillis/versioncake.png?branch=master)](http://travis-ci.org/bwillis/versioncake)
 
-Render version is a way to easily version views in your Rails app.
+Version Cake is a way to easily version views in your Rails app.
 
 ## Install - not release yet
 
 ```
-gem install renderversion # TBD
+gem install versioncake
 ```
 
 ## How to use
@@ -64,9 +64,8 @@ Proc.new { |request| request.headers["HTTP_X_API_MAGIC"].to_i }
 ## Development Work
 
 1. Finish convertion of Rspec tests to TestUnit
-2. Syntatic sugar controller helpers to detect the version - interface discussion: https://github.com/bwillis/renderversion/commit/3dbdaf612ff99676c499a456f3e858e22382e76b#commitcomment-1847368
+2. Syntatic sugar controller helpers to detect the version - interface discussion: https://github.com/bwillis/versioncake/commit/3dbdaf612ff99676c499a456f3e858e22382e76b#commitcomment-1847368
 3. Log the version requested in the logs
-4. Think of a better name for the gem
 
 # Similar Libraries
 
@@ -74,4 +73,4 @@ Proc.new { |request| request.headers["HTTP_X_API_MAGIC"].to_i }
 
 # License
 
-RenderVersion is released under the MIT license: www.opensource.org/licenses/MIT
+Version Cake is released under the MIT license: www.opensource.org/licenses/MIT

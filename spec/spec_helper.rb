@@ -1,7 +1,7 @@
 require 'bundler'
 Bundler.require
 
-require 'renderversion'
+require 'versioncake'
 require 'rspec'
 require 'rails/all'
 require 'rspec/rails'

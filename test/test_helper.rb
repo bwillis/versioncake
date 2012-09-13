@@ -1,7 +1,7 @@
 require 'bundler'
 Bundler.require
 
-require 'renderversion'
+require 'versioncake'
 
 ENV["RAILS_ENV"] = 'test'
 

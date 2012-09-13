@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    renderversion (0.1.0)
+    versioncake (0.1.0)
 
 GEM
   remote: http://rubygems.org/
@@ -90,8 +90,8 @@ DEPENDENCIES
   multi_json
   rack
   rake
-  renderversion!
   rspec-rails
   sqlite3
   test-unit
   tzinfo
+  versioncake!

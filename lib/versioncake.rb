@@ -1,0 +1,6 @@
+require 'versioncake/action_view/template'
+require 'versioncake/action_view/versions'
+require 'versioncake/action_view/lookup_context'
+require 'versioncake/action_view/resolver'
+require 'versioncake/action_controller/versioning'
+require 'versioncake/action_view/railtie'
