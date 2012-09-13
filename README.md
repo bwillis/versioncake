@@ -63,14 +63,14 @@ Proc.new { |request| request.headers["HTTP_X_API_MAGIC"].to_i }
 
 ## Development Work
 
-1. Convert tests to TestUnit
-2. Expose helpers in the controller to detect the version
- - is_view_v1?
- - api_v2- for requested versions two or less
- - api_v3+ for requested versions three or more
- - api_v(2..1) for versions 2 through 1   ( http://stackoverflow.com/questions/2070574/is-there-a-reason-that-we-cannot-iterate-on-reverse-range-in-ruby )
+1. Finish convertion of Rspec tests to TestUnit
+2. Syntatic sugar controller helpers to detect the version - interface discussion: https://github.com/bwillis/renderversion/commit/3dbdaf612ff99676c499a456f3e858e22382e76b#commitcomment-1847368
 3. Log the version requested in the logs
 4. Think of a better name for the gem
+
+# Similar Libraries
+
+- https://github.com/bploetz/versionist
 
 # License
 
