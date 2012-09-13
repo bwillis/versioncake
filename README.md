@@ -2,7 +2,7 @@
 
 Version Cake is a way to easily version views in your Rails app.
 
-## Install - not release yet
+## Install
 
 ```
 gem install versioncake
