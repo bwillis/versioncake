@@ -72,7 +72,6 @@ Proc.new { |request| request.headers["HTTP_X_API_MAGIC"].to_i }
 3. Log the version requested in the logs
 4. Allow renaming of the version string for strategies
 5. Think of a better name for the gem
-6. Allow multiple strategies in priority order
 
 # License
 

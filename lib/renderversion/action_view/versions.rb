@@ -10,26 +10,48 @@ module ActionView
       self.supported_version_numbers = []
 
       mattr_accessor :extraction_strategy
-      self.extraction_strategy = :query_parameter
+      self.extraction_strategy = [:query_parameter]
+
+      EXTRACTION_STRATEGIES = {
+        :query_parameter => lambda { |request|
+          if request.query_parameters.has_key? VERSION_STRING.to_sym
+            request.query_parameters[VERSION_STRING.to_sym].to_i
+          end
+        },
+        :http_header => lambda { |request|
+          if request.headers.has_key? "HTTP_#{VERSION_STRING.upcase}"
+            request.headers["HTTP_#{VERSION_STRING.upcase}"].to_i
+          end
+        },
+        :http_accept_parameter => lambda { |request|
+          if request.headers.has_key?("HTTP_ACCEPT") &&
+              match = request.headers["HTTP_ACCEPT"].match(%{#{VERSION_STRING}=([0-9])})
+            match[1].to_i
+          end
+        }
+      }
 
       def self.extract_version(request)
-        case extraction_strategy
-          when Proc
-            extraction_strategy.call(request)
-          when :query_parameter
-            if request.query_parameters.has_key? VERSION_STRING.to_sym
-              request.query_parameters[VERSION_STRING.to_sym].to_i
-            end
-          when :http_header
-            if request.headers.has_key? "HTTP_#{VERSION_STRING.upcase}"
-              request.headers["HTTP_#{VERSION_STRING.upcase}"].to_i
-            end
-          when :http_accept_parameter
-            if request.headers.has_key?("HTTP_ACCEPT") && match = request.headers["HTTP_ACCEPT"].match(%{#{VERSION_STRING}=([0-9])})
-              match[1].to_i
-            end
+        version = nil
+        extraction_strategy.each do |strategy|
+          version = if strategy.is_a? Proc
+            strategy.call(request)
+          elsif EXTRACTION_STRATEGIES.include? strategy
+            EXTRACTION_STRATEGIES[strategy].call(request)
           else
-            raise "Unknown extraction strategy"
+            raise "Unknown extraction strategy #{strategy}"
+          end
+          break unless version.nil?
+        end
+        version
+      end
+
+      def self.extraction_strategy=(val)
+        case val
+          when Array
+            @@extraction_strategy = val
+          else
+            @@extraction_strategy = Array.wrap(val)
         end
       end
 
