@@ -70,8 +70,7 @@ Proc.new { |request| request.headers["HTTP_X_API_MAGIC"].to_i }
  - api_v3+ for requested versions three or more
  - api_v(2..1) for versions 2 through 1   ( http://stackoverflow.com/questions/2070574/is-there-a-reason-that-we-cannot-iterate-on-reverse-range-in-ruby )
 3. Log the version requested in the logs
-4. Allow renaming of the version string for strategies
-5. Think of a better name for the gem
+4. Think of a better name for the gem
 
 # License
 
