@@ -2,3 +2,4 @@
 .rvmrc
 spec/log
 log/
+*.gem
