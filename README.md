@@ -1,6 +1,8 @@
 # Version Cake [![Build Status](https://secure.travis-ci.org/bwillis/versioncake.png?branch=master)](http://travis-ci.org/bwillis/versioncake)
 
-Version Cake is a way to easily version views in your Rails app. We were tired of urls with version numbers, namespacing controllers with versions, and bumping all resources everytime we supported a version. Simply configure your supported version numbers, create a versioned view and let versioncake render the correct version or gracefully degrade to the latest supported view version.
+Version Cake is unobtrusive way to version views in your Rails app. 
+
+We were tired of urls with version numbers, namespacing controllers with versions, and bumping all resources everytime we supported a new version. Simply configure your supported version numbers, create a versioned view if you need one and let versioncake render the requested version or gracefully degrade to the latest supported view version.
 
 ## Install
 
@@ -43,15 +45,24 @@ When a client makes a request to your controller the latest version of the view 
     - _form.html.erb
 ```
 
-If you start supporting a newer version, v3 for instance, a request for the latest version of posts/show will gracefully degrade to the latest supported and available version, in this case posts/show.v2.json.jbuilder.
+If you start supporting a newer version, v3 for instance, you do not have to copy show.v2 to show.v3. By default, the request for v3 or higher will gracefully degrade to the view that is the newest, supported version, in this case posts/show.v2.json.jbuilder.
 
 ### Client requests
 
 When a client makes a request it will automatically receive the latest supported version of the view. The client can also request for a specific version by one of the strategies configured by ``view_version_extraction_strategy``.
 
-# Similar Libraries
+# Related Material
+
+## Libraries
 
 - https://github.com/bploetz/versionist
+- https://github.com/filtersquad/rocket_pants
+
+## Discussions
+
+- [Steve Klabnik on how to version in a resful way](http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned)
+- [Rails API project disucssion on versioning](https://github.com/spastorino/rails-api/issues/8)
+
 
 # License
 
