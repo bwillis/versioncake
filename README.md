@@ -47,7 +47,7 @@ If you start supporting a newer version, v3 for instance, a request for the late
 
 ### Client requests
 
-When a client makes a request it will automatically receive the latest supported version of the view. The client can also request for a specific version by one of the strategies configured by ``view_version_extraction_strategy``:
+When a client makes a request it will automatically receive the latest supported version of the view. The client can also request for a specific version by one of the strategies configured by ``view_version_extraction_strategy``.
 
 # Similar Libraries
 
