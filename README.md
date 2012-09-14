@@ -63,6 +63,9 @@ When a client makes a request it will automatically receive the latest supported
 - [Steve Klabnik on how to version in a resful way](http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned)
 - [Rails API project disucssion on versioning](https://github.com/spastorino/rails-api/issues/8)
 
+# Questions?
+
+Create a bug/enhancement/question on github or contact [aantix](https://github.com/aantix) or [bwillis](https://github.com/bwillis) through github.
 
 # License
 
