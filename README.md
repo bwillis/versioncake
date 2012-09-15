@@ -1,6 +1,6 @@
 # Version Cake [![Build Status](https://secure.travis-ci.org/bwillis/versioncake.png?branch=master)](http://travis-ci.org/bwillis/versioncake)
 
-Co-authored by Ben Willis ([@bwillis](https://github.com/bwillis/)) and Jim Jones ([@aantix](http://www.github.com/aantix)).
+Co-authored by Ben Willis ([@bwillis](https://github.com/bwillis/)) and Jim Jones ([@aantix](https://github.com/aantix)).
 
 Version Cake is unobtrusive way to version views in your Rails app. 
 
@@ -48,6 +48,10 @@ When a client makes a request to your controller the latest version of the view 
 ```
 
 If you start supporting a newer version, v3 for instance, you do not have to copy show.v2 to show.v3. By default, the request for v3 or higher will gracefully degrade to the view that is the newest, supported version, in this case posts/show.v2.json.jbuilder.
+
+### Controller
+
+You don't need to do anything special in your controller, but if you find that you want to perform some tasks for a specific version you can use `requested_version` and `latest_version`. This may be updated in the [near future](https://github.com/bwillis/versioncake/issues/1).
 
 ### Client requests
 
