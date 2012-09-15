@@ -1,5 +1,7 @@
 # Version Cake [![Build Status](https://secure.travis-ci.org/bwillis/versioncake.png?branch=master)](http://travis-ci.org/bwillis/versioncake)
 
+Co-authored by Ben Willis ([@bwillis](https://github.com/bwillis/)) and Jim Jones ([@aantix](http://www.github.com/aantix)).
+
 Version Cake is unobtrusive way to version views in your Rails app. 
 
 We were tired of urls with version numbers, namespacing controllers with versions, and bumping all resources everytime we supported a new version. Simply configure your supported version numbers, create a versioned view if you need one and let versioncake render the requested version or gracefully degrade to the latest supported view version.
