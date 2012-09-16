@@ -11,13 +11,14 @@ Gem::Specification.new do |s|
   s.summary     = %q{Easily render versions of your rails views.}
   s.description = %q{Render versioned views automagically based on the clients requested version.}
 
-  #s.rubyforge_project = ""
-
   s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.test_files    = `git ls-files -- {test}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_development_dependency "rspec-rails"
+  s.add_dependency('rails', '>= 3.2.8')
+
+  s.add_development_dependency "test-unit"
   s.add_development_dependency "mocha"
+
 end
