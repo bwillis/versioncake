@@ -63,6 +63,7 @@ When a client makes a request it will automatically receive the latest supported
 
 - https://github.com/bploetz/versionist
 - https://github.com/filtersquad/rocket_pants
+- https://github.com/lyonrb/biceps
 
 ## Discussions
 
