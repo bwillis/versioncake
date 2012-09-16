@@ -2,7 +2,7 @@
 
 Co-authored by Ben Willis ([@bwillis](https://github.com/bwillis/)) and Jim Jones ([@aantix](https://github.com/aantix)).
 
-Version Cake is unobtrusive way to version views in your Rails app. 
+Version Cake is an unobtrusive way to version views in your Rails app. 
 
 We were tired of urls with version numbers, namespacing controllers with versions, and bumping all resources everytime we supported a new version. Simply configure your supported version numbers, create a versioned view if you need one and let versioncake render the requested version or gracefully degrade to the latest supported view version.
 
@@ -16,12 +16,12 @@ gem install versioncake
 
 ### Configuration
 
-You need to define the supported versions in your Rails application.rb file as ```view_versions```. Use this config to set the range of supported API versions that can be served:
+You need to define the supported versions in your Rails application.rb file as `view_versions`. Use this config to set the range of supported API versions that can be served:
 
 ```ruby
 config.view_versions = [1,3,4,5] # or (1...5)
 ```
-You can also define the way to extract the version. The ```view_version_extraction_strategy``` allows you to set one of the default strategies or provide a proc to set your own. You can also pass it a prioritized array of the strategies.
+You can also define the way to extract the version. The `view_version_extraction_strategy` allows you to set one of the default strategies or provide a proc to set your own. You can also pass it a prioritized array of the strategies.
 ```ruby
 config.view_version_extraction_strategy = :http_parameter # [:http_header, :http_accept_parameter, :query_parameter]
 ```
@@ -47,7 +47,7 @@ When a client makes a request to your controller the latest version of the view 
     - _form.html.erb
 ```
 
-If you start supporting a newer version, v3 for instance, you do not have to copy show.v2 to show.v3. By default, the request for v3 or higher will gracefully degrade to the view that is the newest, supported version, in this case posts/show.v2.json.jbuilder.
+If you start supporting a newer version, v3 for instance, you do not have to copy posts/show.v2 to posts/show.v3. By default, the request for v3 or higher will gracefully degrade to the view that is the newest, supported version, in this case posts/show.v2.
 
 ### Controller
 
