@@ -52,7 +52,17 @@ If you start supporting a newer version, v3 for instance, you do not have to cop
 ### Controller
 
 You don't need to do anything special in your controller, but if you find that you want to perform some tasks for a specific version you can use `requested_version` and `latest_version`. This may be updated in the [near future](https://github.com/bwillis/versioncake/issues/1).
+```ruby
+def index
+  # shared code for all versions
+  @posts = Post.scoped
 
+  # version 3 or greated supports embedding post comments
+  if requested_version >= 3
+    @posts = @posts.includes(:comments)
+  end
+end
+```
 ### Client requests
 
 When a client makes a request it will automatically receive the latest supported version of the view. The client can also request for a specific version by one of the strategies configured by ``view_version_extraction_strategy``.
