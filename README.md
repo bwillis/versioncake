@@ -22,6 +22,11 @@ config.view_versions = (1...4)
 config.view_version_extraction_strategy = :http_parameter # for simplicity
 ```
 
+Often times with APIs, depending upon the version, different logic needs to be applied. With the following controller code, the initial value of @posts includes all Post entries.
+But if the requested API version is three or greater, we're going to eagerly load the associated comments as well.  
+
+Being able to control the logic based on the api version allow you to ensure forwards and backwards compatibility for future changes.
+
 ### PostsController
 ```ruby
 class PostsController < ApplicationController
@@ -37,7 +42,12 @@ class PostsController < ApplicationController
 end
 ```
 
-### Index Views
+See the view samples below. The basic top level posts are referenced in views/posts/index.v1.json.jbuilder.
+But for views/posts/index.v4.json.jbuilder, we utilize the additional related comments.
+
+### Views
+
+Notice the version numbers are denoted by the "v{version number}" extension within the file name.
 
 #### views/posts/index.v1.json.jbuilder
 ```ruby
@@ -54,7 +64,30 @@ json.array!(@posts) do |json, post|
 end
 ```
 
-### Output
+### Sample Output
+
+When a version is specified for which a view doesn't exist, the request degrades and renders the next lowest version number to ensure the API's backwards compatibility.  In the following case, since views/posts/index.v3.json.jbuilder doesn't exist, views/posts/index.v1.json.jbuilder is rendered instead.
+
+#### http://localhost:3000/posts.json?api_version=3 
+```javascript
+[
+  {
+    id: 1
+    title: "Version Cake v0.1.0 Released!"
+    name: "Ben"
+    updated_at: "2012-09-17T16:23:45Z"
+  },
+  {
+    id: 2
+    title: "Version Cake v0.2.0 Released!"
+    name: "Jim"
+    updated_at: "2012-09-17T16:23:32Z"
+  }
+]
+```
+
+
+For a given request, if we specify the version number, and that version of the view exists, that version specific view version will be rendered.  In the below case, views/posts/index.v1.json.jbuilder is rendered.
 
 #### http://localhost:3000/posts.json?api_version=2 or http://localhost:3000/posts.json?api_version=1 
 ```javascript
@@ -73,6 +106,10 @@ end
   }
 ]
 ```
+
+
+When no version is specified, the latest version of the view is rendered.  In this case, views/posts/index.v4.json.jbuilder.
+
 #### http://localhost:3000/posts.json
 ```javascript
 [
@@ -101,7 +138,6 @@ end
     ]
   }
 ]
-
 ```
 
 ## How to use
