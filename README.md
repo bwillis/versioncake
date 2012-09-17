@@ -12,6 +12,98 @@ We were tired of urls with version numbers, namespacing controllers with version
 gem install versioncake
 ```
 
+## Example
+
+In this simple example we will outline the code that is introduced to support a change in a version.
+
+### config/application.rb
+```ruby
+config.view_versions = (1...4)
+config.view_version_extraction_strategy = :http_parameter # for simplicity
+```
+
+### PostsController
+```ruby
+class PostsController < ApplicationController
+  def index
+    # shared code for all versions
+    @posts = Post.scoped
+
+    # version 3 or greated supports embedding post comments
+    if requested_version >= 3
+      @posts = @posts.includes(:comments)
+    end
+  end
+end
+```
+
+### Index Views
+
+#### views/posts/index.v1.json.jbuilder
+```ruby
+json.array!(@posts) do |json, post|
+    json.(post, :id, :title)
+end
+```
+
+#### views/posts/index.v4.json.jbuilder
+```ruby
+json.array!(@posts) do |json, post|
+    json.(post, :id, :title)
+    json.comments post.comments, :id, :text
+end
+```
+
+### Output
+
+#### http://localhost:3000/posts.json?api_version=2 or http://localhost:3000/posts.json?api_version=1 
+```javascript
+[
+  {
+    id: 1
+    title: "Version Cake v0.1.0 Released!"
+    name: "Ben"
+    updated_at: "2012-09-17T16:23:45Z"
+  },
+  {
+    id: 2
+    title: "Version Cake v0.2.0 Released!"
+    name: "Jim"
+    updated_at: "2012-09-17T16:23:32Z"
+  }
+]
+```
+#### http://localhost:3000/posts.json
+```javascript
+[
+  {
+    id: 1
+    title: "Version Cake v0.1.0 Released!"
+    name: "Ben"
+    updated_at: "2012-09-17T16:23:45Z"
+    comments: [
+      {
+        id: 1
+        text: "Woah interesting approach on versioning"
+      }
+    ]
+  },
+  {
+     id: 2
+     title: "Version Cake v0.2.0 Released!"
+     name: "Jim"
+     updated_at: "2012-09-17T16:23:32Z"
+     comments: [
+      {
+        id: 4
+        text: "These new features are greeeeat!"
+      }
+    ]
+  }
+]
+
+```
+
 ## How to use
 
 ### Configuration
