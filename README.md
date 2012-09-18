@@ -4,7 +4,18 @@ Co-authored by Ben Willis ([@bwillis](https://github.com/bwillis/)) and Jim Jone
 
 Version Cake is an unobtrusive way to version views in your Rails app. 
 
-We were tired of urls with version numbers, namespacing controllers with versions, and bumping all resources everytime we supported a new version. Simply configure your supported version numbers, create a versioned view if you need one and let versioncake render the requested version or gracefully degrade to the latest supported view version.
+- Easily version any view with their API version:
+
+```ruby
+app/views/posts/
+ - index.v1.xml.builder
+ - index.v3.xml.builder
+ - index.v1.json.jbuilder
+ - index.v4.json.jbuilder
+```
+- Gracefully degrade requests to the latest supported version
+- Clients can request API versions through different strategies
+- Dry your controller logic with exposed helpers
 
 ## Install
 
