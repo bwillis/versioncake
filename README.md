@@ -2,7 +2,7 @@
 
 Co-authored by Ben Willis ([@bwillis](https://github.com/bwillis/)) and Jim Jones ([@aantix](https://github.com/aantix)).
 
-Version Cake is an unobtrusive way to version views in your Rails app. 
+Version Cake is an unobtrusive way to version APIs in your Rails app. 
 
 - Easily version any view with their API version:
 
