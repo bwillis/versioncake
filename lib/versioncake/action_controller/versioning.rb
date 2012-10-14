@@ -13,12 +13,17 @@ module ActionController #:nodoc:
     protected
       def set_version
         requested_version = ActionView::Template::Versions.extract_version request
-        if ActionView::Template::Versions.supports_version? requested_version
-          @requested_version = requested_version
-          @_lookup_context.versions = ActionView::Template::Versions.supported_versions(requested_version)
-        else
+
+        if requested_version.nil?
           @requested_version = ActionView::Template::Versions.latest_version
+        elsif ActionView::Template::Versions.supports_version? requested_version
+          @requested_version = requested_version
+        elsif requested_version > ActionView::Template::Versions.latest_version
+          raise ActionController::RoutingError.new("No route match for version")
+        else
+          raise ActionController::RoutingError.new("Version is deprecated")
         end
+        @_lookup_context.versions = ActionView::Template::Versions.supported_versions(@requested_version)
         @is_latest_version = @requested_version == ActionView::Template::Versions.latest_version
       end
   end

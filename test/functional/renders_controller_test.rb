@@ -15,7 +15,7 @@ class RendersControllerTest < ActionController::TestCase
   end
 
   test "exposes latest version when requesting the latest" do
-    get :index, "api_version" => "4"
+    get :index, "api_version" => "3"
     assert @controller.is_latest_version
   end
 
@@ -141,5 +141,26 @@ class MultipleStrategyTest < ActionController::TestCase
     @controller.request.stubs(:headers).returns({"HTTP_ACCEPT" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8;api_version=2"})
     get :index, "api_version" => "1"
     assert_equal @response.body, "index.v2.html.erb"
+  end
+end
+
+class UnsupportedVersionTest < ActionController::TestCase
+  tests RendersController
+
+  setup do
+    ActionView::Template::Versions.extraction_strategy = :query_parameter
+  end
+
+  test "responds with 404 when the version is larger than the supported version" do
+    assert_raise ActionController::RoutingError do
+      get :index, "api_version" => "4"
+    end
+  end
+
+  test "responds with 404 when the version is lower than the latest version, but not an available version" do
+    ActionView::Template::Versions.supported_version_numbers = [2,3]
+    assert_raise ActionController::RoutingError do
+      get :index, "api_version" => "1"
+    end
   end
 end
