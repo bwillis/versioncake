@@ -23,6 +23,16 @@ class RendersControllerTest < ActionController::TestCase
     get :index, "api_version" => "1"
     assert !@controller.is_latest_version
   end
+
+  test "exposes the derived version when the version is not set" do
+    get :index
+    assert_equal 3, @controller.derived_version
+  end
+
+  test "requested version is blank when the version is not set" do
+    get :index
+    assert_blank @controller.requested_version
+  end
 end
 
 class ParameterStragegyTest < ActionController::TestCase
