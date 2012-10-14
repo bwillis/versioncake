@@ -48,7 +48,7 @@ class PostsController < ApplicationController
     @posts = Post.scoped
 
     # version 3 or greated supports embedding post comments
-    if requested_version >= 3
+    if derived_version >= 3
       @posts = @posts.includes(:comments)
     end
   end
@@ -199,7 +199,7 @@ def index
   @posts = Post.scoped
 
   # version 3 or greated supports embedding post comments
-  if requested_version >= 3
+  if derived_version >= 3
     @posts = @posts.includes(:comments)
   end
 end
