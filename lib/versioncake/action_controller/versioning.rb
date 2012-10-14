@@ -16,9 +16,9 @@ module ActionController #:nodoc:
 
         if @requested_version.nil?
           @derived_version = ActionView::Template::Versions.latest_version
-        elsif ActionView::Template::Versions.supports_version? requested_version
+        elsif ActionView::Template::Versions.supports_version? @requested_version
           @derived_version = @requested_version
-        elsif requested_version > ActionView::Template::Versions.latest_version
+        elsif @requested_version > ActionView::Template::Versions.latest_version
           raise ActionController::RoutingError.new("No route match for version")
         else
           raise ActionController::RoutingError.new("Version is deprecated")
