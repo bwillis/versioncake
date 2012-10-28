@@ -4,7 +4,8 @@ module ActionView
   class Template
     module Versions
 
-      VERSION_STRING = "api_version"
+      mattr_accessor :version_string
+      self.version_string = "api_version"
 
       mattr_accessor :supported_version_numbers
       self.supported_version_numbers = []
@@ -14,18 +15,18 @@ module ActionView
 
       EXTRACTION_STRATEGIES = {
         :query_parameter => lambda { |request|
-          if request.query_parameters.has_key? VERSION_STRING.to_sym
-            request.query_parameters[VERSION_STRING.to_sym].to_i
+          if request.query_parameters.has_key? @@version_string.to_sym
+            request.query_parameters[@@version_string.to_sym].to_i
           end
         },
         :http_header => lambda { |request|
-          if request.headers.has_key? "HTTP_#{VERSION_STRING.upcase}"
-            request.headers["HTTP_#{VERSION_STRING.upcase}"].to_i
+          if request.headers.has_key? "HTTP_X_#{@@version_string.upcase}"
+            request.headers["HTTP_X_#{@@version_string.upcase}"].to_i
           end
         },
         :http_accept_parameter => lambda { |request|
           if request.headers.has_key?("HTTP_ACCEPT") &&
-              match = request.headers["HTTP_ACCEPT"].match(%{#{VERSION_STRING}=([0-9])})
+              match = request.headers["HTTP_ACCEPT"].match(%{#{@@version_string}=([0-9])})
             match[1].to_i
           end
         }

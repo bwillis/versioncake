@@ -4,23 +4,33 @@ require "action_controller"
 require "action_controller/test_case"
 
 class RendersControllerTest < ActionController::TestCase
+
+  setup do
+    # change the version string for configuration testing
+    ActionView::Template::Versions.version_string = "version"
+  end
+
+  teardown do
+    ActionView::Template::Versions.version_string = "api_version"
+  end
+
   test "render latest version of partial" do
     get :index
     assert_equal @response.body, "index.v2.html.erb"
   end
 
   test "exposes the requested version" do
-    get :index, "api_version" => "1"
+    get :index, "version" => "1"
     assert_equal @controller.requested_version, 1
   end
 
   test "exposes latest version when requesting the latest" do
-    get :index, "api_version" => "3"
+    get :index, "version" => "3"
     assert @controller.is_latest_version
   end
 
   test "reports not the latest version" do
-    get :index, "api_version" => "1"
+    get :index, "version" => "1"
     assert !@controller.is_latest_version
   end
 
@@ -66,19 +76,19 @@ tests RendersController
   end
 
   test "renders version 1 of the partial based on the header API-Version" do
-    @controller.request.stubs(:headers).returns({"HTTP_API_VERSION" => "1"})
+    @controller.request.stubs(:headers).returns({"HTTP_X_API_VERSION" => "1"})
     get :index
     assert_equal @response.body, "index.v1.html.erb"
   end
 
   test "renders version 2 of the partial based on the header API-Version" do
-    @controller.request.stubs(:headers).returns({"HTTP_API_VERSION" => "2"})
+    @controller.request.stubs(:headers).returns({"HTTP_X_API_VERSION" => "2"})
     get :index
     assert_equal @response.body, "index.v2.html.erb"
   end
 
   test "renders the latest available version (v2) of the partial based on the header API-Version" do
-    @controller.request.stubs(:headers).returns({"HTTP_API_VERSION" => "3"})
+    @controller.request.stubs(:headers).returns({"HTTP_X_API_VERSION" => "3"})
     get :index
     assert_equal @response.body, "index.v2.html.erb"
   end
