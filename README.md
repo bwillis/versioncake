@@ -19,6 +19,8 @@ app/views/posts/
 - Clients can request API versions through different strategies
 - Dry your controller logic with exposed helpers
 
+Check out https://github.com/bwillis/350-rest-api-versioning for a comparison of traditional versioning approaches and a versioncake implementation.
+
 ## Install
 
 ```
