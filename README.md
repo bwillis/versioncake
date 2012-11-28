@@ -34,7 +34,7 @@ In this simple example we will outline the code that is introduced to support a 
 ### config/application.rb
 ```ruby
 config.view_versions = (1...4)
-config.view_version_extraction_strategy = :http_parameter # for simplicity
+config.view_version_extraction_strategy = :query_parameter # for simplicity
 ```
 
 Often times with APIs, depending upon the version, different logic needs to be applied. With the following controller code, the initial value of @posts includes all Post entries.
