@@ -65,7 +65,7 @@ module ActionView
         else
           @@supported_version_numbers = Array.wrap(val)
         end
-        @@supported_version_numbers.reverse!
+        @@supported_version_numbers.sort!.reverse!
       end
 
       def self.supported_versions(requested_version_number=nil)
