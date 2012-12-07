@@ -1,7 +1,6 @@
-require 'test_helper'
-
-require "action_controller"
-require "action_controller/test_case"
+require './test/test_helper'
+require 'action_controller'
+require 'action_controller/test_case'
 
 class RendersControllerTest < ActionController::TestCase
 
