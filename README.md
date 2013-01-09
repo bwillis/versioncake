@@ -1,6 +1,7 @@
 ![Version Cake](https://raw.github.com/alicial/versioncake/master/images/versioncake-logo450x100.png)
 
 [![Build Status](https://secure.travis-ci.org/bwillis/versioncake.png?branch=master)](http://travis-ci.org/bwillis/versioncake)
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/bwillis/versioncake)
 
 Co-authored by Ben Willis ([@bwillis](https://github.com/bwillis/)) and Jim Jones ([@aantix](https://github.com/aantix)).
 
