@@ -13,38 +13,35 @@ module ActionView
       mattr_accessor :extraction_strategy
       self.extraction_strategy = [:query_parameter]
 
-      EXTRACTION_STRATEGIES = {
-        :query_parameter => lambda { |request|
-          if request.query_parameters.has_key? @@version_string.to_sym
-            request.query_parameters[@@version_string.to_sym].to_i
-          end
-        },
-        :http_header => lambda { |request|
-          if request.headers.has_key? "HTTP_X_#{@@version_string.upcase}"
-            request.headers["HTTP_X_#{@@version_string.upcase}"].to_i
-          end
-        },
-        :http_accept_parameter => lambda { |request|
-          if request.headers.has_key?("HTTP_ACCEPT") &&
-              match = request.headers["HTTP_ACCEPT"].match(%{#{@@version_string}=([0-9])})
-            match[1].to_i
-          end
-        }
-      }
-
       def self.extract_version(request)
         version = nil
         extraction_strategy.each do |strategy|
-          version = if strategy.is_a? Proc
-            strategy.call(request)
-          elsif EXTRACTION_STRATEGIES.include? strategy
-            EXTRACTION_STRATEGIES[strategy].call(request)
-          else
-            raise "Unknown extraction strategy #{strategy}"
-          end
+          version = apply_strategy(request, strategy)
           break unless version.nil?
         end
         version
+      end
+
+      def self.apply_strategy(request, strategy)
+        case strategy
+          when Proc
+            strategy.call(request)
+          when :http_accept_parameter
+            if request.headers.has_key?("HTTP_ACCEPT") &&
+                match = request.headers["HTTP_ACCEPT"].match(%{#{@@version_string}=([0-9])})
+              match[1].to_i
+            end
+          when :http_header
+            if request.headers.has_key? "HTTP_X_#{@@version_string.upcase}"
+              request.headers["HTTP_X_#{@@version_string.upcase}"].to_i
+            end
+          when :query_parameter
+            if request.query_parameters.has_key? @@version_string.to_sym
+              request.query_parameters[@@version_string.to_sym].to_i
+            end
+          else
+            raise "Unknown extraction strategy #{strategy}"
+        end
       end
 
       def self.extraction_strategy=(val)
@@ -59,11 +56,11 @@ module ActionView
       def self.supported_version_numbers=(val)
         case val
           when Range
-          @@supported_version_numbers = val.to_a
-        when Array
-          @@supported_version_numbers = val
-        else
-          @@supported_version_numbers = Array.wrap(val)
+            @@supported_version_numbers = val.to_a
+          when Array
+            @@supported_version_numbers = val
+          else
+            @@supported_version_numbers = Array.wrap(val)
         end
         @@supported_version_numbers.sort!.reverse!
       end
