@@ -39,6 +39,10 @@ module ActionView
             if request.query_parameters.has_key? @@version_string.to_sym
               request.query_parameters[@@version_string.to_sym].to_i
             end
+          when :request_parameter
+            if request.request_parameters.has_key? @@version_string.to_sym
+              request.request_parameters[@@version_string.to_sym].to_i
+            end
           else
             raise "Unknown extraction strategy #{strategy}"
         end

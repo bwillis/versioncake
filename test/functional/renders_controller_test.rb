@@ -93,6 +93,19 @@ tests RendersController
   end
 end
 
+class RequestBodyStrategyTest < ActionController::TestCase
+ tests RendersController
+
+  setup do
+    ActionView::Template::Versions.extraction_strategy = :request_parameter
+  end
+
+  test "requested version is in the body" do
+    post :index, "api_version" => "2"
+    assert_equal 2, @controller.requested_version
+  end
+end
+
 class AcceptHeaderStrategyTest < ActionController::TestCase
   tests RendersController
 
