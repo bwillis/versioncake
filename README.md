@@ -217,6 +217,53 @@ end
 
 When a client makes a request it will automatically receive the latest supported version of the view. The client can also request for a specific version by one of the strategies configured by ``view_version_extraction_strategy``.
 
+## How to test
+
+Testing can be painful but here are some easy ways to test different versions of your api using version cake.
+
+### Test configuration
+
+Allowing more extraction strategies during testing can be helpful when needing to override the version.
+```ruby
+# config/environments/test.rb
+config.view_version_extraction_strategy = [:query_parameter, :request_parameter, :http_header, :http_accept_parameter]
+```
+
+### Testing a specific version
+
+One way to test a specific version for would be to stub the requested version in the before block:
+```ruby
+before do
+  @controller.stubs(:requested_version).returns(3)
+end
+```
+
+You can also test a specific version through a specific strategy such query_parameter or request_parameter strategies (configured in test environment) like so:
+```ruby
+# test/functional/renders_controller_test.rb#L47
+test "render version 1 of the partial based on the parameter _api_version" do
+  get :index, "api_version" => "1"
+  assert_equal @response.body, "index.v1.html.erb"
+end
+```
+
+### Testing all supported versions
+
+You can iterate over all of the supported version numbers by accessing the ```AppName::Application.config.view_versions```.
+
+```ruby
+AppName::Application.config.view_versions.each do |supported_version|
+  before do
+    @controller.stubs(:requested_version).returns(supported_version)
+  end
+  
+  test "all versions render the correct template" do
+    get :index
+    assert_equal @response.body, "index.v1.html.erb"
+  end
+end
+```
+
 # Related Material
 
 ## Usages
