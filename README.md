@@ -163,7 +163,7 @@ When no version is specified, the latest version of the view is rendered.  In th
 You need to define the supported versions in your Rails application.rb file as `view_versions`. Use this config to set the range of supported API versions that can be served:
 
 ```ruby
-config.view_versions = [1,3,4,5] # or (1...5)
+config.view_versions = [1,2,3,4,5] # or (1..5)
 ```
 You can also define the way to extract the version. The `view_version_extraction_strategy` allows you to set one of the default strategies or provide a proc to set your own. You can also pass it a prioritized array of the strategies.
 ```ruby
