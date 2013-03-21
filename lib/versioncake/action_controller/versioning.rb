@@ -11,8 +11,8 @@ module ActionController #:nodoc:
     end
 
     protected
-      def set_version
-        @requested_version = ActionView::Template::Versions.extract_version request
+      def set_version(override_version=nil)
+        @requested_version = override_version || ActionView::Template::Versions.extract_version(request)
 
         if @requested_version.nil?
           @derived_version = ActionView::Template::Versions.latest_version

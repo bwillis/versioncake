@@ -42,6 +42,11 @@ class RendersControllerTest < ActionController::TestCase
     get :index
     assert_blank @controller.requested_version
   end
+
+  test "set_version can be called to override the requested version" do
+    get :index, "version" => "1", "override_version" => 2
+    assert_equal 2, @controller.derived_version
+  end
 end
 
 class ParameterStragegyTest < ActionController::TestCase
