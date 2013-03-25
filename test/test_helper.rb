@@ -1,3 +1,6 @@
+require 'coveralls'
+Coveralls.wear!
+
 require 'bundler'
 Bundler.require
 
@@ -10,9 +13,6 @@ require 'rails/test_help'
 require 'test/unit'
 
 require File.expand_path('../config/application', __FILE__)
-
-require 'coveralls'
-Coveralls.wear!
 
 FIXTURE_LOAD_PATH = File.join(File.dirname(__FILE__), 'fixtures')
 FIXTURES = Pathname.new(FIXTURE_LOAD_PATH)
