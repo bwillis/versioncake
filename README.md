@@ -3,6 +3,7 @@
 [![Build Status](https://secure.travis-ci.org/bwillis/versioncake.png?branch=master)](http://travis-ci.org/bwillis/versioncake)
 [![Code Climate](https://codeclimate.com/github/bwillis/versioncake.png)](https://codeclimate.com/github/bwillis/versioncake)
 [![Dependency Status](https://gemnasium.com/bwillis/versioncake.png)](https://gemnasium.com/bwillis/versioncake)
+[![Coverage Status](https://coveralls.io/repos/bwillis/versioncake/badge.png?branch=master)](https://coveralls.io/r/bwillis/versioncake)
 
 Co-authored by Ben Willis ([@bwillis](https://github.com/bwillis/)) and Jim Jones ([@aantix](https://github.com/aantix)).
 
