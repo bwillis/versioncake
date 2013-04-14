@@ -15,4 +15,5 @@ group :development do
   # for travis-ci.org
   gem "rake"
   gem 'test-unit'
+  gem 'mocha', '~> 0.12.0', :require => false
 end

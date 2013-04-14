@@ -12,7 +12,7 @@ class ActionViewVersions < Rails::Railtie
       end
 
       if app.config.respond_to?(:view_version_string)
-        ActionView::Template::Versions.version_string = app.config.view_version_string
+        VersionCake::ExtractionStrategy.version_string = app.config.view_version_string
       end
     end
   end

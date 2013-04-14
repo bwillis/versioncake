@@ -1,5 +1,7 @@
 .idea
 .rvmrc
+.ruby-gemset
+.ruby-version
 spec/log
 log/
 *.gem
