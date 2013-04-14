@@ -6,11 +6,11 @@ class RendersControllerTest < ActionController::TestCase
 
   setup do
     # change the version string for configuration testing
-    ActionView::Template::Versions.version_string = "version"
+    VersionCake::ExtractionStrategy.version_string = "version"
   end
 
   teardown do
-    ActionView::Template::Versions.version_string = "api_version"
+    VersionCake::ExtractionStrategy.version_string = "api_version"
   end
 
   test "render latest version of partial" do
