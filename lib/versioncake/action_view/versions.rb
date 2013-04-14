@@ -8,7 +8,7 @@ module ActionView
       self.supported_version_numbers = []
 
       mattr_accessor :extraction_strategies
-      self.extraction_strategies = [:query_parameter]
+      self.extraction_strategies = [VersionCake::QueryParameterStrategy.new]
 
       def self.extract_version(request)
         version = nil
