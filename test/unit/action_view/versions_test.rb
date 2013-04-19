@@ -37,4 +37,9 @@ class VersionsTest < ActiveSupport::TestCase
       assert_false ActionView::Template::Versions.supports_version? unsupported_version
     end
   end
+
+  test "latest_version retrieves the highest supported version" do
+    ActionView::Template::Versions.supported_version_numbers = [4,1,3,9,2,54]
+    assert_equal 54, ActionView::Template::Versions.latest_version
+  end
 end
