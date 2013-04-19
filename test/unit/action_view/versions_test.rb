@@ -23,4 +23,18 @@ class VersionsTest < ActiveSupport::TestCase
     ActionView::Template::Versions.supported_version_numbers = 19
     assert_equal [19], ActionView::Template::Versions.supported_version_numbers
   end
+
+  test "supports_version? is only true for given supported versions" do
+    ActionView::Template::Versions.supported_version_numbers = (1..7)
+    ActionView::Template::Versions.supported_version_numbers.each do |supported_version|
+      assert_true ActionView::Template::Versions.supports_version? supported_version
+    end
+  end
+
+  test "supports_version? is not true for other versions" do
+    ActionView::Template::Versions.supported_version_numbers = (1..7)
+    [-2,-1,0,8,9,10].each do |unsupported_version|
+      assert_false ActionView::Template::Versions.supports_version? unsupported_version
+    end
+  end
 end
