@@ -27,14 +27,7 @@ module ActionView
       end
 
       def self.supported_version_numbers=(val)
-        case val
-          when Range
-            @@supported_version_numbers = val.to_a
-          when Array
-            @@supported_version_numbers = val
-          else
-            @@supported_version_numbers = Array.wrap(val)
-        end
+        @@supported_version_numbers = val.respond_to?(:to_a) ? val.to_a : Array.wrap(val)
         @@supported_version_numbers.sort!.reverse!
       end
 
