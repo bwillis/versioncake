@@ -288,6 +288,7 @@ end
 - [Ruby5 on versioncake](http://ruby5.envylabs.com/episodes/310-episode-306-september-18th-2012/stories/2704-version-cake)
 - [Rails core discussion](https://groups.google.com/forum/#!msg/rubyonrails-core/odwmEYYIum0/9POep66BvoMJ)
 - [RubyWeekly](http://rubyweekly.com/archive/119.html)
+- [API building tools on Ruby Toolbox](https://www.ruby-toolbox.com/categories/API_Builders)
 
 # Questions?
 
