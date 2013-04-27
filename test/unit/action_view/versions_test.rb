@@ -42,4 +42,8 @@ class VersionsTest < ActiveSupport::TestCase
     ActionView::Template::Versions.supported_version_numbers = [4,1,3,9,2,54]
     assert_equal 54, ActionView::Template::Versions.latest_version
   end
+
+  test "default supported_version_numbers should be a logic set of version numbers" do
+    assert_equal ActionView::Template::Versions::SUPPORTED_VERSIONS_DEFAULT, (1..10)
+  end
 end

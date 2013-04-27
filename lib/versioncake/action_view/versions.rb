@@ -4,8 +4,10 @@ module ActionView
   class Template
     module Versions
 
+      SUPPORTED_VERSIONS_DEFAULT = (1..10)
+
       mattr_accessor :supported_version_numbers
-      self.supported_version_numbers = []
+      self.supported_version_numbers = SUPPORTED_VERSIONS_DEFAULT
 
       mattr_accessor :extraction_strategies
       self.extraction_strategies = [VersionCake::QueryParameterStrategy.new]
