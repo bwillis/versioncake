@@ -53,7 +53,7 @@ class ParameterStragegyTest < ActionController::TestCase
   tests RendersController
 
   setup do
-    ActionView::Template::Versions.extraction_strategy = :query_parameter
+    VersionCake::Configuration.extraction_strategy = :query_parameter
   end
 
   test "render version 1 of the partial based on the parameter _api_version" do
@@ -76,7 +76,7 @@ class CustomHeaderStrategyTest < ActionController::TestCase
 tests RendersController
 
   setup do
-    ActionView::Template::Versions.extraction_strategy = :http_header
+    VersionCake::Configuration.extraction_strategy = :http_header
   end
 
   test "renders version 1 of the partial based on the header API-Version" do
@@ -102,7 +102,7 @@ class RequestBodyStrategyTest < ActionController::TestCase
  tests RendersController
 
   setup do
-    ActionView::Template::Versions.extraction_strategy = :request_parameter
+    VersionCake::Configuration.extraction_strategy = :request_parameter
   end
 
   test "requested version is in the body" do
@@ -115,7 +115,7 @@ class AcceptHeaderStrategyTest < ActionController::TestCase
   tests RendersController
 
   setup do
-    ActionView::Template::Versions.extraction_strategy = :http_accept_parameter
+    VersionCake::Configuration.extraction_strategy = :http_accept_parameter
   end
 
   test "render version 1 of the partial based on the header Accept" do
@@ -147,7 +147,7 @@ class CustomStrategyTest < ActionController::TestCase
   tests RendersController
 
   setup do
-    ActionView::Template::Versions.extraction_strategy = lambda { |request| 2 }
+    VersionCake::Configuration.extraction_strategy = lambda { |request| 2 }
   end
 
   test "renders version 2 of the partial based on the header Accept" do
@@ -160,7 +160,7 @@ class MultipleStrategyTest < ActionController::TestCase
   tests RendersController
 
   setup do
-    ActionView::Template::Versions.extraction_strategy = [:http_accept_parameter, :query_parameter]
+    VersionCake::Configuration.extraction_strategy = [:http_accept_parameter, :query_parameter]
   end
 
   test "renders version 1 of the partial based on the header Accept" do
@@ -185,7 +185,7 @@ class UnsupportedVersionTest < ActionController::TestCase
   tests RendersController
 
   setup do
-    ActionView::Template::Versions.extraction_strategy = :query_parameter
+    VersionCake::Configuration.extraction_strategy = :query_parameter
   end
 
   test "responds with 404 when the version is larger than the supported version" do
@@ -195,7 +195,7 @@ class UnsupportedVersionTest < ActionController::TestCase
   end
 
   test "responds with 404 when the version is lower than the latest version, but not an available version" do
-    ActionView::Template::Versions.supported_version_numbers = [2,3]
+    VersionCake::Configuration.supported_version_numbers = [2,3]
     assert_raise ActionController::RoutingError do
       get :index, "api_version" => "1"
     end
