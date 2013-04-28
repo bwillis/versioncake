@@ -12,19 +12,11 @@ module VersionCake
 
     protected
     def set_version(override_version=nil)
-      @requested_version = override_version || VersionCake::Configuration.extract_version(request)
-
-      if @requested_version.nil?
-        @derived_version = VersionCake::Configuration.latest_version
-      elsif VersionCake::Configuration.supports_version? @requested_version
-        @derived_version = @requested_version
-      elsif @requested_version > VersionCake::Configuration.latest_version
-        raise ActionController::RoutingError.new("No route match for version")
-      else
-        raise ActionController::RoutingError.new("Version is deprecated")
-      end
-      @_lookup_context.versions = VersionCake::Configuration.supported_versions(@derived_version)
-      @is_latest_version        = @derived_version == VersionCake::Configuration.latest_version
+      versioned_request         = VersionCake::VersionedRequest.new(request, override_version)
+      @requested_version        = versioned_request.extracted_version
+      @derived_version          = versioned_request.version
+      @_lookup_context.versions = versioned_request.supported_versions
+      @is_latest_version        = versioned_request.is_latest_version
     end
   end
 end
