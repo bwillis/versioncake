@@ -1,6 +1,6 @@
 require './test/test_helper'
 
-class VersionsTest < ActiveSupport::TestCase
+class ConfigurationTest < ActiveSupport::TestCase
   setup do
     @previous_versions = VersionCake::Configuration.supported_version_numbers
   end

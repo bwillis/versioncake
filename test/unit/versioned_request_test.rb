@@ -1,6 +1,6 @@
 require './test/test_helper'
 
-class VesionedRequestTest < ActiveSupport::TestCase
+class VersionedRequestTest < ActiveSupport::TestCase
   test "a request with a supported version returns the version" do
     VersionCake::VersionedRequest.any_instance.stubs(:apply_strategies => 2)
     versioned_request = VersionCake::VersionedRequest.new(stub())

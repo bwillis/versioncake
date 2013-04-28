@@ -12,16 +12,6 @@ module VersionCake
     mattr_accessor :extraction_strategies
     self.extraction_strategies = [VersionCake::QueryParameterStrategy.new]
 
-    def self.extract_version(request)
-      version = nil
-      extraction_strategies.each do |strategy|
-        version = strategy.extract(request)
-        break unless version.nil?
-      end
-      version
-    end
-
-    # this looks like configuration
     def self.extraction_strategy=(val)
       @@extraction_strategies.clear
       Array.wrap(val).each do |configured_strategy|
@@ -29,13 +19,11 @@ module VersionCake
       end
     end
 
-    # this looks like configuration
     def self.supported_version_numbers=(val)
       @@supported_version_numbers = val.respond_to?(:to_a) ? val.to_a : Array.wrap(val)
       @@supported_version_numbers.sort!.reverse!
     end
 
-    # this looks like configuration
     def self.supported_versions(requested_version_number=nil)
       supported_version_numbers.collect do |supported_version_number|
         if requested_version_number.nil? || supported_version_number <= requested_version_number
@@ -44,12 +32,10 @@ module VersionCake
       end
     end
 
-    # this looks like configuration
     def self.supports_version?(version)
       supported_version_numbers.include? version
     end
 
-    # this looks like configuration
     def self.latest_version
       supported_version_numbers.first
     end
