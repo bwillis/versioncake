@@ -8,7 +8,6 @@ module VersionCake
     mattr_accessor :supported_version_numbers
     self.supported_version_numbers = SUPPORTED_VERSIONS_DEFAULT
 
-    # this does not look like configuration
     mattr_accessor :extraction_strategies
     self.extraction_strategies = [VersionCake::QueryParameterStrategy.new]
 
