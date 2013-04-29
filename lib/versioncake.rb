@@ -7,9 +7,6 @@ require 'versioncake/strategies/custom_strategy'
 
 require 'versioncake/configuration'
 require 'versioncake/controller_additions'
+require 'versioncake/view_additions'
 require 'versioncake/versioned_request'
-
-require 'versioncake/action_view/template'
-require 'versioncake/action_view/lookup_context'
-require 'versioncake/action_view/resolver'
-require 'versioncake/action_view/railtie'
+require 'versioncake/railtie'
