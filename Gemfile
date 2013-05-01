@@ -3,12 +3,8 @@ source "http://rubygems.org"
 gemspec
 
 gem 'rack'
-gem 'actionpack'
-gem 'activerecord'
 gem 'multi_json'
-gem 'i18n', '0.6.1'
 gem 'tzinfo'
-gem 'sqlite3'
 gem 'coveralls', require: false
 
 group :development do

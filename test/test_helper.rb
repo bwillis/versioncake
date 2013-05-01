@@ -8,7 +8,6 @@ require 'versioncake'
 
 ENV["RAILS_ENV"] = 'test'
 
-require 'rails/all'
 require 'rails/test_help'
 require 'test/unit'
 
