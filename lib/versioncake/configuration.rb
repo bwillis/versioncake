@@ -11,6 +11,9 @@ module VersionCake
     mattr_accessor :extraction_strategies
     self.extraction_strategies = [VersionCake::QueryParameterStrategy.new]
 
+    mattr_accessor :default_version
+    self.default_version = nil
+
     def self.extraction_strategy=(val)
       @@extraction_strategies.clear
       Array.wrap(val).each do |configured_strategy|

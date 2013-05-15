@@ -14,6 +14,10 @@ class ActionViewVersions < Rails::Railtie
       if app.config.respond_to?(:view_version_string)
         VersionCake::ExtractionStrategy.version_string = app.config.view_version_string
       end
+
+      if app.config.respond_to?(:default_version)
+        VersionCake::Configuration.default_version = app.config.default_version
+      end
     end
   end
 end
