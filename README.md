@@ -162,12 +162,17 @@ When no version is specified, the latest version of the view is rendered.  In th
 ## How to use
 
 ### Configuration
+The configuration should be placed in your Rails projects `config/application.rb`. It is also suggested to enable different settings per environment, for example development and test can have extraction strategies that make it easier to develop or write test code.
 
+#### Supported Versions
 You need to define the supported versions in your Rails application.rb file as `view_versions`. Use this config to set the range of supported API versions that can be served:
 
 ```ruby
 config.view_versions = [1,2,3,4,5] # or (1..5)
 ```
+
+#### Extraction Strategy
+
 You can also define the way to extract the version. The `view_version_extraction_strategy` allows you to set one of the default strategies or provide a proc to set your own. You can also pass it a prioritized array of the strategies.
 ```ruby
 config.view_version_extraction_strategy = :query_parameter # [:http_header, :http_accept_parameter]
@@ -179,7 +184,17 @@ These are the available strategies:
  - **http_accept_parameter**: HTTP Accept header ie. ```Accept: application/xml; version=1``` [why do this?](http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned)
  - **custom**: `lambda {|request| request.headers["HTTP_X_MY_VERSION"].to_i }` takes the request object and must return an integer
 
-The strategies use a default string of `api_version`, but that can be changed:
+
+#### Default Version
+
+When no version is supplied by a client, the version rendered will be the latest version by default. If you want to override this to another version, set the following property:
+```ruby
+config.default_version = 4
+```
+
+#### Version String
+
+The extraction strategies use a default string key of `api_version`, but that can be changed:
 ```ruby
 config.view_version_string = "special_version_parameter_name"
 ```
