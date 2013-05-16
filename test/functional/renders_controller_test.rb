@@ -33,9 +33,16 @@ class RendersControllerTest < ActionController::TestCase
     assert !@controller.is_latest_version
   end
 
-  test "exposes the derived version when the version is not set" do
+  test "exposes the derived version when the version is not set and no default" do
     get :index
     assert_equal 3, @controller.derived_version
+  end
+
+  test "exposes the default version when the version is not set default is set" do
+    VersionCake::Configuration.default_version = 1
+    get :index
+    assert_equal 1, @controller.derived_version
+    VersionCake::Configuration.default_version = nil
   end
 
   test "requested version is blank when the version is not set" do
@@ -141,6 +148,15 @@ class AcceptHeaderStrategyTest < ActionController::TestCase
     get :index
     assert_equal @response.body, "index.v2.html.erb"
   end
+
+  test "render the default version version of the partial" do
+    VersionCake::Configuration.default_version = 1
+    @controller.request.stubs(:headers).returns({"HTTP_ACCEPT" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8;api_version=abc"})
+    get :index
+    assert_equal @response.body, "index.v1.html.erb"
+    VersionCake::Configuration.default_version = nil
+  end
+
 end
 
 class CustomStrategyTest < ActionController::TestCase

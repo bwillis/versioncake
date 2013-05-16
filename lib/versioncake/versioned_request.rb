@@ -25,7 +25,7 @@ module VersionCake
     def extract_version(request)
       @extracted_version = apply_strategies(request)
       if @extracted_version.nil?
-        @version = VersionCake::Configuration.latest_version
+        @version = VersionCake::Configuration.default_version || VersionCake::Configuration.latest_version
       elsif VersionCake::Configuration.supports_version? @extracted_version
         @version = @extracted_version
       elsif @extracted_version > VersionCake::Configuration.latest_version
