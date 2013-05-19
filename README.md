@@ -282,6 +282,16 @@ AppName::Application.config.view_versions.each do |supported_version|
 end
 ```
 
+# Thanks!
+
+Thanks to all those who have helped make Version Cake really sweet:
+
+* [Manilla](https://github.com/manilla)
+* [Alicia](https://github.com/alicial)
+* [Rohit](https://github.com/rg)
+* Sevag
+* [Billy](https://github.com/bcatherall)
+
 # Related Material
 
 ## Usages
