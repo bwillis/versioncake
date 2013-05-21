@@ -47,7 +47,7 @@ class RendersControllerTest < ActionController::TestCase
 
   test "requested version is blank when the version is not set" do
     get :index
-    assert_blank @controller.requested_version
+    assert @controller.requested_version.blank?
   end
 
   test "set_version can be called to override the requested version" do

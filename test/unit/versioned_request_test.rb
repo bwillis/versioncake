@@ -31,7 +31,7 @@ class VersionedRequestTest < ActiveSupport::TestCase
   test "has a method to determine if requesting the latest version" do
     VersionCake::VersionedRequest.any_instance.stubs(:apply_strategies => nil)
     versioned_request = VersionCake::VersionedRequest.new(stub())
-    assert_true versioned_request.is_latest_version
+    assert versioned_request.is_latest_version
   end
 
   test "has a method to retrieve the extracted version" do

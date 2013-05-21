@@ -27,14 +27,14 @@ class ConfigurationTest < ActiveSupport::TestCase
   test "supports_version? is only true for given supported versions" do
     VersionCake::Configuration.supported_version_numbers = (1..7)
     VersionCake::Configuration.supported_version_numbers.each do |supported_version|
-      assert_true VersionCake::Configuration.supports_version? supported_version
+      assert VersionCake::Configuration.supports_version? supported_version
     end
   end
 
   test "supports_version? is not true for other versions" do
     VersionCake::Configuration.supported_version_numbers = (1..7)
     [-2,-1,0,8,9,10].each do |unsupported_version|
-      assert_false VersionCake::Configuration.supports_version? unsupported_version
+      assert !VersionCake::Configuration.supports_version?(unsupported_version)
     end
   end
 
