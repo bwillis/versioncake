@@ -2,7 +2,8 @@
 
 [Full Changelog](https://github.com/bwillis/versioncake/compare/v1.1...master)
 
-* No significant changes.
+* Support Rails 4
+* Adding Rails version testing with [Appraisals](https://github.com/thoughtbot/appraisal)
 
 ## 1.1.0 (May 18, 2013)
 

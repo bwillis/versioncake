@@ -31,6 +31,10 @@ Check out https://github.com/bwillis/350-rest-api-versioning for a comparison of
 gem install versioncake
 ```
 
+### Requirements
+
+Rails >= v3.2 is supported in versioncake =< v1.1. Rails 4 support will be included versioncake >= v1.2.
+
 ## Example
 
 In this simple example we will outline the code that is introduced to support a change in a version.
