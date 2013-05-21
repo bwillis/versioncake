@@ -3,3 +3,7 @@ rvm:
   - 1.9.2
   - 1.9.3
   - ruby-head
+
+gemfile:
+  - gemfiles/3.2.gemfile
+  - gemfiles/4.0.rc1.gemfile
