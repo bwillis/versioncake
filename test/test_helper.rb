@@ -11,7 +11,7 @@ ENV["RAILS_ENV"] = 'test'
 require 'rails/test_help'
 require 'test/unit'
 
-require "mocha"
+require 'mocha/setup'
 
 require File.expand_path('../config/application', __FILE__)
 
