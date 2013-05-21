@@ -7,3 +7,8 @@ rvm:
 gemfile:
   - gemfiles/rails3.2.gemfile
   - gemfiles/rails4.0.rc1.gemfile
+
+matrix:
+  exclude:
+    - rvm: 1.9.2
+      gemfile: gemfiles/rails4.0.rc1.gemfile
