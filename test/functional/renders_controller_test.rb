@@ -56,7 +56,7 @@ class RendersControllerTest < ActionController::TestCase
   end
 end
 
-class ParameterStragegyTest < ActionController::TestCase
+class ParameterStrategyTest < ActionController::TestCase
   tests RendersController
 
   setup do
