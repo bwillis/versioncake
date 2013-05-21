@@ -90,5 +90,6 @@ DEPENDENCIES
   coveralls
   mocha
   railties (~> 3.2.0)
+  rake
   test-unit
   versioncake!

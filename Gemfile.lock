@@ -87,5 +87,6 @@ DEPENDENCIES
   appraisal
   coveralls
   mocha
+  rake
   test-unit
   versioncake!
