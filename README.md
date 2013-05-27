@@ -33,7 +33,7 @@ gem install versioncake
 
 ### Requirements
 
-Rails >= v3.2 is supported in versioncake =< v1.1. Rails 4 support will be included versioncake >= v1.2.
+Rails >= v3.2 is supported in versioncake =< v1.1. Rails 4 support is included versioncake >= v1.2.
 
 ## Example
 

@@ -1,14 +1,28 @@
 ## Unreleased Changes
 
-[Full Changelog](https://github.com/bwillis/versioncake/compare/v1.1...master)
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v1.2...master)
+
+## 1.2.0 (May 26, 2013)
+
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v1.1...v1.2)
+
+Bug Fixes:
+
+* None
+
+Enhancements:
 
 * Support Rails 4
 * Adding Rails version testing with [Appraisals](https://github.com/thoughtbot/appraisal)
+* Added contribution guide
+
+Deprecations:
+
+* None
 
 ## 1.1.0 (May 18, 2013)
 
 [Full Changelog](https://github.com/bwillis/versioncake/compare/v1.0...v1.1)
-
 
 Bug Fixes:
 
