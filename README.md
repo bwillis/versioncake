@@ -311,6 +311,7 @@ Thanks to all those who have helped make Version Cake really sweet:
 
 ## Discussions
 
+- [Peter Williams on versioning rest web services](http://barelyenough.org/blog/2008/05/versioning-rest-web-services/)
 - [Steve Klabnik on how to version in a resful way](http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned)
 - [Rails API project disucssion on versioning](https://github.com/rails-api/rails-api/issues/8)
 - [Railscast on versioning](http://railscasts.com/episodes/350-rest-api-versioning)
