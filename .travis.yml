@@ -12,3 +12,6 @@ matrix:
   exclude:
     - rvm: 1.9.2
       gemfile: gemfiles/rails4.0.gemfile
+
+  allow_failures:
+    - rvm: ruby-head
