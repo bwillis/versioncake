@@ -295,6 +295,7 @@ Thanks to all those who have helped make Version Cake really sweet:
 * [Rohit](https://github.com/rg)
 * Sevag
 * [Billy](https://github.com/bcatherall)
+* [Jérémie Meyer de Ville](https://github.com/jeremiemv)
 
 # Related Material
 
