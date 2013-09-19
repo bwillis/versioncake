@@ -1,4 +1,5 @@
 require 'active_support/core_ext/class/attribute_accessors.rb'
+require 'active_support/core_ext/string/inflections.rb'
 
 module VersionCake
   class ExtractionStrategy
