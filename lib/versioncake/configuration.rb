@@ -1,15 +1,15 @@
 require 'active_support/core_ext/module/attribute_accessors.rb'
+require 'active_support/core_ext/array/wrap.rb'
 
 module VersionCake
   module Configuration
 
     SUPPORTED_VERSIONS_DEFAULT = (1..10)
 
-    mattr_accessor :supported_version_numbers
-    self.supported_version_numbers = SUPPORTED_VERSIONS_DEFAULT
+    mattr_reader :supported_version_numbers
 
     mattr_accessor :extraction_strategies
-    self.extraction_strategies = [VersionCake::QueryParameterStrategy.new]
+    self.extraction_strategies = []
 
     mattr_accessor :default_version
     self.default_version = nil
@@ -42,5 +42,7 @@ module VersionCake
       supported_version_numbers.first
     end
 
+    self.extraction_strategy       = :query_parameter
+    self.supported_version_numbers = SUPPORTED_VERSIONS_DEFAULT
   end
 end
