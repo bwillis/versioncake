@@ -2,6 +2,10 @@
 
 [Full Changelog](https://github.com/bwillis/versioncake/compare/v1.2...master)
 
+Bug Fixes:
+
+* Default supported versions were not being set correctly (issue #13), thanks [Jérémie Meyer de Ville](https://github.com/jeremiemv)
+
 ## 1.2.0 (May 26, 2013)
 
 [Full Changelog](https://github.com/bwillis/versioncake/compare/v1.1...v1.2)
