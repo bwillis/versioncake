@@ -23,5 +23,5 @@ Keeping releases consistent is important so here are the steps to follow when pu
 7. Tag the version ```git tag -a vX.X -m 'Version X.X Stable' && git push --tags```
 
 8. Build the gem ```gem build versioncake.gemspec```
-9. Push the gem to ruby gems ```gem push versioncake-vX.X.X.gem```
+9. Push the gem to ruby gems ```gem push versioncake-X.X.X.gem```
 10. Remove the built gem locally ```rm versioncake-X.X.X.gem```
