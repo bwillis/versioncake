@@ -2,6 +2,10 @@
 
 [Full Changelog](https://github.com/bwillis/versioncake/compare/v1.3...master)
 
+Bug Fixes:
+
+* Adjusting view details priorities so that RABL templates that do not have a format are not prioritized over templates that do have a format (issues #14). This is going to go into v2 as it is a breaking change.
+
 ## 1.3.0 (Sept 26, 2013)
 
 [Full Changelog](https://github.com/bwillis/versioncake/compare/v1.2...v1.3)

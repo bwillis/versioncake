@@ -14,10 +14,10 @@ Version Cake is an unobtrusive way to version APIs in your Rails app.
 
 ```ruby
 app/views/posts/
- - index.v1.xml.builder
- - index.v3.xml.builder
- - index.v1.json.jbuilder
- - index.v4.json.jbuilder
+ - index.xml.v1.builder
+ - index.xml.v3.builder
+ - index.json.v1.jbuilder
+ - index.json.v4.jbuilder
 ```
 - Gracefully degrade requests to the latest supported version
 - Clients can request API versions through different strategies
@@ -34,6 +34,12 @@ gem install versioncake
 ### Requirements
 
 Rails >= v3.2 is supported in versioncake =< v1.1. Rails 4 support is included versioncake >= v1.2.
+
+## Upgrade v1.0 -> v2.0
+
+The major breaking change to require a bump to v2.0 was the order of the extensions. To avoid priority issues with the format (#14), the version number and the format have been swapped.
+
+`index.v1.json.jbuilder` -> `index.json.v1.jbuilder`
 
 ## Example
 
@@ -65,21 +71,21 @@ class PostsController < ApplicationController
 end
 ```
 
-See the view samples below. The basic top level posts are referenced in views/posts/index.v1.json.jbuilder.
-But for views/posts/index.v4.json.jbuilder, we utilize the additional related comments.
+See the view samples below. The basic top level posts are referenced in views/posts/index.json.v1.jbuilder.
+But for views/posts/index.json.v4.jbuilder, we utilize the additional related comments.
 
 ### Views
 
 Notice the version numbers are denoted by the "v{version number}" extension within the file name.
 
-#### views/posts/index.v1.json.jbuilder
+#### views/posts/index.json.v1.jbuilder
 ```ruby
 json.array!(@posts) do |json, post|
     json.(post, :id, :title)
 end
 ```
 
-#### views/posts/index.v4.json.jbuilder
+#### views/posts/index.json.v4.jbuilder
 ```ruby
 json.array!(@posts) do |json, post|
     json.(post, :id, :title)
@@ -89,7 +95,7 @@ end
 
 ### Sample Output
 
-When a version is specified for which a view doesn't exist, the request degrades and renders the next lowest version number to ensure the API's backwards compatibility.  In the following case, since views/posts/index.v3.json.jbuilder doesn't exist, views/posts/index.v1.json.jbuilder is rendered instead.
+When a version is specified for which a view doesn't exist, the request degrades and renders the next lowest version number to ensure the API's backwards compatibility.  In the following case, since views/posts/index.json.v3.jbuilder doesn't exist, views/posts/index.json.v1.jbuilder is rendered instead.
 
 #### http://localhost:3000/posts.json?api_version=3 
 ```javascript
@@ -110,7 +116,7 @@ When a version is specified for which a view doesn't exist, the request degrades
 ```
 
 
-For a given request, if we specify the version number, and that version of the view exists, that version specific view version will be rendered.  In the below case, views/posts/index.v1.json.jbuilder is rendered.
+For a given request, if we specify the version number, and that version of the view exists, that version specific view version will be rendered.  In the below case, views/posts/index.json.v1.jbuilder is rendered.
 
 #### http://localhost:3000/posts.json?api_version=2 or http://localhost:3000/posts.json?api_version=1 
 ```javascript
@@ -131,7 +137,7 @@ For a given request, if we specify the version number, and that version of the v
 ```
 
 
-When no version is specified, the latest version of the view is rendered.  In this case, views/posts/index.v4.json.jbuilder.
+When no version is specified, the latest version of the view is rendered.  In this case, views/posts/index.json.v4.jbuilder.
 
 #### http://localhost:3000/posts.json
 ```javascript
@@ -213,8 +219,8 @@ When a client makes a request to your controller the latest version of the view 
     - edit.html.erb
     - show.html.erb
     - show.json.jbuilder
-    - show.v1.json.jbuilder
-    - show.v2.json.jbuilder
+    - show.json.v1.jbuilder
+    - show.json.v2.jbuilder
     - new.html.erb
     - _form.html.erb
 ```
@@ -265,7 +271,7 @@ You can also test a specific version through a specific strategy such query_para
 # test/functional/renders_controller_test.rb#L47
 test "render version 1 of the partial based on the parameter _api_version" do
   get :index, "api_version" => "1"
-  assert_equal @response.body, "index.v1.html.erb"
+  assert_equal @response.body, "index.html.v1.erb"
 end
 ```
 
@@ -281,7 +287,7 @@ AppName::Application.config.view_versions.each do |supported_version|
   
   test "all versions render the correct template" do
     get :index
-    assert_equal @response.body, "index.v1.html.erb"
+    assert_equal @response.body, "index.html.v1.erb"
   end
 end
 ```
