@@ -11,6 +11,6 @@ class CustomStrategyTest < ActionController::TestCase
 
   test "renders version 2 of the partial based on the header Accept" do
     get :index
-    assert_equal @response.body, "template v2"
+    assert_equal "template v2", @response.body
   end
 end

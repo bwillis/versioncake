@@ -15,12 +15,12 @@ class RendersControllerTest < ActionController::TestCase
 
   test "render latest version of partial" do
     get :index
-    assert_equal @response.body, "template v2"
+    assert_equal "template v2", @response.body
   end
 
   test "exposes the requested version" do
     get :index, "version" => "1"
-    assert_equal @controller.requested_version, 1
+    assert_equal 1, @controller.requested_version
   end
 
   test "exposes latest version when requesting the latest" do

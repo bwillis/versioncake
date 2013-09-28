@@ -11,16 +11,16 @@ class ParameterStrategyTest < ActionController::TestCase
 
   test "render version 1 of the partial based on the parameter _api_version" do
     get :index, "api_version" => "1"
-    assert_equal @response.body, "template v1"
+    assert_equal "template v1", @response.body
   end
 
   test "render version 2 of the partial based on the parameter _api_version" do
     get :index, "api_version" => "2"
-    assert_equal @response.body, "template v2"
+    assert_equal "template v2", @response.body
   end
 
   test "render the latest available version (v2) of the partial based on the parameter _api_version" do
     get :index, "api_version" => "3"
-    assert_equal @response.body, "template v2"
+    assert_equal "template v2", @response.body
   end
 end

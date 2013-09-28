@@ -11,7 +11,7 @@ class ExtractionStrategyTest < ActiveSupport::TestCase
     class TestStrategy < VersionCake::ExtractionStrategy
       def execute(request); "123"; end
     end
-    assert_equal TestStrategy.new.extract("request"), 123
+    assert_equal 123, TestStrategy.new.extract("request")
   end
 
   test "it can lookup a strategy" do
