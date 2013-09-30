@@ -1,0 +1,70 @@
+# http_header_strategy
+- request:
+    headers:
+      HTTP_ACCEPT: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8;api_version=1"
+  response: "template v1"
+
+- request:
+    headers:
+      HTTP_ACCEPT: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8;api_version=2"
+  response: "template v2"
+
+- request:
+    headers:
+      HTTP_ACCEPT: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8;api_version=INVALID"
+  response: "template v2"
+
+# request_parameter_strategy
+- request:
+    method: post
+    params:
+      api_version: "1"
+  response: "template v1"
+
+- request:
+    method: post
+    params:
+      api_version: "2"
+  response: "template v2"
+
+- request:
+    method: post
+    params:
+      api_version: "INVALID"
+  response: "template v2"
+
+# query_parameter_strategy
+- request:
+    params:
+      api_version: "1"
+  response: "template v1"
+
+- request:
+    params:
+      api_version: "2"
+  response: "template v2"
+
+- request:
+    params:
+      api_version: "INVALID"
+  response: "template v2"
+
+# http_header_strategy
+- request:
+    headers:
+      HTTP_X_API_VERSION: "1"
+  response: "template v1"
+
+- request:
+    headers:
+      HTTP_X_API_VERSION: "2"
+  response: "template v2"
+
+- request:
+    headers:
+      HTTP_X_API_VERSION: "INVALID"
+  response: "template v2"
+
+# general
+- request:
+  response: "template v2"
