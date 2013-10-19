@@ -5,6 +5,7 @@ require "versioncake/version"
 Gem::Specification.new do |s|
   s.name        = "versioncake"
   s.version     = VersionCake::VERSION
+  s.license     = 'MIT'
   s.authors     = ["Jim Jones", "Ben Willis"]
   s.email       = ["jim.jones1@gmail.com", "benjamin.willis@gmail.com"]
   s.homepage    = "https://github.com/bwillis/versioncake"
