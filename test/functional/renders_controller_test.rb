@@ -4,32 +4,23 @@ require 'action_controller/test_case'
 
 class RendersControllerTest < ActionController::TestCase
 
-  setup do
-    # change the version string for configuration testing
-    VersionCake::ExtractionStrategy.version_string = "version"
-  end
-
-  teardown do
-    VersionCake::ExtractionStrategy.version_string = "api_version"
-  end
-
   test "render latest version of partial" do
     get :index
-    assert_equal @response.body, "template v2"
+    assert_equal "template v2", @response.body
   end
 
   test "exposes the requested version" do
-    get :index, "version" => "1"
-    assert_equal @controller.requested_version, 1
+    get :index, "api_version" => "1"
+    assert_equal 1, @controller.requested_version
   end
 
   test "exposes latest version when requesting the latest" do
-    get :index, "version" => "3"
+    get :index, "api_version" => "3"
     assert @controller.is_latest_version
   end
 
   test "reports not the latest version" do
-    get :index, "version" => "1"
+    get :index, "api_version" => "1"
     assert !@controller.is_latest_version
   end
 
@@ -39,10 +30,9 @@ class RendersControllerTest < ActionController::TestCase
   end
 
   test "exposes the default version when the version is not set default is set" do
-    VersionCake::Configuration.default_version = 1
+    VersionCake::Configuration.stubs(:default_version => 1)
     get :index
     assert_equal 1, @controller.derived_version
-    VersionCake::Configuration.default_version = nil
   end
 
   test "requested version is blank when the version is not set" do
@@ -51,157 +41,8 @@ class RendersControllerTest < ActionController::TestCase
   end
 
   test "set_version can be called to override the requested version" do
-    get :index, "version" => "1", "override_version" => 2
+    get :index, "api_version" => "1", "override_version" => 2
     assert_equal 2, @controller.derived_version
-  end
-end
-
-class ParameterStrategyTest < ActionController::TestCase
-  tests RendersController
-
-  setup do
-    VersionCake::Configuration.extraction_strategy = :query_parameter
-  end
-
-  test "render version 1 of the partial based on the parameter _api_version" do
-    get :index, "api_version" => "1"
-    assert_equal @response.body, "template v1"
-  end
-
-  test "render version 2 of the partial based on the parameter _api_version" do
-    get :index, "api_version" => "2"
-    assert_equal @response.body, "template v2"
-  end
-
-  test "render the latest available version (v2) of the partial based on the parameter _api_version" do
-    get :index, "api_version" => "3"
-    assert_equal @response.body, "template v2"
-  end
-end
-
-class CustomHeaderStrategyTest < ActionController::TestCase
-tests RendersController
-
-  setup do
-    VersionCake::Configuration.extraction_strategy = :http_header
-  end
-
-  test "renders version 1 of the partial based on the header API-Version" do
-    @controller.request.stubs(:headers).returns({"HTTP_X_API_VERSION" => "1"})
-    get :index
-    assert_equal @response.body, "template v1"
-  end
-
-  test "renders version 2 of the partial based on the header API-Version" do
-    @controller.request.stubs(:headers).returns({"HTTP_X_API_VERSION" => "2"})
-    get :index
-    assert_equal @response.body, "template v2"
-  end
-
-  test "renders the latest available version (v2) of the partial based on the header API-Version" do
-    @controller.request.stubs(:headers).returns({"HTTP_X_API_VERSION" => "3"})
-    get :index
-    assert_equal @response.body, "template v2"
-  end
-end
-
-class RequestBodyStrategyTest < ActionController::TestCase
- tests RendersController
-
-  setup do
-    VersionCake::Configuration.extraction_strategy = :request_parameter
-  end
-
-  test "requested version is in the body" do
-    post :index, "api_version" => "2"
-    assert_equal 2, @controller.requested_version
-  end
-end
-
-class AcceptHeaderStrategyTest < ActionController::TestCase
-  tests RendersController
-
-  setup do
-    VersionCake::Configuration.extraction_strategy = :http_accept_parameter
-  end
-
-  test "render version 1 of the partial based on the header Accept" do
-    @controller.request.stubs(:headers).returns({"HTTP_ACCEPT" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8;api_version=1"})
-    get :index
-    assert_equal @response.body, "template v1"
-  end
-
-  test "render version 2 of the partial based on the header Accept" do
-    @controller.request.stubs(:headers).returns({"HTTP_ACCEPT" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8;api_version=2"})
-    get :index
-    assert_equal @response.body, "template v2"
-  end
-
-  test "render the latest available version (v2) of the partial based on the header Accept" do
-    @controller.request.stubs(:headers).returns({"HTTP_ACCEPT" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8;api_version=3"})
-    get :index
-    assert_equal @response.body, "template v2"
-  end
-
-  test "render the latest version of the partial" do
-    @controller.request.stubs(:headers).returns({"HTTP_ACCEPT" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8;api_version=abc"})
-    get :index
-    assert_equal @response.body, "template v2"
-  end
-
-  test "render the default version version of the partial" do
-    VersionCake::Configuration.default_version = 1
-    @controller.request.stubs(:headers).returns({"HTTP_ACCEPT" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8;api_version=abc"})
-    get :index
-    assert_equal @response.body, "template v1"
-    VersionCake::Configuration.default_version = nil
-  end
-
-end
-
-class CustomStrategyTest < ActionController::TestCase
-  tests RendersController
-
-  setup do
-    VersionCake::Configuration.extraction_strategy = lambda { |request| 2 }
-  end
-
-  test "renders version 2 of the partial based on the header Accept" do
-    get :index
-    assert_equal @response.body, "template v2"
-  end
-end
-
-class MultipleStrategyTest < ActionController::TestCase
-  tests RendersController
-
-  setup do
-    VersionCake::Configuration.extraction_strategy = [:http_accept_parameter, :query_parameter]
-  end
-
-  test "renders version 1 of the partial based on the header Accept" do
-    @controller.request.stubs(:headers).returns({"HTTP_ACCEPT" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8;api_version=1"})
-    get :index
-    assert_equal @response.body, "template v1"
-  end
-
-  test "renders the query parameter when accept parameter isn't available" do
-    get :index, "api_version" => "1"
-    assert_equal @response.body, "template v1"
-  end
-
-  test "renders the higher priority accept parameter version" do
-    @controller.request.stubs(:headers).returns({"HTTP_ACCEPT" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8;api_version=2"})
-    get :index, "api_version" => "1"
-    assert_equal @response.body, "template v2"
-  end
-end
-
-class UnsupportedVersionTest < ActionController::TestCase
-  tests RendersController
-
-  setup do
-    VersionCake::Configuration.extraction_strategy = :query_parameter
   end
 
   test "responds with 404 when the version is larger than the supported version" do
@@ -211,9 +52,15 @@ class UnsupportedVersionTest < ActionController::TestCase
   end
 
   test "responds with 404 when the version is lower than the latest version, but not an available version" do
-    VersionCake::Configuration.supported_version_numbers = [2,3]
+    VersionCake::Configuration.stubs(:supported_version_numbers => [2,3])
     assert_raise ActionController::RoutingError do
       get :index, "api_version" => "1"
     end
+  end
+
+  test "render the default version version of the partial" do
+    VersionCake::Configuration.stubs(:default_version => 1)
+    get :index, "api_version" => "abc"
+    assert_equal "template v1", @response.body
   end
 end

@@ -44,6 +44,6 @@ class ConfigurationTest < ActiveSupport::TestCase
   end
 
   test "default supported_version_numbers should be a logic set of version numbers" do
-    assert_equal VersionCake::Configuration::SUPPORTED_VERSIONS_DEFAULT, (1..10)
+    assert_equal (1..10), VersionCake::Configuration::SUPPORTED_VERSIONS_DEFAULT
   end
 end

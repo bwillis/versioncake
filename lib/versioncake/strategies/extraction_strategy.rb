@@ -9,7 +9,7 @@ module VersionCake
 
     def extract(request)
       version = execute(request)
-      return version.to_i if version
+      return version.to_i if version && /[0-9]+/.match(version)
     end
 
     def execute(request)
