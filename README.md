@@ -194,11 +194,15 @@ You can also define the way to extract the version. The `view_version_extraction
 config.view_version_extraction_strategy = :query_parameter # [:http_header, :http_accept_parameter]
 ```
 These are the available strategies:
- - **query_parameter**: version in the url query parameter, for testing or to override for special case i.e. ```http://localhost:3000/posts.json?api_version=1```  (This is the default.)
- - **request_parameter**: version that is sent in the body of the request. Good for testing.
- - **http_header**: Api version HTTP header ie. ```X-API-Version: 1```
- - **http_accept_parameter**: HTTP Accept header ie. ```Accept: application/xml; version=1``` [why do this?](http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned)
- - **custom**: `lambda {|request| request.headers["HTTP_X_MY_VERSION"].to_i }` takes the request object and must return an integer
+
+Strategy | Description | Example
+--- | --- | ---
+:query_parameter | version in the url query parameter, for testing or to override for special case | `http://localhost:3000/posts.json?api_version=1`  (This is the default.)
+:path_parameter | version in the url path parameter | `api/v:api_version/` 
+request_parameter | version that is sent in the body of the request | Good for testing.
+:http_header | Api version HTTP header | `X-API-Version: 1`
+:http_accept_parameter | HTTP Accept header | `Accept: application/xml; version=1` [why do this?](http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned)
+custom | takes the request object and must return an integer | lambda {&#124;request&#124; request.headers["HTTP_X_MY_VERSION"].to_i }
 
 
 #### Default Version
