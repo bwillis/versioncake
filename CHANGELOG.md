@@ -6,6 +6,10 @@ Bug Fixes:
 
 * Adjusting view details priorities so that RABL templates that do not have a format are not prioritized over templates that do have a format (issues #14). This is going to go into v2 as it is a breaking change.
 
+Enhancements:
+
+* New path strategy to support `/v3/posts` style versioning, thanks [Michael Elfassy](https://github.com/elfassy)
+
 ## 1.3.0 (Sept 26, 2013)
 
 [Full Changelog](https://github.com/bwillis/versioncake/compare/v1.2...v1.3)
