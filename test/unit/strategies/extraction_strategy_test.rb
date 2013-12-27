@@ -7,7 +7,7 @@ class ExtractionStrategyTest < ActiveSupport::TestCase
     end
   end
 
-  test "extract will convert the the result to integer" do
+  test "extract will convert the result to integer" do
     class TestStrategy < VersionCake::ExtractionStrategy
       def execute(request); "123"; end
     end
