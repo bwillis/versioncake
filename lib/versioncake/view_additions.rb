@@ -6,9 +6,18 @@ require 'action_view'
 ActionView::LookupContext.register_detail(:versions){ VersionCake::Configuration.supported_versions }
 
 ActionView::PathResolver.class_eval do
-
   # not sure why we are doing this yet, but looks like a good idea
-  ActionView::PathResolver::EXTENSIONS.replace [:locale, :formats, :versions, :handlers]
+  if defined?(ActionView::VERSION) && ActionView::VERSION::STRING >= "4.1"
+    ActionView::PathResolver::EXTENSIONS.replace({
+      :locale => ".",
+      :formats => ".",
+      :versions => ".",
+      :variants => "+",
+      :handlers => "."
+    })
+  else
+    ActionView::PathResolver::EXTENSIONS.replace [:locale, :formats, :versions, :handlers]
+  end
 
   # The query builder has the @details from the lookup_context and will
   # match the detail name to the string in the pattern, so we must append
@@ -67,11 +76,9 @@ ActionView::PathResolver.class_eval do
 end
 
 ActionView::Template.class_eval do
-
   # the identifier method name filters out numbers,
   # but we want to preserve them for v1 etc.
   def identifier_method_name #:nodoc:
     inspect.gsub(/[^a-z0-9_]/, '_')
   end
-
 end
