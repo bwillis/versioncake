@@ -7,7 +7,7 @@ ActionView::LookupContext.register_detail(:versions){ VersionCake::Configuration
 
 ActionView::PathResolver.class_eval do
   # not sure why we are doing this yet, but looks like a good idea
-  if defined?(ActionView::VERSION) && ActionView::VERSION::STRING >= "4.1"
+  if ActionPack::VERSION::STRING >= "4.1"
     ActionView::PathResolver::EXTENSIONS.replace({
       :locale => ".",
       :formats => ".",
