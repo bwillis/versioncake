@@ -24,4 +24,12 @@ class ViewAdditionsTest < ActiveSupport::TestCase
     handler, format = @resolver.extract_handler_and_format('application.en.json.v1.jbuilder', nil)
     assert_equal 'application/json', format.to_s
   end
+
+  if ActionPack::VERSION::MAJOR == 4 && ActionPack::VERSION::MINOR >= 1
+    test "it retrieves the correct handler and format when only handler, format, variant and version are present" do
+      handler, format = @resolver.extract_handler_and_format('application.json+tablet.v1.jbuilder', nil)
+      assert_equal 'application/json', format.to_s
+    end
+  end
+
 end
