@@ -7,22 +7,24 @@ ActionView::LookupContext.register_detail(:versions){ VersionCake::Configuration
 
 ActionView::PathResolver.class_eval do
   # not sure why we are doing this yet, but looks like a good idea
-  if ActionPack::VERSION::STRING >= "4.1"
+  if ActionPack::VERSION::MAJOR >= 4 && ActionPack::VERSION::MINOR >= 1
     ActionView::PathResolver::EXTENSIONS.replace({
-      :locale => ".",
-      :formats => ".",
-      :versions => ".",
-      :variants => "+",
-      :handlers => "."
-    })
+                                                     :locale => ".",
+                                                     :formats => ".",
+                                                     :versions => ".",
+                                                     :variants => "+",
+                                                     :handlers => "."
+                                                 })
+
+    ActionView::PathResolver::DEFAULT_PATTERN.replace ":prefix/:action{.:locale,}{.:formats,}{+:variants,}{.:versions,}{.:handlers,}"
   else
     ActionView::PathResolver::EXTENSIONS.replace [:locale, :formats, :versions, :handlers]
-  end
 
-  # The query builder has the @details from the lookup_context and will
-  # match the detail name to the string in the pattern, so we must append
-  # it to the default pattern
-  ActionView::PathResolver::DEFAULT_PATTERN.replace ":prefix/:action{.:locale,}{.:formats,}{.:versions,}{.:handlers,}"
+    # The query builder has the @details from the lookup_context and will
+    # match the detail name to the string in the pattern, so we must append
+    # it to the default pattern
+    ActionView::PathResolver::DEFAULT_PATTERN.replace ":prefix/:action{.:locale,}{.:formats,}{.:versions,}{.:handlers,}"
+  end
 
   # The default extract handler expects that the handler is the last extension and
   # the format is the next one. Since we are replacing the DEFAULT_PATTERN, we need to
