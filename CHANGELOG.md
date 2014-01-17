@@ -5,6 +5,7 @@
 Bug Fixes:
 
 * Adjusting view details priorities so that RABL templates that do not have a format are not prioritized over templates that do have a format (issues #14). This is going to go into v2 as it is a breaking change.
+* Looking up a versioned or unversioned layout template was not working (issue #22). The change related to issue #14 resulted in the template format not being identified properly. Monkey patched another Rails (for old and new Rails) method to fix this issue.
 
 Enhancements:
 
