@@ -2,8 +2,8 @@
 
 source "https://rubygems.org"
 
-gem "actionpack", github: 'rails/rails'
-gem "activesupport", github: 'rails/rails'
-gem "railties", github: 'rails/rails'
+gem "actionpack", "~> 4.1.0.beta1"
+gem "activesupport", "~> 4.1.0.beta1"
+gem "railties", "~> 4.1.0.beta1"
 
 gemspec :path=>"../"
