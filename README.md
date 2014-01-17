@@ -313,6 +313,7 @@ Thanks to all those who have helped make Version Cake really sweet:
 * [Billy](https://github.com/bcatherall)
 * [Jérémie Meyer de Ville](https://github.com/jeremiemv)
 * [Michael Elfassy](https://github.com/elfassy)
+* [Kelley Reynolds](https://github.com/kreynolds)
 
 # Related Material
 
