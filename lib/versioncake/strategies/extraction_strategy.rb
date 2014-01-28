@@ -1,4 +1,8 @@
-require 'active_support/core_ext/class/attribute_accessors.rb'
+if defined?(ActionPack::VERSION::MAJOR) && ActionPack::VERSION::MAJOR == 4 && ActionPack::VERSION::MINOR >= 1
+  require 'active_support/core_ext/module/attribute_accessors'
+else
+  require 'active_support/core_ext/class/attribute_accessors.rb'
+end
 require 'active_support/core_ext/string/inflections.rb'
 
 module VersionCake
