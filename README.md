@@ -314,6 +314,7 @@ Thanks to all those who have helped make Version Cake really sweet:
 * [Jérémie Meyer de Ville](https://github.com/jeremiemv)
 * [Michael Elfassy](https://github.com/elfassy)
 * [Kelley Reynolds](https://github.com/kreynolds)
+* [Washington L Braga Jr](https://github.com/huoxito)
 
 # Related Material
 
