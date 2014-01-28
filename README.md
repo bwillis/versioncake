@@ -33,13 +33,13 @@ gem install versioncake
 
 ### Requirements
 
-| Version | Rails 3.2 Support? | Rails 4 Support? |
-| ------- |:---------:| -------:|
-| 1.0     | Yes       | No      |
-| 1.1     | Yes       | No      |
-| 1.2     | Yes       | Yes     |
-| 1.3     | Yes       | Yes     |
-| 2.0     | Yes       | Yes     |
+| Version | Rails 3.2 Support? | Rails 4 Support? | Rails 4.1 Support? |
+| ------- |:---------:| -------:| -------:|
+| 1.0     | Yes       | No      | No      |
+| 1.1     | Yes       | No      | No      |
+| 1.2     | Yes       | Yes     | No      |
+| 1.3     | Yes       | Yes     | No      |
+| 2.0     | Yes       | Yes     | Yes     |
 
 ## Upgrade v1.0 -> v2.0
 
