@@ -4,18 +4,22 @@ module VersionCake
 
     def initialize(request, version_override=nil)
       @version = version_override || extract_version(request)
-      @is_latest_version = @version == VersionCake::Configuration.latest_version
+      @is_latest_version = @version == config.latest_version
     end
 
     def supported_versions
-      VersionCake::Configuration.supported_versions(@version)
+      config.supported_versions(@version)
     end
 
     private
 
+    def config
+      VersionCake::Railtie.config.versioncake
+    end
+
     def apply_strategies(request)
       version = nil
-      VersionCake::Configuration.extraction_strategies.each do |strategy|
+      config.extraction_strategies.each do |strategy|
         version = strategy.extract(request)
         break unless version.nil?
       end
@@ -25,10 +29,10 @@ module VersionCake
     def extract_version(request)
       @extracted_version = apply_strategies(request)
       if @extracted_version.nil?
-        @version = VersionCake::Configuration.default_version || VersionCake::Configuration.latest_version
-      elsif VersionCake::Configuration.supports_version? @extracted_version
+        @version = config.default_version || config.latest_version
+      elsif config.supports_version? @extracted_version
         @version = @extracted_version
-      elsif @extracted_version > VersionCake::Configuration.latest_version
+      elsif @extracted_version > config.latest_version
         raise ActionController::RoutingError.new("No route match for version")
       else
         raise ActionController::RoutingError.new("Version is deprecated")

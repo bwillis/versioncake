@@ -22,7 +22,7 @@ class VersionedRequestTest < ActiveSupport::TestCase
 
   test "a request for a deprecated version raises an exception" do
     VersionCake::VersionedRequest.any_instance.stubs(:apply_strategies => 2)
-    VersionCake::Configuration.stubs(:supports_version? => false)
+    VersionCake::Configuration.any_instance.stubs(:supports_version? => false)
     assert_raise ActionController::RoutingError do
       VersionCake::VersionedRequest.new(stub())
     end

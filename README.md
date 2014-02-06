@@ -43,6 +43,7 @@ gem install versioncake
 
 ## Upgrade v1.0 -> v2.0
 
+### Filename changes
 The major breaking change to require a bump to v2.0 was the order of the extensions. To avoid priority issues with the format (#14), the version number and the format have been swapped.
 
 `index.v1.json.jbuilder` -> `index.json.v1.jbuilder`
@@ -50,6 +51,17 @@ The major breaking change to require a bump to v2.0 was the order of the extensi
 To make it easier to upgrade, run the following command to automatically rename these files:
 
 `verisoncake migrate` or `verisoncake migrate path/to/views`
+
+### Configuration changes
+
+The configuration options for Version Cake have been namespaced and slightly renamed. The following is a mapping of the old names to the new names:
+
+| Old Name | New Name |
+| --------------------------------------- | -------------------------------------------- |
+| config.view_versions                    | config.versioncake.supported_version_numbers |
+| config.view_version_extraction_strategy | config.versioncake.extraction_strategy       |
+| config.view_version_string              | config.versioncake.version_key               |
+| config.default_version                  | config.versioncake.default_version           |
 
 ## Example
 

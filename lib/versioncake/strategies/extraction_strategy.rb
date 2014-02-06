@@ -1,19 +1,15 @@
-if defined?(ActionPack::VERSION::MAJOR) && ActionPack::VERSION::MAJOR == 4 && ActionPack::VERSION::MINOR >= 1
-  require 'active_support/core_ext/module/attribute_accessors'
-else
-  require 'active_support/core_ext/class/attribute_accessors.rb'
-end
 require 'active_support/core_ext/string/inflections.rb'
 
 module VersionCake
   class ExtractionStrategy
 
-    cattr_accessor :version_string
-    @@version_string = 'api_version'
-
     def extract(request)
       version = execute(request)
       return version.to_i if version && /[0-9]+/.match(version)
+    end
+
+    def version_key
+      VersionCake::Railtie.config.versioncake.version_key
     end
 
     def execute(request)
