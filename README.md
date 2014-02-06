@@ -69,8 +69,8 @@ In this simple example we will outline the code that is introduced to support a 
 
 ### config/application.rb
 ```ruby
-config.view_versions = (1...4)
-config.view_version_extraction_strategy = :query_parameter # for simplicity
+config.versioncake.supported_version_numbers = (1...4)
+config.versioncake.extraction_strategy       = :query_parameter # for simplicity
 ```
 
 Often times with APIs, depending upon the version, different logic needs to be applied. With the following controller code, the initial value of @posts includes all Post entries.
@@ -200,14 +200,14 @@ The configuration should be placed in your Rails projects `config/application.rb
 You need to define the supported versions in your Rails application.rb file as `view_versions`. Use this config to set the range of supported API versions that can be served:
 
 ```ruby
-config.view_versions = [1,2,3,4,5] # or (1..5)
+config.versioncake.supported_version_numbers = [1,2,3,4,5] # or (1..5)
 ```
 
 #### Extraction Strategy
 
 You can also define the way to extract the version. The `view_version_extraction_strategy` allows you to set one of the default strategies or provide a proc to set your own. You can also pass it a prioritized array of the strategies.
 ```ruby
-config.view_version_extraction_strategy = :query_parameter # [:http_header, :http_accept_parameter]
+config.versioncake.extraction_strategy = :query_parameter # [:http_header, :http_accept_parameter]
 ```
 These are the available strategies:
 
@@ -225,14 +225,14 @@ custom | takes the request object and must return an integer | lambda {&#124;req
 
 When no version is supplied by a client, the version rendered will be the latest version by default. If you want to override this to another version, set the following property:
 ```ruby
-config.default_version = 4
+config.versioncake.default_version = 4
 ```
 
 #### Version String
 
 The extraction strategies use a default string key of `api_version`, but that can be changed:
 ```ruby
-config.view_version_string = "special_version_parameter_name"
+config.versioncake.version_key = "special_version_parameter_name"
 ```
 
 ### Version your views
@@ -280,7 +280,7 @@ Testing can be painful but here are some easy ways to test different versions of
 Allowing more extraction strategies during testing can be helpful when needing to override the version.
 ```ruby
 # config/environments/test.rb
-config.view_version_extraction_strategy = [:query_parameter, :request_parameter, :http_header, :http_accept_parameter]
+config.versioncake.extraction_strategy = [:query_parameter, :request_parameter, :http_header, :http_accept_parameter]
 ```
 
 ### Testing a specific version
@@ -303,10 +303,10 @@ end
 
 ### Testing all supported versions
 
-You can iterate over all of the supported version numbers by accessing the ```AppName::Application.config.view_versions```.
+You can iterate over all of the supported version numbers by accessing the ```AppName::Application.config.versioncake.supported_version_numbers```.
 
 ```ruby
-AppName::Application.config.view_versions.each do |supported_version|
+AppName::Application.config.versioncake.supported_version_numbers.each do |supported_version|
   before do
     @controller.stubs(:requested_version).returns(supported_version)
   end
