@@ -30,7 +30,7 @@ class RendersControllerTest < ActionController::TestCase
   end
 
   test "exposes the default version when the version is not set default is set" do
-    VersionCake::Configuration.stubs(:default_version => 1)
+    VersionCake::Configuration.any_instance.stubs(:default_version => 1)
     get :index
     assert_equal 1, @controller.derived_version
   end
@@ -52,14 +52,13 @@ class RendersControllerTest < ActionController::TestCase
   end
 
   test "responds with 404 when the version is lower than the latest version, but not an available version" do
-    VersionCake::Configuration.stubs(:supported_version_numbers => [2,3])
     assert_raise ActionController::RoutingError do
-      get :index, "api_version" => "1"
+      get :index, "api_version" => "0"
     end
   end
 
   test "render the default version version of the partial" do
-    VersionCake::Configuration.stubs(:default_version => 1)
+    VersionCake::Configuration.any_instance.stubs(:default_version => 1)
     get :index, "api_version" => "abc"
     assert_equal "template v1", @response.body
   end

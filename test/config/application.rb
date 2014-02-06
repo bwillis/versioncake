@@ -11,7 +11,8 @@ module RendersTest
     config.eager_load = false
 
     config.active_support.deprecation = :stderr
-    config.view_versions = (1..3)
-    config.view_version_extraction_strategy = [:http_header, :http_accept_parameter, :query_parameter, :request_parameter]
+
+    config.versioncake.supported_version_numbers = (1..3)
+    config.versioncake.extraction_strategy = [:http_header, :http_accept_parameter, :query_parameter, :request_parameter]
   end
 end

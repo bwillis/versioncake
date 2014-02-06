@@ -2,47 +2,47 @@ require 'active_support/core_ext/module/attribute_accessors.rb'
 require 'active_support/core_ext/array/wrap.rb'
 
 module VersionCake
-  module Configuration
+  class Configuration
 
     SUPPORTED_VERSIONS_DEFAULT = (1..10)
+    VERSION_KEY_DEFAULT = 'api_version'
 
-    mattr_reader :supported_version_numbers
+    attr_reader :extraction_strategies, :supported_version_numbers
+    attr_accessor :default_version, :version_key
 
-    mattr_accessor :extraction_strategies
-    self.extraction_strategies = []
+    def initialize
+      @version_key                   = VERSION_KEY_DEFAULT
+      self.supported_version_numbers = SUPPORTED_VERSIONS_DEFAULT
+      self.extraction_strategy       = :query_parameter
+    end
 
-    mattr_accessor :default_version
-    self.default_version = nil
-
-    def self.extraction_strategy=(val)
-      @@extraction_strategies.clear
+    def extraction_strategy=(val)
+      @extraction_strategies = []
       Array.wrap(val).each do |configured_strategy|
-        @@extraction_strategies << VersionCake::ExtractionStrategy.lookup(configured_strategy)
+        @extraction_strategies << VersionCake::ExtractionStrategy.lookup(configured_strategy)
       end
     end
 
-    def self.supported_version_numbers=(val)
-      @@supported_version_numbers = val.respond_to?(:to_a) ? val.to_a : Array.wrap(val)
-      @@supported_version_numbers.sort!.reverse!
+    def supported_version_numbers=(val)
+      @supported_version_numbers = val.respond_to?(:to_a) ? val.to_a : Array.wrap(val)
+      @supported_version_numbers.sort!.reverse!
     end
 
-    def self.supported_versions(requested_version_number=nil)
-      supported_version_numbers.collect do |supported_version_number|
+    def supported_versions(requested_version_number=nil)
+      @supported_version_numbers.collect do |supported_version_number|
         if requested_version_number.nil? || supported_version_number <= requested_version_number
           :"v#{supported_version_number}"
         end
       end
     end
 
-    def self.supports_version?(version)
-      supported_version_numbers.include? version
+    def supports_version?(version)
+      @supported_version_numbers.include? version
     end
 
-    def self.latest_version
-      supported_version_numbers.first
+    def latest_version
+      @supported_version_numbers.first
     end
 
-    self.extraction_strategy       = :query_parameter
-    self.supported_version_numbers = SUPPORTED_VERSIONS_DEFAULT
   end
 end
