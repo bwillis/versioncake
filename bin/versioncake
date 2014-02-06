@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+require 'versioncake'
+
+case ARGV[0]
+  when 'migrate'
+    VersionCake::Cli.new.migrate ARGV[1]
+  else
+    raise 'Unknown command.'
+end

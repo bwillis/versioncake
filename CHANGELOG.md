@@ -11,6 +11,7 @@ Enhancements:
 
 * New path strategy to support `/v3/posts` style versioning, thanks [Michael Elfassy](https://github.com/elfassy)
 * Support Rails 4.1, thanks [Washington L Braga Jr](https://github.com/huoxito)
+* Added v1->v2 template renaming migration script
 
 ## 1.3.0 (Sept 26, 2013)
 
