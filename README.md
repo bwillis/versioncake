@@ -47,6 +47,10 @@ The major breaking change to require a bump to v2.0 was the order of the extensi
 
 `index.v1.json.jbuilder` -> `index.json.v1.jbuilder`
 
+To make it easier to upgrade, run the following command to automatically rename these files:
+
+`verisoncake migrate` or `verisoncake migrate path/to/views`
+
 ## Example
 
 In this simple example we will outline the code that is introduced to support a change in a version.
