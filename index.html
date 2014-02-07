@@ -1,0 +1,520 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Version Cake by bwillis</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Version Cake</h1>
+        <p>Version Cake is an unobtrusive way to version APIs in your Rails app</p>
+
+        <p class="view"><a href="https://github.com/bwillis/versioncake">View the Project on GitHub <small>bwillis/versioncake</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/bwillis/versioncake/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/bwillis/versioncake/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/bwillis/versioncake">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p><img src="https://raw.github.com/alicial/versioncake/master/images/versioncake-logo450x100.png" alt="Version Cake"></p>
+
+<p><a href="http://travis-ci.org/bwillis/versioncake"><img src="https://secure.travis-ci.org/bwillis/versioncake.png?branch=master" alt="Build Status"></a>
+<a href="https://codeclimate.com/github/bwillis/versioncake"><img src="https://codeclimate.com/github/bwillis/versioncake.png" alt="Code Climate"></a>
+<a href="https://coveralls.io/r/bwillis/versioncake"><img src="https://coveralls.io/repos/bwillis/versioncake/badge.png?branch=master" alt="Coverage Status"></a>
+<a href="https://gemnasium.com/bwillis/versioncake"><img src="https://gemnasium.com/bwillis/versioncake.png" alt="Dependency Status"></a>
+<a href="http://badge.fury.io/rb/versioncake"><img src="https://badge.fury.io/rb/versioncake.png" alt="Gem Version"></a></p>
+
+<p>Co-authored by Ben Willis (<a href="https://github.com/bwillis/">@bwillis</a>) and Jim Jones (<a href="https://github.com/aantix">@aantix</a>).</p>
+
+<p>Version Cake is an unobtrusive way to version APIs in your Rails app. </p>
+
+<ul>
+<li>Easily version any view with their API version:</li>
+</ul><div class="highlight highlight-ruby"><pre><span class="n">app</span><span class="o">/</span><span class="n">views</span><span class="o">/</span><span class="n">posts</span><span class="o">/</span>
+ <span class="o">-</span> <span class="n">index</span><span class="o">.</span><span class="n">xml</span><span class="o">.</span><span class="n">v1</span><span class="o">.</span><span class="n">builder</span>
+ <span class="o">-</span> <span class="n">index</span><span class="o">.</span><span class="n">xml</span><span class="o">.</span><span class="n">v3</span><span class="o">.</span><span class="n">builder</span>
+ <span class="o">-</span> <span class="n">index</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">v1</span><span class="o">.</span><span class="n">jbuilder</span>
+ <span class="o">-</span> <span class="n">index</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">v4</span><span class="o">.</span><span class="n">jbuilder</span>
+</pre></div>
+
+<ul>
+<li>Gracefully degrade requests to the latest supported version</li>
+<li>Clients can request API versions through different strategies</li>
+<li>Dry your controller logic with exposed helpers</li>
+</ul><p>Check out <a href="https://github.com/bwillis/350-rest-api-versioning">https://github.com/bwillis/350-rest-api-versioning</a> for a comparison of traditional versioning approaches and a versioncake implementation.</p>
+
+<h2>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<pre><code>gem install versioncake
+</code></pre>
+
+<h3>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h3>
+
+<table>
+<thead><tr>
+<th>Version</th>
+<th align="center">Rails 3.2 Support?</th>
+<th align="right">Rails 4 Support?</th>
+<th align="right">Rails 4.1 Support?</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td align="center">Yes</td>
+<td align="right">No</td>
+<td align="right">No</td>
+</tr>
+<tr>
+<td>1.1</td>
+<td align="center">Yes</td>
+<td align="right">No</td>
+<td align="right">No</td>
+</tr>
+<tr>
+<td>1.2</td>
+<td align="center">Yes</td>
+<td align="right">Yes</td>
+<td align="right">No</td>
+</tr>
+<tr>
+<td>1.3</td>
+<td align="center">Yes</td>
+<td align="right">Yes</td>
+<td align="right">No</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td align="center">Yes</td>
+<td align="right">Yes</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table><h2>
+<a name="upgrade-v10---v20" class="anchor" href="#upgrade-v10---v20"><span class="octicon octicon-link"></span></a>Upgrade v1.0 -&gt; v2.0</h2>
+
+<h3>
+<a name="filename-changes" class="anchor" href="#filename-changes"><span class="octicon octicon-link"></span></a>Filename changes</h3>
+
+<p>The major breaking change to require a bump to v2.0 was the order of the extensions. To avoid priority issues with the format (#14), the version number and the format have been swapped.</p>
+
+<p><code>index.v1.json.jbuilder</code> -&gt; <code>index.json.v1.jbuilder</code></p>
+
+<p>To make it easier to upgrade, run the following command to automatically rename these files:</p>
+
+<p><code>verisoncake migrate</code> or <code>verisoncake migrate path/to/views</code></p>
+
+<h3>
+<a name="configuration-changes" class="anchor" href="#configuration-changes"><span class="octicon octicon-link"></span></a>Configuration changes</h3>
+
+<p>The configuration options for Version Cake have been namespaced and slightly renamed. The following is a mapping of the old names to the new names:</p>
+
+<table>
+<thead><tr>
+<th>Old Name</th>
+<th>New Name</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>config.view_versions</td>
+<td>config.versioncake.supported_version_numbers</td>
+</tr>
+<tr>
+<td>config.view_version_extraction_strategy</td>
+<td>config.versioncake.extraction_strategy</td>
+</tr>
+<tr>
+<td>config.view_version_string</td>
+<td>config.versioncake.version_key</td>
+</tr>
+<tr>
+<td>config.default_version</td>
+<td>config.versioncake.default_version</td>
+</tr>
+</tbody>
+</table><h2>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h2>
+
+<p>In this simple example we will outline the code that is introduced to support a change in a version.</p>
+
+<h3>
+<a name="configapplicationrb" class="anchor" href="#configapplicationrb"><span class="octicon octicon-link"></span></a>config/application.rb</h3>
+
+<div class="highlight highlight-ruby"><pre><span class="n">config</span><span class="o">.</span><span class="n">versioncake</span><span class="o">.</span><span class="n">supported_version_numbers</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">versioncake</span><span class="o">.</span><span class="n">extraction_strategy</span>       <span class="o">=</span> <span class="ss">:query_parameter</span> <span class="c1"># for simplicity</span>
+</pre></div>
+
+<p>Often times with APIs, depending upon the version, different logic needs to be applied. With the following controller code, the initial value of @posts includes all Post entries.
+But if the requested API version is three or greater, we're going to eagerly load the associated comments as well.  </p>
+
+<p>Being able to control the logic based on the api version allow you to ensure forwards and backwards compatibility for future changes.</p>
+
+<h3>
+<a name="postscontroller" class="anchor" href="#postscontroller"><span class="octicon octicon-link"></span></a>PostsController</h3>
+
+<div class="highlight highlight-ruby"><pre><span class="k">class</span> <span class="nc">PostsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">index</span>
+    <span class="c1"># shared code for all versions</span>
+    <span class="vi">@posts</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">scoped</span>
+
+    <span class="c1"># version 3 or greated supports embedding post comments</span>
+    <span class="k">if</span> <span class="n">derived_version</span> <span class="o">&gt;=</span> <span class="mi">3</span>
+      <span class="vi">@posts</span> <span class="o">=</span> <span class="vi">@posts</span><span class="o">.</span><span class="n">includes</span><span class="p">(</span><span class="ss">:comments</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+<p>See the view samples below. The basic top level posts are referenced in views/posts/index.json.v1.jbuilder.
+But for views/posts/index.json.v4.jbuilder, we utilize the additional related comments.</p>
+
+<h3>
+<a name="views" class="anchor" href="#views"><span class="octicon octicon-link"></span></a>Views</h3>
+
+<p>Notice the version numbers are denoted by the "v{version number}" extension within the file name.</p>
+
+<h4>
+<a name="viewspostsindexjsonv1jbuilder" class="anchor" href="#viewspostsindexjsonv1jbuilder"><span class="octicon octicon-link"></span></a>views/posts/index.json.v1.jbuilder</h4>
+
+<div class="highlight highlight-ruby"><pre><span class="n">json</span><span class="o">.</span><span class="n">array!</span><span class="p">(</span><span class="vi">@posts</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">json</span><span class="p">,</span> <span class="n">post</span><span class="o">|</span>
+    <span class="n">json</span><span class="o">.</span><span class="p">(</span><span class="n">post</span><span class="p">,</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:title</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+
+<h4>
+<a name="viewspostsindexjsonv4jbuilder" class="anchor" href="#viewspostsindexjsonv4jbuilder"><span class="octicon octicon-link"></span></a>views/posts/index.json.v4.jbuilder</h4>
+
+<div class="highlight highlight-ruby"><pre><span class="n">json</span><span class="o">.</span><span class="n">array!</span><span class="p">(</span><span class="vi">@posts</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">json</span><span class="p">,</span> <span class="n">post</span><span class="o">|</span>
+    <span class="n">json</span><span class="o">.</span><span class="p">(</span><span class="n">post</span><span class="p">,</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:title</span><span class="p">)</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">comments</span> <span class="n">post</span><span class="o">.</span><span class="n">comments</span><span class="p">,</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:text</span>
+<span class="k">end</span>
+</pre></div>
+
+<h3>
+<a name="sample-output" class="anchor" href="#sample-output"><span class="octicon octicon-link"></span></a>Sample Output</h3>
+
+<p>When a version is specified for which a view doesn't exist, the request degrades and renders the next lowest version number to ensure the API's backwards compatibility.  In the following case, since views/posts/index.json.v3.jbuilder doesn't exist, views/posts/index.json.v1.jbuilder is rendered instead.</p>
+
+<h4>
+<a name="httplocalhost3000postsjsonapi_version3" class="anchor" href="#httplocalhost3000postsjsonapi_version3"><span class="octicon octicon-link"></span></a>http://localhost:3000/posts.json?api_version=3</h4>
+
+<div class="highlight highlight-javascript"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nx">id</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="s2">"Version Cake v0.1.0 Released!"</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">"Ben"</span>
+    <span class="nx">updated_at</span><span class="o">:</span> <span class="s2">"2012-09-17T16:23:45Z"</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nx">id</span><span class="o">:</span> <span class="mi">2</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="s2">"Version Cake v0.2.0 Released!"</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">"Jim"</span>
+    <span class="nx">updated_at</span><span class="o">:</span> <span class="s2">"2012-09-17T16:23:32Z"</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+
+<p>For a given request, if we specify the version number, and that version of the view exists, that version specific view version will be rendered.  In the below case, views/posts/index.json.v1.jbuilder is rendered.</p>
+
+<h4>
+<a name="httplocalhost3000postsjsonapi_version2-or-httplocalhost3000postsjsonapi_version1" class="anchor" href="#httplocalhost3000postsjsonapi_version2-or-httplocalhost3000postsjsonapi_version1"><span class="octicon octicon-link"></span></a>http://localhost:3000/posts.json?api_version=2 or http://localhost:3000/posts.json?api_version=1</h4>
+
+<div class="highlight highlight-javascript"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nx">id</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="s2">"Version Cake v0.1.0 Released!"</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">"Ben"</span>
+    <span class="nx">updated_at</span><span class="o">:</span> <span class="s2">"2012-09-17T16:23:45Z"</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nx">id</span><span class="o">:</span> <span class="mi">2</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="s2">"Version Cake v0.2.0 Released!"</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">"Jim"</span>
+    <span class="nx">updated_at</span><span class="o">:</span> <span class="s2">"2012-09-17T16:23:32Z"</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+
+<p>When no version is specified, the latest version of the view is rendered.  In this case, views/posts/index.json.v4.jbuilder.</p>
+
+<h4>
+<a name="httplocalhost3000postsjson" class="anchor" href="#httplocalhost3000postsjson"><span class="octicon octicon-link"></span></a>http://localhost:3000/posts.json</h4>
+
+<div class="highlight highlight-javascript"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nx">id</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="s2">"Version Cake v0.1.0 Released!"</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s2">"Ben"</span>
+    <span class="nx">updated_at</span><span class="o">:</span> <span class="s2">"2012-09-17T16:23:45Z"</span>
+    <span class="nx">comments</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nx">id</span><span class="o">:</span> <span class="mi">1</span>
+        <span class="nx">text</span><span class="o">:</span> <span class="s2">"Woah interesting approach on versioning"</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+     <span class="nx">id</span><span class="o">:</span> <span class="mi">2</span>
+     <span class="nx">title</span><span class="o">:</span> <span class="s2">"Version Cake v0.2.0 Released!"</span>
+     <span class="nx">name</span><span class="o">:</span> <span class="s2">"Jim"</span>
+     <span class="nx">updated_at</span><span class="o">:</span> <span class="s2">"2012-09-17T16:23:32Z"</span>
+     <span class="nx">comments</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nx">id</span><span class="o">:</span> <span class="mi">4</span>
+        <span class="nx">text</span><span class="o">:</span> <span class="s2">"These new features are greeeeat!"</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+
+<h2>
+<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use</h2>
+
+<h3>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h3>
+
+<p>The configuration should be placed in your Rails projects <code>config/application.rb</code>. It is also suggested to enable different settings per environment, for example development and test can have extraction strategies that make it easier to develop or write test code.</p>
+
+<h4>
+<a name="supported-versions" class="anchor" href="#supported-versions"><span class="octicon octicon-link"></span></a>Supported Versions</h4>
+
+<p>You need to define the supported versions in your Rails application.rb file as <code>view_versions</code>. Use this config to set the range of supported API versions that can be served:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="n">config</span><span class="o">.</span><span class="n">versioncake</span><span class="o">.</span><span class="n">supported_version_numbers</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="o">]</span> <span class="c1"># or (1..5)</span>
+</pre></div>
+
+<h4>
+<a name="extraction-strategy" class="anchor" href="#extraction-strategy"><span class="octicon octicon-link"></span></a>Extraction Strategy</h4>
+
+<p>You can also define the way to extract the version. The <code>view_version_extraction_strategy</code> allows you to set one of the default strategies or provide a proc to set your own. You can also pass it a prioritized array of the strategies.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="n">config</span><span class="o">.</span><span class="n">versioncake</span><span class="o">.</span><span class="n">extraction_strategy</span> <span class="o">=</span> <span class="ss">:query_parameter</span> <span class="c1"># [:http_header, :http_accept_parameter]</span>
+</pre></div>
+
+<p>These are the available strategies:</p>
+
+<table>
+<thead><tr>
+<th>Strategy</th>
+<th>Description</th>
+<th>Example</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>:query_parameter</td>
+<td>version in the url query parameter, for testing or to override for special case</td>
+<td>
+<code>http://localhost:3000/posts.json?api_version=1</code>  (This is the default.)</td>
+</tr>
+<tr>
+<td>:path_parameter</td>
+<td>version in the url path parameter</td>
+<td><code>api/v:api_version/</code></td>
+</tr>
+<tr>
+<td>request_parameter</td>
+<td>version that is sent in the body of the request</td>
+<td>Good for testing.</td>
+</tr>
+<tr>
+<td>:http_header</td>
+<td>Api version HTTP header</td>
+<td><code>X-API-Version: 1</code></td>
+</tr>
+<tr>
+<td>:http_accept_parameter</td>
+<td>HTTP Accept header</td>
+<td>
+<code>Accept: application/xml; version=1</code> <a href="http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned">why do this?</a>
+</td>
+</tr>
+<tr>
+<td>custom</td>
+<td>takes the request object and must return an integer</td>
+<td>lambda {|request| request.headers["HTTP_X_MY_VERSION"].to_i }</td>
+</tr>
+</tbody>
+</table><h4>
+<a name="default-version" class="anchor" href="#default-version"><span class="octicon octicon-link"></span></a>Default Version</h4>
+
+<p>When no version is supplied by a client, the version rendered will be the latest version by default. If you want to override this to another version, set the following property:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="n">config</span><span class="o">.</span><span class="n">versioncake</span><span class="o">.</span><span class="n">default_version</span> <span class="o">=</span> <span class="mi">4</span>
+</pre></div>
+
+<h4>
+<a name="version-string" class="anchor" href="#version-string"><span class="octicon octicon-link"></span></a>Version String</h4>
+
+<p>The extraction strategies use a default string key of <code>api_version</code>, but that can be changed:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="n">config</span><span class="o">.</span><span class="n">versioncake</span><span class="o">.</span><span class="n">version_key</span> <span class="o">=</span> <span class="s2">"special_version_parameter_name"</span>
+</pre></div>
+
+<h3>
+<a name="version-your-views" class="anchor" href="#version-your-views"><span class="octicon octicon-link"></span></a>Version your views</h3>
+
+<p>When a client makes a request to your controller the latest version of the view will be rendered. The latest version is determined by naming the template or partial with a version number that you configured to support.</p>
+
+<pre><code>- app/views/posts
+    - index.html.erb
+    - edit.html.erb
+    - show.html.erb
+    - show.json.jbuilder
+    - show.json.v1.jbuilder
+    - show.json.v2.jbuilder
+    - new.html.erb
+    - _form.html.erb
+</code></pre>
+
+<p>If you start supporting a newer version, v3 for instance, you do not have to copy posts/show.v2 to posts/show.v3. By default, the request for v3 or higher will gracefully degrade to the view that is the newest, supported version, in this case posts/show.v2.</p>
+
+<h3>
+<a name="controller" class="anchor" href="#controller"><span class="octicon octicon-link"></span></a>Controller</h3>
+
+<p>You don't need to do anything special in your controller, but if you find that you want to perform some tasks for a specific version you can use <code>requested_version</code> and <code>latest_version</code>. This may be updated in the <a href="https://github.com/bwillis/versioncake/issues/1">near future</a>.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="k">def</span> <span class="nf">index</span>
+  <span class="c1"># shared code for all versions</span>
+  <span class="vi">@posts</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">scoped</span>
+
+  <span class="c1"># version 3 or greated supports embedding post comments</span>
+  <span class="k">if</span> <span class="n">derived_version</span> <span class="o">&gt;=</span> <span class="mi">3</span>
+    <span class="vi">@posts</span> <span class="o">=</span> <span class="vi">@posts</span><span class="o">.</span><span class="n">includes</span><span class="p">(</span><span class="ss">:comments</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+<h3>
+<a name="client-requests" class="anchor" href="#client-requests"><span class="octicon octicon-link"></span></a>Client requests</h3>
+
+<p>When a client makes a request it will automatically receive the latest supported version of the view. The client can also request for a specific version by one of the strategies configured by <code>view_version_extraction_strategy</code>.</p>
+
+<h2>
+<a name="how-to-test" class="anchor" href="#how-to-test"><span class="octicon octicon-link"></span></a>How to test</h2>
+
+<p>Testing can be painful but here are some easy ways to test different versions of your api using version cake.</p>
+
+<h3>
+<a name="test-configuration" class="anchor" href="#test-configuration"><span class="octicon octicon-link"></span></a>Test configuration</h3>
+
+<p>Allowing more extraction strategies during testing can be helpful when needing to override the version.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="c1"># config/environments/test.rb</span>
+<span class="n">config</span><span class="o">.</span><span class="n">versioncake</span><span class="o">.</span><span class="n">extraction_strategy</span> <span class="o">=</span> <span class="o">[</span><span class="ss">:query_parameter</span><span class="p">,</span> <span class="ss">:request_parameter</span><span class="p">,</span> <span class="ss">:http_header</span><span class="p">,</span> <span class="ss">:http_accept_parameter</span><span class="o">]</span>
+</pre></div>
+
+<h3>
+<a name="testing-a-specific-version" class="anchor" href="#testing-a-specific-version"><span class="octicon octicon-link"></span></a>Testing a specific version</h3>
+
+<p>One way to test a specific version for would be to stub the requested version in the before block:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="n">before</span> <span class="k">do</span>
+  <span class="vi">@controller</span><span class="o">.</span><span class="n">stubs</span><span class="p">(</span><span class="ss">:requested_version</span><span class="p">)</span><span class="o">.</span><span class="n">returns</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+
+<p>You can also test a specific version through a specific strategy such query_parameter or request_parameter strategies (configured in test environment) like so:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="c1"># test/functional/renders_controller_test.rb#L47</span>
+<span class="nb">test</span> <span class="s2">"render version 1 of the partial based on the parameter _api_version"</span> <span class="k">do</span>
+  <span class="n">get</span> <span class="ss">:index</span><span class="p">,</span> <span class="s2">"api_version"</span> <span class="o">=&gt;</span> <span class="s2">"1"</span>
+  <span class="n">assert_equal</span> <span class="vi">@response</span><span class="o">.</span><span class="n">body</span><span class="p">,</span> <span class="s2">"index.html.v1.erb"</span>
+<span class="k">end</span>
+</pre></div>
+
+<h3>
+<a name="testing-all-supported-versions" class="anchor" href="#testing-all-supported-versions"><span class="octicon octicon-link"></span></a>Testing all supported versions</h3>
+
+<p>You can iterate over all of the supported version numbers by accessing the <code>AppName::Application.config.versioncake.supported_version_numbers</code>.</p>
+
+<div class="highlight highlight-ruby"><pre><span class="no">AppName</span><span class="o">::</span><span class="no">Application</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">versioncake</span><span class="o">.</span><span class="n">supported_version_numbers</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">supported_version</span><span class="o">|</span>
+  <span class="n">before</span> <span class="k">do</span>
+    <span class="vi">@controller</span><span class="o">.</span><span class="n">stubs</span><span class="p">(</span><span class="ss">:requested_version</span><span class="p">)</span><span class="o">.</span><span class="n">returns</span><span class="p">(</span><span class="n">supported_version</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="nb">test</span> <span class="s2">"all versions render the correct template"</span> <span class="k">do</span>
+    <span class="n">get</span> <span class="ss">:index</span>
+    <span class="n">assert_equal</span> <span class="vi">@response</span><span class="o">.</span><span class="n">body</span><span class="p">,</span> <span class="s2">"index.html.v1.erb"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+<h1>
+<a name="thanks" class="anchor" href="#thanks"><span class="octicon octicon-link"></span></a>Thanks!</h1>
+
+<p>Thanks to all those who have helped make Version Cake really sweet:</p>
+
+<ul>
+<li><a href="https://github.com/manilla">Manilla</a></li>
+<li><a href="https://github.com/alicial">Alicia</a></li>
+<li><a href="https://github.com/rg">Rohit</a></li>
+<li>Sevag</li>
+<li><a href="https://github.com/bcatherall">Billy</a></li>
+<li><a href="https://github.com/jeremiemv">Jérémie Meyer de Ville</a></li>
+<li><a href="https://github.com/elfassy">Michael Elfassy</a></li>
+<li><a href="https://github.com/kreynolds">Kelley Reynolds</a></li>
+<li><a href="https://github.com/huoxito">Washington L Braga Jr</a></li>
+</ul><h1>
+<a name="related-material" class="anchor" href="#related-material"><span class="octicon octicon-link"></span></a>Related Material</h1>
+
+<h2>
+<a name="usages" class="anchor" href="#usages"><span class="octicon octicon-link"></span></a>Usages</h2>
+
+<ul>
+<li>
+<a href="https://manilla.com">Manilla</a> (original use case)</li>
+<li>
+<a href="http://spreecommerce.com/">Spree</a> and the <a href="https://github.com/spree/spree/pull/2209">pull request</a>
+</li>
+</ul><h2>
+<a name="libraries" class="anchor" href="#libraries"><span class="octicon octicon-link"></span></a>Libraries</h2>
+
+<ul>
+<li><a href="https://github.com/bploetz/versionist">https://github.com/bploetz/versionist</a></li>
+<li><a href="https://github.com/filtersquad/rocket_pants">https://github.com/filtersquad/rocket_pants</a></li>
+<li><a href="https://github.com/lyonrb/biceps">https://github.com/lyonrb/biceps</a></li>
+</ul><h2>
+<a name="discussions" class="anchor" href="#discussions"><span class="octicon octicon-link"></span></a>Discussions</h2>
+
+<ul>
+<li><a href="http://barelyenough.org/blog/2008/05/versioning-rest-web-services/">Peter Williams on versioning rest web services</a></li>
+<li><a href="http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned">Steve Klabnik on how to version in a resful way</a></li>
+<li><a href="https://github.com/rails-api/rails-api/issues/8">Rails API project disucssion on versioning</a></li>
+<li><a href="http://railscasts.com/episodes/350-rest-api-versioning">Railscast on versioning</a></li>
+<li><a href="http://ruby5.envylabs.com/episodes/310-episode-306-september-18th-2012/stories/2704-version-cake">Ruby5 on versioncake</a></li>
+<li><a href="https://groups.google.com/forum/#!msg/rubyonrails-core/odwmEYYIum0/9POep66BvoMJ">Rails core discussion</a></li>
+<li><a href="http://rubyweekly.com/archive/119.html">RubyWeekly</a></li>
+<li><a href="https://www.ruby-toolbox.com/categories/API_Builders">API building tools on Ruby Toolbox</a></li>
+</ul><h1>
+<a name="questions" class="anchor" href="#questions"><span class="octicon octicon-link"></span></a>Questions?</h1>
+
+<p>Create a bug/enhancement/question on github or contact <a href="https://github.com/aantix">aantix</a> or <a href="https://github.com/bwillis">bwillis</a> through github.</p>
+
+<h1>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h1>
+
+<p>Version Cake is released under the MIT license: <a href="http://www.opensource.org/licenses/MIT">www.opensource.org/licenses/MIT</a></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/bwillis">bwillis</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
