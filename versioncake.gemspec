@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
   s.authors     = ["Jim Jones", "Ben Willis"]
   s.email       = ["jim.jones1@gmail.com", "benjamin.willis@gmail.com"]
-  s.homepage    = "https://github.com/bwillis/versioncake"
+  s.homepage    = "http://bwillis.github.io/versioncake"
   s.summary     = %q{Easily render versions of your rails views.}
   s.description = %q{Render versioned views automagically based on the clients requested version.}
 
