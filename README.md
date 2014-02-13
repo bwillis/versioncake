@@ -220,6 +220,10 @@ request_parameter | version that is sent in the body of the request | Good for t
 :http_accept_parameter | HTTP Accept header | `Accept: application/xml; version=1` [why do this?](http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned)
 custom | takes the request object and must return an integer | lambda {&#124;request&#124; request.headers["HTTP_X_MY_VERSION"].to_i }
 
+If you use the path_parameter strategy with resources routes, you will want to setup your routes like this:
+```
+resources :cakes, path: '/api/v:api_version/cakes'
+```
 
 #### Default Version
 
