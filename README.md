@@ -35,13 +35,13 @@ gem install versioncake
 
 | Version | Rails 3.2 Support? | Rails 4 Support? | Rails 4.1 Support? |
 | ------- |:---------:| -------:| -------:|
-| 1.0     | Yes       | No      | No      |
-| 1.1     | Yes       | No      | No      |
-| 1.2     | Yes       | Yes     | No      |
-| 1.3     | Yes       | Yes     | No      |
-| 2.0     | Yes       | Yes     | Yes     |
+| [1.0](CHANGELOG.md#100-march-14-2013) | Yes       | No      | No      |
+| [1.1](CHANGELOG.md#110-may-18-2013)   | Yes       | No      | No      |
+| [1.2](CHANGELOG.md#120-may-26-2013)   | Yes       | Yes     | No      |
+| [1.3](CHANGELOG.md#130-sept-26-2013)  | Yes       | Yes     | No      |
+| [2.0](CHANGELOG.md#200-feb-6-2014)    | Yes       | Yes     | Yes     |
 
-## Upgrade v1.0 -> v2.0
+## Upgrade v1.* -> v2.0
 
 ### Filename changes
 The major breaking change to require a bump to v2.0 was the order of the extensions. To avoid priority issues with the format (#14), the version number and the format have been swapped.
