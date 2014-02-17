@@ -325,7 +325,7 @@ Thanks to all those who have helped make Version Cake really sweet:
 * [Manilla](https://github.com/manilla)
 * [Alicia](https://github.com/alicial)
 * [Rohit](https://github.com/rg)
-* Sevag
+* [Sevag](https://github.com/sevagf)
 * [Billy](https://github.com/bcatherall)
 * [Jérémie Meyer de Ville](https://github.com/jeremiemv)
 * [Michael Elfassy](https://github.com/elfassy)
