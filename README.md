@@ -6,7 +6,7 @@
 [![Dependency Status](https://gemnasium.com/bwillis/versioncake.png)](https://gemnasium.com/bwillis/versioncake)
 [![Gem Version](https://badge.fury.io/rb/versioncake.png)](http://badge.fury.io/rb/versioncake)
 
-Co-authored by Ben Willis ([@bwillis](https://github.com/bwillis/)) and Jim Jones ([@aantix](https://github.com/aantix)).
+Co-authored by Ben Willis ([bwillis](https://github.com/bwillis/)) and Jim Jones ([aantix](https://github.com/aantix)).
 
 Version Cake is an unobtrusive way to version APIs in your Rails app. 
 
