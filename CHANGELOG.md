@@ -1,6 +1,14 @@
 ## Unreleased Changes
 
-[Full Changelog](https://github.com/bwillis/versioncake/compare/v1.3...master)
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v2.0...master)
+
+Bug Fixes:
+
+Enhancements:
+
+## 2.0.0 (Feb 6, 2014)
+
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v1.3...v2.0)
 
 Bug Fixes:
 
