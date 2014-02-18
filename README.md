@@ -220,9 +220,15 @@ request_parameter | version that is sent in the body of the request | Good for t
 :http_accept_parameter | HTTP Accept header | `Accept: application/xml; version=1` [why do this?](http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned)
 custom | takes the request object and must return an integer | lambda {&#124;request&#124; request.headers["HTTP_X_MY_VERSION"].to_i }
 
-If you use the path_parameter strategy with resources routes, you will want to setup your routes like this:
+If you use the path_parameter strategy with resources routes, you will want to setup your routes.rb config file to capture the api version.  You can do that in a few ways.  If you have just a few api routes you might specify the path directly like this:
 ```
 resources :cakes, path: '/api/v:api_version/cakes'
+```
+If you are using a lot of routes it might be better to keep them all inside a scope like this:
+```
+scope '/api/v:api_version' do
+  resources :cakes
+end
 ```
 
 #### Default Version
