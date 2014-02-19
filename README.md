@@ -341,6 +341,7 @@ Thanks to all those who have helped make Version Cake really sweet:
 * [Michael Elfassy](https://github.com/elfassy)
 * [Kelley Reynolds](https://github.com/kreynolds)
 * [Washington L Braga Jr](https://github.com/huoxito)
+* [mbradshawabs](https://github.com/mbradshawabs)
 
 # Related Material
 
