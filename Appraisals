@@ -11,7 +11,7 @@ appraise "rails4.0" do
 end
 
 appraise "rails4.1" do
-  gem('actionpack',     '~> 4.1.0.beta1')
-  gem('activesupport',  '~> 4.1.0.beta1')
-  gem('railties',       '~> 4.1.0.beta1')
+  gem('actionpack',     '~> 4.1.0.rc1')
+  gem('activesupport',  '~> 4.1.0.rc1')
+  gem('railties',       '~> 4.1.0.rc1')
 end
