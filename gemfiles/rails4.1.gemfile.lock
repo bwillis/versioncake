@@ -1,5 +1,5 @@
 PATH
-  remote: /Users/bwillis/Work/versioncake/source
+  remote: ../
   specs:
     versioncake (2.0.0)
       actionpack (>= 3.2)
