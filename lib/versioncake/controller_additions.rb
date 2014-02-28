@@ -43,6 +43,8 @@ module VersionCake
       @is_older_version         = versioned_request.is_older_version
       @is_latest_version        = versioned_request.is_latest_version
       @is_newer_version         = versioned_request.is_newer_version
+      raise ActionController::RoutingError.new("Version is deprecated") if versioned_request.is_older_version
+      raise ActionController::RoutingError.new("No route match for version") if versioned_request.is_newer_version
     end
   end
 end

@@ -75,6 +75,21 @@ class RendersControllerTest < ActionController::TestCase
     get :index, "api_version" => "4" rescue ActionController::RoutingError
     assert !@controller.is_older_version
   end
+
+  test "a request for a deprecated version raises an exception" do
+    VersionCake::Configuration.any_instance.stubs(:default_version => 1)
+    assert_raise ActionController::RoutingError do
+      get :index, "api_version" => "0"
+    end
+  end
+
+  test "a request for a version that is higher than the latest version raises an exception" do
+    VersionCake::Configuration.any_instance.stubs(:default_version => 1)
+    assert_raise ActionController::RoutingError do
+      get :index, "api_version" => "4"
+    end
+  end
+
   test "set_version can be called to override the requested version" do
     get :index, "api_version" => "1", "override_version" => 2
     assert_equal 2, @controller.derived_version
