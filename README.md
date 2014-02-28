@@ -245,6 +245,22 @@ The extraction strategies use a default string key of `api_version`, but that ca
 config.versioncake.version_key = "special_version_parameter_name"
 ```
 
+#### Response Header Key
+
+When a value for the response_header_key property is defined, an HTTP header is added to the response. The field name will be the value specified for the property and the field value will be either "true" if the requested version is supported or "false" if it is not supported.
+```ruby
+config.versioncake.response_header_key = "X-API-Version-Supported"
+```
+
+You can then use the header value to notify the user if the requested version is unsupported. The following example uses jQuery's .ajaxComplete() to check for an unsupported version on all ajax requests.
+```javascript
+$(document).ajaxComplete(function(event, xhr, settings) {
+  if (xhr.getResponseHeader('X-API-Version-Supported') === "false") {
+    // Notify user of the unsupported version request
+  }
+});
+```
+
 ### Version your views
 
 When a client makes a request to your controller the latest version of the view will be rendered. The latest version is determined by naming the template or partial with a version number that you configured to support.
@@ -277,6 +293,9 @@ def index
   end
 end
 ```
+
+You can use `is_newer_version` and `is_older_version` to customize error handling on the controller. The `is_newer_version` is set to true when a consumer requests a version that is higher than the latest supported version. The `is_older_version` will be set to true when a consumer requests a deprecated version.
+
 ### Client requests
 
 When a client makes a request it will automatically receive the latest supported version of the view. The client can also request for a specific version by one of the strategies configured by ``view_version_extraction_strategy``.

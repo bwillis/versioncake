@@ -1,6 +1,7 @@
 module VersionCake
   class VersionedRequest
-    attr_reader :version, :extracted_version, :is_latest_version
+    attr_reader :version, :extracted_version, :is_latest_version,
+                :is_newer_version, :is_older_version
 
     def initialize(request, version_override=nil)
       @version = version_override || extract_version(request)
@@ -27,15 +28,15 @@ module VersionCake
     end
 
     def extract_version(request)
+      @is_newer_version = @is_older_version = false
       @extracted_version = apply_strategies(request)
       if @extracted_version.nil?
         @version = config.default_version || config.latest_version
       elsif config.supports_version? @extracted_version
         @version = @extracted_version
-      elsif @extracted_version > config.latest_version
-        raise ActionController::RoutingError.new("No route match for version")
       else
-        raise ActionController::RoutingError.new("Version is deprecated")
+        @is_newer_version = @extracted_version > config.latest_version
+        @is_older_version = !@is_newer_version
       end
     end
   end

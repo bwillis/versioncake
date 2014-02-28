@@ -40,6 +40,78 @@ class RendersControllerTest < ActionController::TestCase
     assert @controller.requested_version.blank?
   end
 
+  test "is_newer_version is true if the requested version is larger than the supported versions" do
+    VersionCake::Configuration.any_instance.stubs(:default_version => 1)
+    get :index, "api_version" => "4" rescue ActionController::RoutingError
+    assert @controller.is_newer_version
+  end
+
+  test "is_newer_version is false if the requested version is a supported version" do
+    VersionCake::Configuration.any_instance.stubs(:default_version => 1)
+    get :index, "api_version" => "1"
+    assert !@controller.is_newer_version
+  end
+
+  test "is_newer_version is false if the requested version is a deprecated version" do
+    VersionCake::Configuration.any_instance.stubs(:default_version => 1)
+    get :index, "api_version" => "0" rescue ActionController::RoutingError
+    assert !@controller.is_newer_version
+  end
+
+  test "is_older_version is true if the requested version is a deprecated version" do
+    VersionCake::Configuration.any_instance.stubs(:default_version => 1)
+    get :index, "api_version" => "0" rescue ActionController::RoutingError
+    assert @controller.is_older_version
+  end
+
+  test "is_older_version is false if the requested version is a supported version" do
+    VersionCake::Configuration.any_instance.stubs(:default_version => 1)
+    get :index, "api_version" => "1"
+    assert !@controller.is_older_version
+  end
+
+  test "is_older_version is false if the requested version is larger than the supported versions" do
+    VersionCake::Configuration.any_instance.stubs(:default_version => 1)
+    get :index, "api_version" => "4" rescue ActionController::RoutingError
+    assert !@controller.is_older_version
+  end
+
+  test "a request for a deprecated version raises an exception" do
+    VersionCake::Configuration.any_instance.stubs(:default_version => 1)
+    assert_raise ActionController::RoutingError do
+      get :index, "api_version" => "0"
+    end
+  end
+
+  test "a request for a version that is higher than the latest version raises an exception" do
+    VersionCake::Configuration.any_instance.stubs(:default_version => 1)
+    assert_raise ActionController::RoutingError do
+      get :index, "api_version" => "4"
+    end
+  end
+
+  test "sets responses header value to true when the version is supported and response_header_key configuration is defined" do
+    response_header_key = 'x-version-supported'
+    VersionCake::Configuration.any_instance.stubs(:response_header_key => response_header_key)
+    get :index, "api_version" => "1"
+    assert_equal "true", @response.headers[response_header_key]
+  end
+
+  test "sets responses header value to false when the version is not supported and response_header_key configuration is defined" do
+    response_header_key = 'x-version-supported'
+    VersionCake::Configuration.any_instance.stubs(:response_header_key => response_header_key)
+    get :index, "api_version" => "0" rescue ActionController::RoutingError
+    assert_equal "false", @response.headers[response_header_key]
+  end
+
+  test "doesn't set a response header value when the response_header_key configuration is not defined" do
+    VersionCake::Configuration.any_instance.stubs(:response_header_key => nil)
+    get :index, "api_version" => "1"
+    @response.headers.each do |header_key, header_value|
+      assert !["true", "false"].include?(header_value)
+    end
+  end
+
   test "set_version can be called to override the requested version" do
     get :index, "api_version" => "1", "override_version" => 2
     assert_equal 2, @controller.derived_version
