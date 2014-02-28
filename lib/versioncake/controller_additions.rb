@@ -8,8 +8,14 @@ module VersionCake
     # be the rendered version and may also be nil.
     attr_accessor :requested_version
 
+    # A boolean check to determine if the requested version is deprecated.
+    attr_accessor :is_older_version
+
     # A boolean check to determine if the latest version is requested.
     attr_accessor :is_latest_version
+
+    # A boolean check to determine if the requested version is newer than any supported version.
+    attr_accessor :is_newer_version
 
     # The requested version by a client or if it's nil the latest or default
     # version configured.
@@ -34,7 +40,9 @@ module VersionCake
       @requested_version        = versioned_request.extracted_version
       @derived_version          = versioned_request.version
       @_lookup_context.versions = versioned_request.supported_versions
+      @is_older_version         = versioned_request.is_older_version
       @is_latest_version        = versioned_request.is_latest_version
+      @is_newer_version         = versioned_request.is_newer_version
     end
   end
 end
