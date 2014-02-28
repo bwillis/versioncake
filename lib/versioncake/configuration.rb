@@ -8,7 +8,7 @@ module VersionCake
     VERSION_KEY_DEFAULT = 'api_version'
 
     attr_reader :extraction_strategies, :supported_version_numbers
-    attr_accessor :default_version, :version_key
+    attr_accessor :default_version, :version_key, :response_header_key
 
     def initialize
       @version_key                   = VERSION_KEY_DEFAULT
