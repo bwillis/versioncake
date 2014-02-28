@@ -1,6 +1,7 @@
 module VersionCake
   class VersionedRequest
-    attr_reader :version, :extracted_version, :is_latest_version
+    attr_reader :version, :extracted_version, :is_latest_version,
+                :is_newer_version, :is_older_version
 
     def initialize(request, version_override=nil)
       @version = version_override || extract_version(request)
