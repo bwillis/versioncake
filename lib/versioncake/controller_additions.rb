@@ -39,12 +39,33 @@ module VersionCake
       versioned_request         = VersionCake::VersionedRequest.new(request, override_version)
       @requested_version        = versioned_request.extracted_version
       @derived_version          = versioned_request.version
-      @_lookup_context.versions = versioned_request.supported_versions
       @is_older_version         = versioned_request.is_older_version
       @is_latest_version        = versioned_request.is_latest_version
       @is_newer_version         = versioned_request.is_newer_version
+
+      set_response_header
+
       raise ActionController::RoutingError.new("Version is deprecated") if versioned_request.is_older_version
       raise ActionController::RoutingError.new("No route match for version") if versioned_request.is_newer_version
+
+      @_lookup_context.versions = versioned_request.supported_versions
+    end
+
+    private
+
+    # Adds a header field in the response with a name that corresponds
+    # to the value of the configuration's response_header_key variable.
+    # The value of the header field is "true" if the requested version
+    # is supported and "false" when it is not supported.
+    #
+    # The header is only added to the response when the configuration's
+    # response_header_key variable is defined.
+    #
+    # @return No explicit return, but sets a header in the response
+    def set_response_header
+      header_key = VersionCake::Railtie.config.versioncake.response_header_key
+      is_supported_version = !(@is_older_version || @is_newer_version)
+      headers[header_key] = is_supported_version.to_s if header_key
     end
   end
 end

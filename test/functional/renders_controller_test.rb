@@ -90,6 +90,28 @@ class RendersControllerTest < ActionController::TestCase
     end
   end
 
+  test "sets responses header value to true when the version is supported and response_header_key configuration is defined" do
+    response_header_key = 'x-version-supported'
+    VersionCake::Configuration.any_instance.stubs(:response_header_key => response_header_key)
+    get :index, "api_version" => "1"
+    assert_equal "true", @response.headers[response_header_key]
+  end
+
+  test "sets responses header value to false when the version is not supported and response_header_key configuration is defined" do
+    response_header_key = 'x-version-supported'
+    VersionCake::Configuration.any_instance.stubs(:response_header_key => response_header_key)
+    get :index, "api_version" => "0" rescue ActionController::RoutingError
+    assert_equal "false", @response.headers[response_header_key]
+  end
+
+  test "doesn't set a response header value when the response_header_key configuration is not defined" do
+    VersionCake::Configuration.any_instance.stubs(:response_header_key => nil)
+    get :index, "api_version" => "1"
+    @response.headers.each do |header_key, header_value|
+      assert !["true", "false"].include?(header_value)
+    end
+  end
+
   test "set_version can be called to override the requested version" do
     get :index, "api_version" => "1", "override_version" => 2
     assert_equal 2, @controller.derived_version
