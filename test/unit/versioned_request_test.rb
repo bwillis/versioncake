@@ -15,23 +15,19 @@ class VersionedRequestTest < ActiveSupport::TestCase
 
   test "a request for a version that is higher than the latest version raises an error" do
     VersionCake::VersionedRequest.any_instance.stubs(:apply_strategies => 99)
-    assert_raise ActionController::RoutingError do
-      VersionCake::VersionedRequest.new(stub())
-    end
+    assert !VersionCake::VersionedRequest.new(stub()).is_version_supported?
   end
 
   test "a request for a deprecated version raises an exception" do
     VersionCake::VersionedRequest.any_instance.stubs(:apply_strategies => 2)
     VersionCake::Configuration.any_instance.stubs(:supports_version? => false)
-    assert_raise ActionController::RoutingError do
-      VersionCake::VersionedRequest.new(stub())
-    end
+    assert !VersionCake::VersionedRequest.new(stub()).is_version_supported?
   end
 
   test "has a method to determine if requesting the latest version" do
     VersionCake::VersionedRequest.any_instance.stubs(:apply_strategies => nil)
     versioned_request = VersionCake::VersionedRequest.new(stub())
-    assert versioned_request.is_latest_version
+    assert versioned_request.is_latest_version?
   end
 
   test "has a method to retrieve the extracted version" do
