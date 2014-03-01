@@ -6,6 +6,8 @@ Bug Fixes:
 
 Enhancements:
 
+* Allow simpler handling of an unsupported versioned request by raising a custom error (issues #24 and #25)
+
 ## 2.0.0 (Feb 6, 2014)
 
 [Full Changelog](https://github.com/bwillis/versioncake/compare/v1.3...v2.0)
