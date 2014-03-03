@@ -6,6 +6,7 @@ require 'versioncake/strategies/path_parameter_strategy'
 require 'versioncake/strategies/request_parameter_strategy'
 require 'versioncake/strategies/custom_strategy'
 
+require 'versioncake/exceptions'
 require 'versioncake/configuration'
 require 'versioncake/controller_additions'
 require 'versioncake/view_additions'

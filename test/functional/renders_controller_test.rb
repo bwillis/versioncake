@@ -46,13 +46,13 @@ class RendersControllerTest < ActionController::TestCase
   end
 
   test "responds with 404 when the version is larger than the supported version" do
-    assert_raise ActionController::RoutingError do
+    assert_raise VersionCake::UnsupportedVersionError do
       get :index, "api_version" => "4"
     end
   end
 
   test "responds with 404 when the version is lower than the latest version, but not an available version" do
-    assert_raise ActionController::RoutingError do
+    assert_raise VersionCake::UnsupportedVersionError do
       get :index, "api_version" => "0"
     end
   end

@@ -281,6 +281,32 @@ end
 
 When a client makes a request it will automatically receive the latest supported version of the view. The client can also request for a specific version by one of the strategies configured by ``view_version_extraction_strategy``.
 
+### Unsupported Version Requests
+
+If a client requests a version that is no longer supported (is not included in the `config.versioncake.supported_version_numbers`), a `VersionCake::UnsupportedVersionError` will be raised. This can be handled using Rails `rescue_from` to return app specific messages to the client.
+
+```ruby
+class ApplicationController < ActionController::Base
+
+  ...
+
+  rescue_from VersionCake::UnsupportedVersionError, :with => :render_unsupported_version
+
+  private
+
+  def render_unsupported_version
+    headers['X-API-Version-Supported'] = 'false'
+    respond_to do |format|
+      format.json { render json: {message: "You requested an unsupported version (#{requested_version})"}, status: :unprocessable_entity }
+    end
+  end
+
+  ...
+
+end
+
+```
+
 ## How to test
 
 Testing can be painful but here are some easy ways to test different versions of your api using version cake.
@@ -342,6 +368,8 @@ Thanks to all those who have helped make Version Cake really sweet:
 * [Kelley Reynolds](https://github.com/kreynolds)
 * [Washington L Braga Jr](https://github.com/huoxito)
 * [mbradshawabs](https://github.com/mbradshawabs)
+* [Richard Nuno](https://github.com/richardnuno)
+* [Andres Camacho](https://github.com/andresfcamacho)
 
 # Related Material
 

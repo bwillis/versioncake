@@ -33,8 +33,11 @@ module VersionCake
       versioned_request         = VersionCake::VersionedRequest.new(request, override_version)
       @requested_version        = versioned_request.extracted_version
       @derived_version          = versioned_request.version
+      @is_latest_version        = versioned_request.is_latest_version?
+      if !versioned_request.is_version_supported?
+        raise UnsupportedVersionError.new('Unsupported version error')
+      end
       @_lookup_context.versions = versioned_request.supported_versions
-      @is_latest_version        = versioned_request.is_latest_version
     end
   end
 end
