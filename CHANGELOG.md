@@ -6,7 +6,7 @@ Bug Fixes:
 
 Enhancements:
 
-* Allow simpler handling of an unsupported versioned request by raising a custom error (issues #24 and #25)
+* Allow simpler handling of an unsupported versioned request by raising a custom error (issues #24 and #25) thanks [Richard Nuno](https://github.com/richardnuno) and [Andres Camacho](https://github.com/andresfcamacho)
 
 ## 2.0.0 (Feb 6, 2014)
 
