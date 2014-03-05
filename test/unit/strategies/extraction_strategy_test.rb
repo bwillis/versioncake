@@ -7,11 +7,25 @@ class ExtractionStrategyTest < ActiveSupport::TestCase
     end
   end
 
-  test "extract will convert the result to integer" do
+  test "custom strategy result will be converted to integer" do
     class TestStrategy < VersionCake::ExtractionStrategy
       def execute(request); "123"; end
     end
     assert_equal 123, TestStrategy.new.extract("request")
+  end
+
+  test "custom strategy result will be returned" do
+    class TestStrategy < VersionCake::ExtractionStrategy
+      def execute(request); 123; end
+    end
+    assert_equal 123, TestStrategy.new.extract("request")
+  end
+
+  test "custom strategy will fail if it returns unexpected result" do
+    class TestStrategy < VersionCake::ExtractionStrategy
+      def execute(request); Object.new; end
+    end
+    assert_nil TestStrategy.new.extract("request")
   end
 
   test "it can lookup a strategy" do
