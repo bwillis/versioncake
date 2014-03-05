@@ -1,12 +1,30 @@
 ## Unreleased Changes
 
-[Full Changelog](https://github.com/bwillis/versioncake/compare/v2.1...master)
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v2.2...master)
 
 Bug Fixes:
 
+* None
+
 Enhancements:
 
+* None
+
+Deprecations:
+
+* None
+
+## 2.2.0 (Mar 5, 2014)
+
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v2.1...v2.2)
+
+Bug Fixes:
+
+* Be defensive with the return value of a custom strategy (#27)
+
 ## 2.1.0 (Mar 3, 2014)
+
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v2.0...v2.1)
 
 Enhancements:
 
@@ -40,19 +58,11 @@ Bug Fixes:
 
 [Full Changelog](https://github.com/bwillis/versioncake/compare/v1.1...v1.2)
 
-Bug Fixes:
-
-* None
-
 Enhancements:
 
 * Support Rails 4
 * Adding Rails version testing with [Appraisals](https://github.com/thoughtbot/appraisal)
 * Added contribution guide
-
-Deprecations:
-
-* None
 
 ## 1.1.0 (May 18, 2013)
 
@@ -68,10 +78,6 @@ Enhancements:
 * New configuration parameter default_version to set the desired version when a client does not send a version instead of the default latest version. Thanks to [Billy Catherall](https://github.com/bcatherall) for implementing this.
 * Internal refactoring of strategies for better testability.
 * Isolated Rails hooks.
-
-Deprecations:
-
-* None
 
 ## 1.0.0 (March 14, 2013)
 
