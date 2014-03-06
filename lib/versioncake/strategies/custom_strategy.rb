@@ -5,7 +5,11 @@ module VersionCake
     end
 
     def execute(request)
-      @callback.call(request)
+      if @callback.respond_to? :execute
+        @callback.execute(request)
+      else
+        @callback.call(request)
+      end
     end
   end
 end

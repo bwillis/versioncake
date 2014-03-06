@@ -43,7 +43,7 @@ module VersionCake
           elsif strategy.method(:execute).arity != 1
             raise Exception, "Custom extraction strategy requires an execute method with a single parameter"
           else
-            strategy
+            VersionCake::CustomStrategy.new(strategy)
           end
         else
           raise Exception, "Invalid extration strategy"
