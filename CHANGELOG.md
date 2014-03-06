@@ -1,6 +1,6 @@
 ## Unreleased Changes
 
-[Full Changelog](https://github.com/bwillis/versioncake/compare/v2.2...master)
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v2.3...master)
 
 Bug Fixes:
 
@@ -13,6 +13,14 @@ Enhancements:
 Deprecations:
 
 * None
+
+## 2.3.0 (Mar 6, 2014)
+
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v2.2...v2.3)
+
+Enhancements:
+
+* Allow an object instance to be used as a custom strategy
 
 ## 2.2.0 (Mar 5, 2014)
 
