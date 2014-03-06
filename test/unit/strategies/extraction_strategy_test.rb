@@ -38,6 +38,15 @@ class ExtractionStrategyTest < ActiveSupport::TestCase
     assert_equal VersionCake::CustomStrategy, strategy.class
   end
 
+  test "it allows a custom class" do
+    class FakeStrategy
+      def execute(request); end
+    end
+    instance = FakeStrategy.new
+    strategy = VersionCake::ExtractionStrategy.lookup(instance)
+    assert_equal instance, strategy
+  end
+
   test "it fails to create a custom strategy for a proc with no parameters" do
     assert_raise(Exception) do
       VersionCake::ExtractionStrategy.lookup(lambda{})

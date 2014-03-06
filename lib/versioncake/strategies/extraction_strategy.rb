@@ -23,22 +23,31 @@ module VersionCake
     end
 
     def self.lookup(strategy)
-      if strategy.class == Proc
-        if strategy.arity == 1
-          VersionCake::CustomStrategy.new(strategy)
+      case strategy
+        when String, Symbol
+          strategy_name = "#{strategy}_strategy".camelize
+          begin
+            VersionCake.const_get(strategy_name).new
+          rescue
+            raise Exception, "Unknown VersionCake extraction strategy #{strategy_name}"
+          end
+        when Proc
+          if strategy.arity == 1
+            VersionCake::CustomStrategy.new(strategy)
+          else
+            raise Exception, "Custom proc extraction strategy requires a single parameter"
+          end
+        when Object
+          if !strategy.methods.include?(:execute)
+            raise Exception, "Custom extraction strategy requires an execute method"
+          elsif strategy.method(:execute).arity != 1
+            raise Exception, "Custom extraction strategy requires an execute method with a single parameter"
+          else
+            strategy
+          end
         else
-          raise Exception, "Custom extraction strategy requires a single parameter"
-        end
-      else
-        strategy_name = "#{strategy}_strategy".camelize
-        begin
-          VersionCake.const_get(strategy_name).new
-        rescue
-          raise Exception, "Unknown VersionCake extraction strategy #{strategy_name}"
-        end
+          raise Exception, "Invalid extration strategy"
       end
-
     end
-
   end
 end
