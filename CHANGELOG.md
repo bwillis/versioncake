@@ -1,6 +1,6 @@
 ## Unreleased Changes
 
-[Full Changelog](https://github.com/bwillis/versioncake/compare/v2.3...master)
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v2.3.1...master)
 
 Bug Fixes:
 
@@ -14,7 +14,7 @@ Deprecations:
 
 * None
 
-## 2.3.0 (Mar 6, 2014)
+## 2.3.1 (Mar 6, 2014)
 
 [Full Changelog](https://github.com/bwillis/versioncake/compare/v2.2...v2.3)
 
