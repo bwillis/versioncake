@@ -11,7 +11,7 @@ module VersionCake
 
     def migrate(path)
       path = RAILS_VIEW_PATH unless path
-      raise ArgumentError.new("No directory exists for '#{path}'") unless File.exists? path
+      raise ArgumentError.new("No directory exists for '#{path}'") unless File.exist? path
 
       files_to_rename = []
       Dir.glob(File.join(path, '**/*.*')).each do |filename|
