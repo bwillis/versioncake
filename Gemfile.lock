@@ -45,6 +45,9 @@ GEM
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
+    rails-api (0.2.0)
+      actionpack (>= 3.2.11)
+      railties (>= 3.2.11)
     railties (4.0.0)
       actionpack (= 4.0.0)
       activesupport (= 4.0.0)
@@ -70,6 +73,7 @@ DEPENDENCIES
   appraisal
   coveralls
   mocha
+  rails-api
   rake
   test-unit
   versioncake!

@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency('railties',      '>= 3.2')
   s.add_dependency('tzinfo')
 
+  s.add_development_dependency 'rails-api'
   s.add_development_dependency 'test-unit'
   s.add_development_dependency 'mocha'
   s.add_development_dependency 'appraisal'
