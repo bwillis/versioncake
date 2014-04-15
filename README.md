@@ -373,6 +373,7 @@ Thanks to all those who have helped make Version Cake really sweet:
 * [Andres Camacho](https://github.com/andresfcamacho)
 * [Yukio Mizuta](https://github.com/untidy-hair)
 * [David Butler](https://github.com/dwbutler)
+* [Jeroen K.](https://github.com/jrnkntl)
 
 # Related Material
 
