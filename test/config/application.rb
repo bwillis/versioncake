@@ -1,5 +1,6 @@
 require "action_controller/railtie"
 require "active_support/railtie"
+require "rails/test_unit/railtie"
 
 # Auto-require default libraries and those for the current Rails environment.
 Bundler.require :default, Rails.env
@@ -11,6 +12,8 @@ module RendersTest
     config.eager_load = false
 
     config.active_support.deprecation = :stderr
+
+    config.api_only = false
 
     config.versioncake.supported_version_numbers = (1..3)
     config.versioncake.extraction_strategy = [:http_header, :http_accept_parameter, :query_parameter, :request_parameter]
