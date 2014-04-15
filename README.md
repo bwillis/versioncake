@@ -8,7 +8,7 @@
 
 Co-authored by Ben Willis ([bwillis](https://github.com/bwillis/)) and Jim Jones ([aantix](https://github.com/aantix)).
 
-Version Cake is an unobtrusive way to version APIs in your Rails app. 
+Version Cake is an unobtrusive way to version APIs in your Rails app.
 
 - Easily version any view with their API version:
 
@@ -39,7 +39,7 @@ gem install versioncake
 | [1.1](CHANGELOG.md#110-may-18-2013)   | Yes       | No      | No      |
 | [1.2](CHANGELOG.md#120-may-26-2013)   | Yes       | Yes     | No      |
 | [1.3](CHANGELOG.md#130-sept-26-2013)  | Yes       | Yes     | No      |
-| [2.0](CHANGELOG.md#200-feb-6-2014)    | Yes       | Yes     | Yes     |
+| [>2.0](CHANGELOG.md#200-feb-6-2014)     | Yes       | Yes     | Yes     |
 
 ## Upgrade v1.* -> v2.0
 
@@ -74,7 +74,7 @@ config.versioncake.extraction_strategy       = :query_parameter # for simplicity
 ```
 
 Often times with APIs, depending upon the version, different logic needs to be applied. With the following controller code, the initial value of @posts includes all Post entries.
-But if the requested API version is three or greater, we're going to eagerly load the associated comments as well.  
+But if the requested API version is three or greater, we're going to eagerly load the associated comments as well.
 
 Being able to control the logic based on the api version allow you to ensure forwards and backwards compatibility for future changes.
 
@@ -119,7 +119,7 @@ end
 
 When a version is specified for which a view doesn't exist, the request degrades and renders the next lowest version number to ensure the API's backwards compatibility.  In the following case, since views/posts/index.json.v3.jbuilder doesn't exist, views/posts/index.json.v1.jbuilder is rendered instead.
 
-#### http://localhost:3000/posts.json?api_version=3 
+#### http://localhost:3000/posts.json?api_version=3
 ```javascript
 [
   {
@@ -140,7 +140,7 @@ When a version is specified for which a view doesn't exist, the request degrades
 
 For a given request, if we specify the version number, and that version of the view exists, that version specific view version will be rendered.  In the below case, views/posts/index.json.v1.jbuilder is rendered.
 
-#### http://localhost:3000/posts.json?api_version=2 or http://localhost:3000/posts.json?api_version=1 
+#### http://localhost:3000/posts.json?api_version=2 or http://localhost:3000/posts.json?api_version=1
 ```javascript
 [
   {
@@ -214,11 +214,11 @@ These are the available strategies:
 Strategy | Description | Example
 --- | --- | ---
 :query_parameter | version in the url query parameter, for testing or to override for special case | `http://localhost:3000/posts.json?api_version=1`  (This is the default.)
-:path_parameter | version in the url path parameter | `api/v:api_version/` 
+:path_parameter | version in the url path parameter | `api/v:api_version/`
 request_parameter | version that is sent in the body of the request | Good for testing.
 :http_header | Api version HTTP header | `X-API-Version: 1`
 :http_accept_parameter | HTTP Accept header | `Accept: application/xml; version=1` [why do this?](http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned)
-custom | takes the request object and must return an integer | lambda {&#124;request&#124; request.headers["HTTP_X_MY_VERSION"].to_i }
+custom | takes the request object and must return an integer | lambda {&#124;request&#124; request.headers["HTTP_X_MY_VERSION"].to_i } or class ExtractorStrategy; def execute(request);end;end
 
 If you use the path_parameter strategy with resources routes, you will want to setup your routes.rb config file to capture the api version.  You can do that in a few ways.  If you have just a few api routes you might specify the path directly like this:
 ```
@@ -346,7 +346,7 @@ AppName::Application.config.versioncake.supported_version_numbers.each do |suppo
   before do
     @controller.stubs(:requested_version).returns(supported_version)
   end
-  
+
   test "all versions render the correct template" do
     get :index
     assert_equal @response.body, "index.html.v1.erb"
@@ -370,6 +370,7 @@ Thanks to all those who have helped make Version Cake really sweet:
 * [mbradshawabs](https://github.com/mbradshawabs)
 * [Richard Nuno](https://github.com/richardnuno)
 * [Andres Camacho](https://github.com/andresfcamacho)
+* [Yukio Mizuta](https://github.com/untidy-hair)
 * [David Butler](https://github.com/dwbutler)
 
 # Related Material
