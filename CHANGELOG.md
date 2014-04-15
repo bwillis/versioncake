@@ -1,6 +1,6 @@
 ## Unreleased Changes
 
-[Full Changelog](https://github.com/bwillis/versioncake/compare/v2.3.1...master)
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v2.4...master)
 
 Bug Fixes:
 
@@ -11,6 +11,14 @@ Enhancements:
 * None
 
 Deprecations:
+
+* None
+
+## 2.4.0 (Apr 14, 2014)
+
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v2.3...v2.4)
+
+Enhancements:
 
 * Enable support for [Rails API](https://github.com/rails-api/rails-api) project! thanks [David Butler](https://github.com/dwbutler)
 
