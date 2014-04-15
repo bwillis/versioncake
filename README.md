@@ -51,7 +51,7 @@ The major breaking change to require a bump to v2.0 was the order of the extensi
 
 To make it easier to upgrade, run the following command to automatically rename these files:
 
-`verisoncake migrate` or `verisoncake migrate path/to/views`
+`versioncake migrate` or `versioncake migrate path/to/views`
 
 ### Configuration changes
 
