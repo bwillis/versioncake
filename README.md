@@ -370,6 +370,7 @@ Thanks to all those who have helped make Version Cake really sweet:
 * [mbradshawabs](https://github.com/mbradshawabs)
 * [Richard Nuno](https://github.com/richardnuno)
 * [Andres Camacho](https://github.com/andresfcamacho)
+* [David Butler](https://github.com/dwbutler)
 
 # Related Material
 

@@ -6,6 +6,8 @@ Bug Fixes:
 
 Enhancements:
 
+* Enable support for [Rails API](https://github.com/rails-api/rails-api) project! thanks [David Butler](https://github.com/dwbutler)
+
 ## 2.1.0 (Mar 3, 2014)
 
 Enhancements:
