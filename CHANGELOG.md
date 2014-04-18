@@ -4,7 +4,7 @@
 
 Bug Fixes:
 
-* None
+* Fix issue where calling helper methods can return nil in prepended before_filters (#32)
 
 Enhancements:
 
