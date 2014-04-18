@@ -62,4 +62,10 @@ class RendersControllerTest < ActionController::TestCase
     get :index, "api_version" => "abc"
     assert_equal "template v1", @response.body
   end
+
+  test "derived_version can be called before the before_filter and it returns the request version" do
+    @controller.instance_variable_set("@_lookup_context", mock(:versions= => nil))
+    @controller.request.stubs(:query_parameters => {:api_version => "2"})
+    assert_equal 2, @controller.derived_version
+  end
 end

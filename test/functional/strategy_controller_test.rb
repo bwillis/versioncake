@@ -18,6 +18,7 @@ class StrategyControllerTest < ActionController::TestCase
       method   = (request['method'] || "get").to_sym
       response = test_case['response']
       @controller.request.stubs(:headers).returns(headers || {})
+      @controller.versioned_request = nil # clear out the versioned request so it's not cached
       begin
         send(method, :index, params || {})
         assert_equal(response, @response.body, custom_message(headers, params, method, response))
