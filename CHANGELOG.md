@@ -1,10 +1,10 @@
 ## Unreleased Changes
 
-[Full Changelog](https://github.com/bwillis/versioncake/compare/v2.4...master)
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v2.5...master)
 
 Bug Fixes:
 
-* Fix issue where calling helper methods can return nil in prepended before_filters (#32)
+* None
 
 Enhancements:
 
@@ -13,6 +13,14 @@ Enhancements:
 Deprecations:
 
 * None
+
+## 2.5.0 (Apr 18, 2014)
+
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v2.4...v2.5)
+
+Bug Fixes:
+
+* Fix issue where calling helper methods can return nil in prepended before_filters (#32)
 
 ## 2.4.0 (Apr 14, 2014)
 
