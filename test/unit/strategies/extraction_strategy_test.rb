@@ -25,7 +25,9 @@ class ExtractionStrategyTest < ActiveSupport::TestCase
     class TestStrategy < VersionCake::ExtractionStrategy
       def execute(request); Object.new; end
     end
-    assert_nil TestStrategy.new.extract("request")
+    assert_raise(Exception) do 
+      TestStrategy.new.extract("request")
+    end
   end
 
   test "it can lookup a strategy" do

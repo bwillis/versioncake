@@ -57,10 +57,10 @@ class RendersControllerTest < ActionController::TestCase
     end
   end
 
-  test "render the default version version of the partial" do
-    VersionCake::Configuration.any_instance.stubs(:default_version => 1)
-    get :index, "api_version" => "abc"
-    assert_equal "template v1", @response.body
+  test "responds with unsupported version error when invalid api version" do
+    assert_raise VersionCake::UnsupportedVersionError do
+      get :index, "api_version" => "abc"
+    end
   end
 
   test "derived_version can be called before the before_filter and it returns the request version" do

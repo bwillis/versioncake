@@ -9,8 +9,10 @@ module VersionCake
         version
       elsif version.is_a?(String) && /[0-9]+/.match(version)
         version.to_i
-      else
+      elsif version.nil? # no version was found
         nil
+      else
+        raise Exception, "Invalid format for version number."
       end
     end
 
@@ -18,6 +20,9 @@ module VersionCake
       VersionCake::Railtie.config.versioncake.version_key
     end
 
+    # Execute should return a number or a numeric string if it successfully finds a version. 
+    # If no version is found, nil should be returned. Any other results returned will raise
+    # an exception.
     def execute(request)
       raise Exception, "ExtractionStrategy requires execute to be implemented"
     end
