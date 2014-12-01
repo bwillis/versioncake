@@ -17,7 +17,7 @@ describe VersionCake::Cli do
           ['./spec/fixtures/templates/v1_extension_scheme.v6.json',
             './spec/fixtures/templates/v1_extension_scheme.json.v6']
         ]
-        expect(renamed_files).to eq migrated_files
+        expect(renamed_files).to match_array migrated_files
       }
     end
 
