@@ -1,3 +1,3 @@
 RendersTest::Application.routes.draw do
-  resources :renders
+  resources :renders, only: :index
 end
