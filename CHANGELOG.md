@@ -4,11 +4,11 @@
 
 Bug Fixes:
 
-* None
+* When an invalid version is received an unsupported exception is raised (#34)
 
 Enhancements:
 
-* None
+* Migrate from test-unit to rspec (#37)
 
 Deprecations:
 
