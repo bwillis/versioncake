@@ -36,12 +36,12 @@
 # http_header_strategy
 - request:
     headers:
-      HTTP_X_API_VERSION: "1"
+      HTTP_API_VERSION: "1"
   response: "template v1"
 
 - request:
     headers:
-      HTTP_X_API_VERSION: "2"
+      HTTP_API_VERSION: "2"
   response: "template v2"
 
 # general

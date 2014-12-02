@@ -42,6 +42,12 @@ gem install versioncake
 | [>2.0](CHANGELOG.md#200-feb-6-2014)   | Yes       | Yes     | Yes     | No   |
 | [>2.4](CHANGELOG.md#200-feb-6-2014)   | Yes       | Yes     | Yes     | Yes  |
 
+## Upgrade v2.0 -> v3.0
+
+### Accept header name changes
+
+The default accept header was changed from 'X-API-Version' to 'API-Version'. If you require the 'X-' or some other variant, you can specify a custom strategy as outlined in Extraction Strategy section below.
+
 ## Upgrade v1.* -> v2.0
 
 ### Filename changes
@@ -217,7 +223,7 @@ Strategy | Description | Example
 :query_parameter | version in the url query parameter, for testing or to override for special case | `http://localhost:3000/posts.json?api_version=1`  (This is the default.)
 :path_parameter | version in the url path parameter | `api/v:api_version/`
 request_parameter | version that is sent in the body of the request | Good for testing.
-:http_header | Api version HTTP header | `X-API-Version: 1`
+:http_header | Api version HTTP header | `API-Version: 1`
 :http_accept_parameter | HTTP Accept header | `Accept: application/xml; version=1` [why do this?](http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned)
 custom | takes the request object and must return an integer | lambda {&#124;request&#124; request.headers["HTTP_X_MY_VERSION"].to_i } or class ExtractorStrategy; def execute(request);end;end
 
@@ -296,7 +302,7 @@ class ApplicationController < ActionController::Base
   private
 
   def render_unsupported_version
-    headers['X-API-Version-Supported'] = 'false'
+    headers['API-Version-Supported'] = 'false'
     respond_to do |format|
       format.json { render json: {message: "You requested an unsupported version (#{requested_version})"}, status: :unprocessable_entity }
     end
