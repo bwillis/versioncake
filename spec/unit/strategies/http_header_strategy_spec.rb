@@ -5,7 +5,7 @@ describe VersionCake::HttpHeaderStrategy do
   subject { strategy.extract(request) }
 
   context "a request with an HTTP_X_API_VERSION retrieves the version" do
-    let(:request) { instance_double('Request', headers: {'HTTP_X_API_VERSION' => '11'}) }
+    let(:request) { instance_double('Request', headers: {'HTTP_API_VERSION' => '11'}) }
 
     it { is_expected.to eq 11 }
   end
