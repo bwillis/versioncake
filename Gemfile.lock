@@ -85,7 +85,7 @@ GEM
     thor (0.18.1)
     thread_safe (0.3.3)
     tins (0.13.2)
-    tzinfo (1.1.0)
+    tzinfo (1.2.2)
       thread_safe (~> 0.1)
 
 PLATFORMS
