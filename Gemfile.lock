@@ -25,9 +25,10 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    appraisal (0.5.2)
+    appraisal (1.0.2)
       bundler
       rake
+      thor (>= 0.14.0)
     builder (3.2.2)
     coveralls (0.7.2)
       multi_json (~> 1.3)
