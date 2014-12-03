@@ -1,4 +1,4 @@
-require './spec/spec_helper'
+require 'spec_helper'
 
 describe VersionCake::QueryParameterStrategy do
   let(:strategy) { VersionCake::QueryParameterStrategy.new }

@@ -1,5 +1,6 @@
 require 'coveralls'
 Coveralls.wear!
+require 'versioncake'
 
 def capture_stdout(flag=true)
   if flag
