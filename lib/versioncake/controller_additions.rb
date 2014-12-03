@@ -45,7 +45,11 @@ module VersionCake
     # @return No explicit return, but several attributes are exposed
     def set_version(override_version=nil)
       return if @versioned_request.present? && override_version.blank?
-      @versioned_request = VersionCake::VersionedRequest.new(request, override_version)
+      @versioned_request = VersionCake::VersionedRequest.new(
+          request,
+          VersionCake::Railtie.config.versioncake,
+          override_version
+      )
       if !@versioned_request.is_version_supported?
         raise UnsupportedVersionError.new('Unsupported version error')
       end
