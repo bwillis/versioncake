@@ -1,7 +1,4 @@
-require './spec/spec_helper'
-require './lib/versioncake/strategies/extraction_strategy'
-require './lib/versioncake/strategies/query_parameter_strategy'
-require './lib/versioncake/strategies/custom_strategy'
+require 'spec_helper'
 
 # TODO: make better!!!
 describe VersionCake::ExtractionStrategy do

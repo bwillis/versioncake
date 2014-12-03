@@ -1,12 +1,18 @@
-require './spec/spec_helper'
+require 'spec_helper'
 
 describe VersionCake::VersionedRequest do
   context 'a request' do
-    before do
-      allow_any_instance_of(described_class).to \
-        receive(:apply_strategies).and_return(request_version)
+    let(:request) do
+      request = double query_parameters: { }
+      request.query_parameters[:api_version] = request_version if request_version
+      request
     end
-    subject(:versioned_request) { VersionCake::VersionedRequest.new double }
+    let(:config) do
+      config = VersionCake::Configuration.new
+      config.supported_version_numbers = (2..3)
+      config
+    end
+    subject(:versioned_request) { VersionCake::VersionedRequest.new request, config }
 
     context 'with a supported version' do
       let(:request_version) { 2 }
@@ -30,17 +36,13 @@ describe VersionCake::VersionedRequest do
     end
 
     context 'with a deprecated version' do
-      before do
-        allow_any_instance_of(VersionCake::Configuration).to \
-          receive(:supports_version?).and_return(false)
-      end
-      let(:request_version) { 2 }
+      let(:request_version) { 1 }
 
       it{ expect(versioned_request.is_latest_version?).to be_falsey }
     end
 
-    context 'when the version is overriden by a parameter' do
-      subject(:versioned_request) { VersionCake::VersionedRequest.new(double, 8) }
+    context 'when the version is overridden by a parameter' do
+      subject(:versioned_request) { VersionCake::VersionedRequest.new(request, config, 8) }
       let(:request_version) { 2 }
 
       it { expect(versioned_request.version).to eq 8 }

@@ -1,4 +1,4 @@
-require './spec/spec_helper'
+require 'spec_helper'
 
 describe VersionCake::HttpHeaderStrategy do
   let(:strategy) { VersionCake::HttpHeaderStrategy.new }
