@@ -69,7 +69,7 @@ describe RendersController, type: :controller do
   context 'when derived_version is called before the before_filter' do
     before do
       controller.instance_variable_set('@_lookup_context', double(:versions= => nil))
-      allow(request).to receive(:query_parameters).and_return({:api_version => '2'})
+      allow(request).to receive(:query_parameters).and_return({api_version: '2'})
     end
 
     it { expect(controller.derived_version).to eq 2 }

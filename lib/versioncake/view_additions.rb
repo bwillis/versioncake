@@ -9,11 +9,11 @@ ActionView::PathResolver.class_eval do
   # not sure why we are doing this yet, but looks like a good idea
   if ActionPack::VERSION::MAJOR >= 4 && ActionPack::VERSION::MINOR >= 1
     ActionView::PathResolver::EXTENSIONS.replace({
-                                                     :locale => ".",
-                                                     :formats => ".",
-                                                     :versions => ".",
-                                                     :variants => "+",
-                                                     :handlers => "."
+                                                     locale: ".",
+                                                     formats: ".",
+                                                     versions: ".",
+                                                     variants: "+",
+                                                     handlers: "."
                                                  })
 
     ActionView::PathResolver::DEFAULT_PATTERN.replace ":prefix/:action{.:locale,}{.:formats,}{+:variants,}{.:versions,}{.:handlers,}"
