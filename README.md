@@ -212,7 +212,7 @@ config.versioncake.supported_version_numbers = [1,2,3,4,5] # or (1..5)
 
 #### Extraction Strategy
 
-You can also define the way to extract the version. The `view_version_extraction_strategy` allows you to set one of the default strategies or provide a proc to set your own. You can also pass it a prioritized array of the strategies.
+You can also define the way to extract the version. The `extraction_strategy` allows you to set one of the default strategies or provide a proc to set your own. You can also pass it a prioritized array of the strategies.
 ```ruby
 config.versioncake.extraction_strategy = :query_parameter # [:http_header, :http_accept_parameter]
 ```
@@ -222,7 +222,7 @@ Strategy | Description | Example
 --- | --- | ---
 :query_parameter | version in the url query parameter, for testing or to override for special case | `http://localhost:3000/posts.json?api_version=1`  (This is the default.)
 :path_parameter | version in the url path parameter | `api/v:api_version/`
-request_parameter | version that is sent in the body of the request | Good for testing.
+:request_parameter | version that is sent in the body of the request | Good for testing.
 :http_header | Api version HTTP header | `API-Version: 1`
 :http_accept_parameter | HTTP Accept header | `Accept: application/xml; version=1` [why do this?](http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned)
 custom | takes the request object and must return an integer | lambda {&#124;request&#124; request.headers["HTTP_X_MY_VERSION"].to_i } or class ExtractorStrategy; def execute(request);end;end
