@@ -1,4 +1,3 @@
-require 'spec_helper'
 require './spec/rails_helper'
 
 describe ActionView::Base do
@@ -7,8 +6,6 @@ describe ActionView::Base do
   let(:view) { ActionView::Base.new(view_paths) }
   let(:version_override) { nil }
   subject { view.render(template: 'templates/versioned', versions: version_override) }
-
-  it { is_expected.to eq 'template v3' }
 
   context 'with a 0 version' do
     before { view.lookup_context.versions = [:v0] }

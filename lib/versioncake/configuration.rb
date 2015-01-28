@@ -7,11 +7,13 @@ module VersionCake
     SUPPORTED_VERSIONS_DEFAULT = (1..10)
     VERSION_KEY_DEFAULT = 'api_version'
 
-    attr_reader :extraction_strategies, :supported_version_numbers
-    attr_accessor :default_version, :version_key
+    attr_reader :extraction_strategies, :supported_version_numbers, :versioned_resources
+    attr_accessor :missing_version, :version_key, :rails_view_versioning
 
     def initialize
+      @versioned_resources           = []
       @version_key                   = VERSION_KEY_DEFAULT
+      @rails_view_versioning         = true
       self.supported_version_numbers = SUPPORTED_VERSIONS_DEFAULT
       self.extraction_strategy       = :query_parameter
     end
@@ -44,5 +46,20 @@ module VersionCake
       @supported_version_numbers.first
     end
 
+    def resources
+      builder = ResourceBuilder.new
+      yield builder
+      @versioned_resources = builder.resources
+    end
+  end
+
+  class ResourceBuilder
+    attr_reader :resources
+    def initialize
+      @resources = []
+    end
+    def resource(regex, obsolete, unsupported, supported)
+      @resources << VersionCake::VersionedResource.new(regex, obsolete, unsupported, supported)
+    end
   end
 end

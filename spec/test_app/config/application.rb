@@ -12,13 +12,5 @@ module RendersTest
     config.generators do |g|
       g.test_framework :rspec
     end
-
-    config.versioncake.supported_version_numbers = (1..3)
-    config.versioncake.extraction_strategy = [
-      :http_header,
-      :http_accept_parameter,
-      :query_parameter,
-      :request_parameter
-    ]
   end
 end

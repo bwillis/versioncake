@@ -1,13 +1,9 @@
-require 'spec_helper'
-require 'rails_helper'
+require './spec/rails_helper'
 
 describe RendersController, type: :controller do
   render_views
-  
-  before do
-    allow_any_instance_of(VersionCake::Configuration).to \
-      receive(:extraction_strategy).and_return(lambda { |_| 2 })
-  end
+
+  before { set_request_version 2 }
   
   subject(:render_response) { get :index }
 

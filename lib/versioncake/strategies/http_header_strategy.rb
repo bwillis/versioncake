@@ -2,8 +2,8 @@ module VersionCake
   class HttpHeaderStrategy < ExtractionStrategy
 
     def execute(request)
-      if request.headers.key? "HTTP_#{version_key.upcase}"
-        request.headers["HTTP_#{version_key.upcase}"]
+      if request.env.key? "HTTP_#{version_key.upcase}"
+        request.env["HTTP_#{version_key.upcase}"]
       end
     end
 

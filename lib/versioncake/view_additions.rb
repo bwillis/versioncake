@@ -3,7 +3,7 @@ require 'action_view'
 # register an addition detail for the lookup context to understand,
 # this will allow us to have the versions available upon lookup in
 # the resolver.
-ActionView::LookupContext.register_detail(:versions){ VersionCake::Railtie.config.versioncake.supported_versions }
+ActionView::LookupContext.register_detail(:versions){ [] }
 
 ActionView::PathResolver.class_eval do
   # not sure why we are doing this yet, but looks like a good idea

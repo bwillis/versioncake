@@ -1,48 +1,34 @@
 module VersionCake
   class VersionedRequest
-    attr_reader :version, :extracted_version, :is_version_supported
+    attr_reader :failed, :version
 
-    def initialize(request, config, version_override=nil)
-      @config = config
-      derive_version(request, version_override)
+    def initialize(request, strategies, default_version=nil)
+      @request, @strategies, @default_version, @failed = request, strategies, default_version, false
     end
 
-    def supported_versions
-      @config.supported_versions(@version)
-    end
+    def execute
+      begin
+        extracted_version = extract_version
 
-    def is_latest_version?
-      @version == @config.latest_version
-    end
-
-    def is_version_supported?
-      @is_version_supported
+        if extracted_version.nil?
+          @version = @default_version
+        else
+          @version = extracted_version
+        end
+      rescue Exception
+        @failed = true
+      end
     end
 
     private
 
-    def apply_strategies(request)
-      version = nil
-      @config.extraction_strategies.each do |strategy|
-        version = strategy.extract(request)
-        break unless version.nil?
+    def extract_version
+      extracted_version = nil
+      @strategies.each do |strategy|
+        extracted_version = strategy.extract(@request)
+        break unless extracted_version.nil?
       end
-      version
-    end
-
-    def derive_version(request, version_override)
-      if version_override
-        @version = version_override
-        @is_version_supported = true
-      else
-        begin
-          @extracted_version = apply_strategies(request)
-          @version = @extracted_version || @config.default_version || @config.latest_version
-          @is_version_supported = @config.supports_version? @version
-        rescue Exception
-          @is_version_supported = false
-        end
-      end
+      extracted_version
     end
   end
 end
