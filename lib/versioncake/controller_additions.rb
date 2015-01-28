@@ -4,56 +4,53 @@ module VersionCake
   module ControllerAdditions
     extend ActiveSupport::Concern
 
-    attr_accessor :versioned_request
-
     # set_version is the prepend filter that will determine the version of the
     # requests.
     included do
-      prepend_before_filter :set_version
+      prepend_before_filter :check_version!
     end
 
     # The explicit version requested by a client, this may not
     # be the rendered version and may also be nil.
-    def requested_version
-      versioned_request.extracted_version
-    end
-
-    # The requested version by a client or if it's nil the latest or default
-    # version configured.
-    def derived_version
-      versioned_request.version
+    def request_version
+      @request_version ||= version_context.version
     end
 
     # A boolean check to determine if the latest version is requested.
-    def is_latest_version
-      versioned_request.is_latest_version?
+    def is_latest_version?
+      version_context.is_latest_version?
     end
 
     protected
 
-    # The current requests version information.
-    def versioned_request
-      set_version
-      @versioned_request
+    def version_context
+      request.env['versioncake.context']
     end
 
-    # Sets the version of the request as well as several accessor variables.
+    # Check the version of the request and raise errors when it's invalid. Additionally,
+    # setup view versioning if configured.
     #
     # @param override_version a version number to use instead of the one extracted
     #     from the request
     #
     # @return No explicit return, but several attributes are exposed
-    def set_version(override_version=nil)
-      return if @versioned_request.present? && override_version.blank?
-      @versioned_request = VersionCake::VersionedRequest.new(
-          request,
-          VersionCake::Railtie.config.versioncake,
-          override_version
-      )
-      if !@versioned_request.is_version_supported?
-        raise UnsupportedVersionError.new('Unsupported version error')
+    def check_version!(override_version=nil)
+      case version_context.result
+        when :version_invalid, :version_too_high, :version_too_low, :unknown
+          raise UnsupportedVersionError.new('Unsupported version error')
+        when :obsolete
+          raise ObsoleteVersionError.new('The version given is obsolete')
+        when :no_version
+          raise MissingVersionError.new('No version was given')
       end
-      @_lookup_context.versions = @versioned_request.supported_versions
+
+      if VersionCake.config.rails_view_versioning
+        @_lookup_context.versions = version_context.resource.supported_versions.map { |n| :"v#{n}" }
+      end
+    end
+
+    def set_version(version)
+      @request_version = version
     end
   end
 end

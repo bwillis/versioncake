@@ -17,7 +17,7 @@ module VersionCake
     end
 
     def version_key
-      VersionCake::Railtie.config.versioncake.version_key
+      VersionCake.config.version_key
     end
 
     # Execute should return a number or a numeric string if it successfully finds a version. 

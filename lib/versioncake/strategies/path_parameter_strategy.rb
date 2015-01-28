@@ -2,9 +2,13 @@ module VersionCake
   class PathParameterStrategy < ExtractionStrategy
 
     def execute(request)
-      if request.path_parameters.key? version_key.to_sym
-        request.path_parameters[version_key.to_sym]
+      version = nil
+      request.path.split('/').find do |part|
+        next unless match = part.match(%r{v(?<version>\d+)})
+        version = match[:version]
+        break
       end
+      version
     end
 
   end
