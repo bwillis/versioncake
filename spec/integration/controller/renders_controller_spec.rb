@@ -1,50 +1,54 @@
 require './spec/rails_helper'
 
 describe RendersController, type: :controller do
-  before { set_request_version 3 }
   let(:request_options) { {} }
   subject(:response_body) { get :index, request_options; response.body }
 
   context '#index' do
+    render_views
+    before { set_request_version 'renders', request_version }
     before { response_body }
 
-    context 'with version 1 requested' do
-      before { set_request_version 1, :supported, [1,2] }
+    context 'when requesting the non latest version' do
+      let(:request_version) { 1 }
 
       it { expect(controller.request_version).to eq 1 }
       it { expect(controller.is_latest_version?).to be_falsey }
+      it { expect(response_body).to eq 'template v1' }
     end
 
     context 'with explicity requesting the latest version' do
-      before { set_request_version 3 }
+      let(:request_version) { 3 }
 
       it { expect(controller.request_version).to eq 3 }
       it { expect(controller.is_latest_version?).to be_truthy }
+      it { expect(response_body).to eq 'template v2' }
     end
 
     context '#set_version' do
       let(:request_options) { { 'override_version' => 2 } }
-      before { set_request_version 3 }
+      let(:request_version) { 3 }
 
       it { expect(controller.request_version).to eq 2 }
+      it { expect(response_body).to eq 'template v2' }
     end
   end
 
   context 'errors' do
     context 'with a version larger than the supported versions' do
-      before { set_request_version :version_too_high }
+      before { set_version_context :version_too_high }
 
       it { expect { response_body }.to raise_error VersionCake::UnsupportedVersionError }
     end
 
     context 'with a version lower than the supported versions' do
-      before { set_request_version :version_too_low }
+      before { set_version_context :version_too_low }
 
       it { expect { response_body }.to raise_error VersionCake::UnsupportedVersionError }
     end
 
     context 'with an invalid version' do
-      before { set_request_version :version_invalid }
+      before { set_version_context :version_invalid }
 
       it { expect { response_body }.to raise_error VersionCake::UnsupportedVersionError }
     end
