@@ -10,5 +10,11 @@ module VersionCake
     def is_latest_version?
       @version == @resource.latest_version
     end
+
+    # Ordered versions that are equal to or lower
+    # than the requested version.
+    def supported_versions
+      @resource.supported_versions.sort.reverse.reject { |v| v > @version }
+    end
   end
 end

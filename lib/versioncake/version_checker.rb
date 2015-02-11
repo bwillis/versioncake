@@ -1,24 +1,22 @@
 module VersionCake
   class VersionChecker
     attr_reader :result
-    def initialize(request, resource)
-      @request, @resource = resource, request
+    def initialize(version, resource)
+      @version, @resource = resource, version
     end
 
     def execute
-      @result = if @request.failed
-        :version_invalid
-      elsif @request.version.nil?
+      @result = if @version.nil?
         :no_version
-      elsif @resource.supported_versions.include? @request.version
+      elsif @resource.supported_versions.include? @version
         :supported
-      elsif @resource.obsolete_versions.include? @request.version
+      elsif @resource.obsolete_versions.include? @version
         :obsolete
-      elsif @resource.deprecated_versions.include? @request.version
+      elsif @resource.deprecated_versions.include? @version
         :deprecated
-      elsif @request.version > @resource.supported_versions.last
+      elsif @version > @resource.supported_versions.last
         :version_too_high
-      elsif @request.version < @resource.supported_versions.first
+      elsif @version < @resource.supported_versions.first
         :version_too_low
       else
         :unknown
