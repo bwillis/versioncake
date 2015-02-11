@@ -45,7 +45,7 @@ module VersionCake
       end
 
       if VersionCake.config.rails_view_versioning
-        @_lookup_context.versions = version_context.resource.supported_versions.map { |n| :"v#{n}" }
+        @_lookup_context.versions = version_context.supported_versions.map { |n| :"v#{n}" }
       end
     end
 

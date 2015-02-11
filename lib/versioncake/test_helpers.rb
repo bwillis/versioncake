@@ -1,20 +1,14 @@
 module VersionCake
   module TestHelpers
-    def set_request_version(version_number, version_status=:supported, supported_versions=[version_number])
-      if version_number.is_a? Symbol
-        version_status = version_number
-        if version_status == :supported
-          version_number = 1
-        else
-          version_number = 666
-        end
-      end
+    # Test helper the mimics the middleware because we do not
+    # have middleware during tests.
+    def set_request_version(resource, version)
+      service = VersionCake::VersionContextService.new(VersionCake.config)
+      @request.env['versioncake.context'] = service.create_context resource, version
+    end
 
-      @request.env['versioncake.context'] = VersionCake::VersionContext.new(
-          version_number,
-          instance_double('VersionedResource', latest_version: supported_versions.last, supported_versions: supported_versions),
-          version_status
-      )
+    def set_version_context(status, resource=nil, version=nil)
+      @request.env['versioncake.context'] = VersionCake::VersionContext.new(version, resource, status)
     end
   end
 end

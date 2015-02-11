@@ -8,7 +8,7 @@ module VersionCake
     end
 
     def latest_version
-      @supported_versions.first
+      @supported_versions.last
     end
   end
 end
