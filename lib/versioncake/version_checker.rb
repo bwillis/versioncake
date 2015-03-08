@@ -8,6 +8,8 @@ module VersionCake
     def execute
       @result = if @version.nil?
         :no_version
+      elsif !@version.is_a? Integer
+        :invalid_format
       elsif @resource.supported_versions.include? @version
         :supported
       elsif @resource.obsolete_versions.include? @version
