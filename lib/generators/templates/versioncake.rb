@@ -1,9 +1,12 @@
 VersionCake.setup do |config|
-  # Set the version key that clients will send example: `X-API-VERSION: 5`
-  # config.version_key = 'version'
-
-  # Enable Rails versioned filename mapping
-  # config.rails_view_versioning = true
+  # Versioned Resources
+  # Define what server resources are supported, deprecated or obsolete
+  # Resources listed are priority based upon creation. To version all
+  # resources you can define a catch all at the bottom of the block.
+  config.resources do |r|
+    # r.resource uri_regex, obsolete, deprecated, supported
+    r.resource %r{.*}, [], [], (1..5)
+  end
 
   # Extraction Strategies
   # Define how you will accept version from the request.
@@ -28,14 +31,11 @@ VersionCake.setup do |config|
 
   # Version when no version in present in the request. If none is
   # specified then it will error?
-  # config.missing_version = 5
+  # config.missing_version = nil
 
-  # Versioned Resources
-  # Define what server resources are supported, deprecated or obsolete
-  # Resources listed are priority based upon creation. To version all
-  # resources you can define a catch all at the bottom of the block.
-  config.resources do |r|
-    # r.resource uri_regex, obsolete, deprecated, supported
-    r.resource %r{.*}, [], [], (1..5)
-  end
+  # Set the version key that clients will send example: `API-VERSION: 5`
+  # config.version_key = 'version'
+
+  # Enable Rails versioned filename mapping
+  # config.rails_view_versioning = true
 end
