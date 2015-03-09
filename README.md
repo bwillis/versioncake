@@ -29,11 +29,12 @@ Check out https://github.com/bwillis/350-rest-api-versioning for a comparison of
 
 ```
 gem install versioncake
+rails g versioncake:install
 ```
 
 ### Requirements
 
-| Version | Rails 3.2 Support? | Rails 4 Support? | Rails 4.1 Support? | [Rails API](https://github.com/rails-api/rails-api) 0.2 Support? |
+| Version | Rails 3.2 Support? | Rails 4 Support? | Rails >4.1 Support? | [Rails API](https://github.com/rails-api/rails-api) 0.2 Support? |
 | ------- |:---------:| -------:| -------:| -------:|
 | [1.0](CHANGELOG.md#100-march-14-2013) | Yes       | No      | No      | No   |
 | [1.1](CHANGELOG.md#110-may-18-2013)   | Yes       | No      | No      | No   |
@@ -41,12 +42,26 @@ gem install versioncake
 | [1.3](CHANGELOG.md#130-sept-26-2013)  | Yes       | Yes     | No      | No   |
 | [>2.0](CHANGELOG.md#200-feb-6-2014)   | Yes       | Yes     | Yes     | No   |
 | [>2.4](CHANGELOG.md#200-feb-6-2014)   | Yes       | Yes     | Yes     | Yes  |
+| [>3.0](CHANGELOG.md)                  | Yes       | Yes     | Yes     | Yes  |
 
 ## Upgrade v2.0 -> v3.0
 
 ### Accept header name changes
 
 The default accept header was changed from 'X-API-Version' to 'API-Version'. If you require the 'X-' or some other variant, you can specify a custom strategy as outlined in Extraction Strategy section below.
+
+### Configuration changes
+
+Configuration is now done with an initialize-you can generate a default one with `rails g versioncake:install` and then modify the generated file to match your configuration.
+
+### Configuration changes
+
+The configuration options for Version Cake have changed:
+
+| Old Name |
+| --------------------------------------- | -------------------------------------------- |
+| config.versioncake.supported_version_numbers | config.resources |
+| config.versioncake.default_version           | config.missing_version |
 
 ## Upgrade v1.* -> v2.0
 
@@ -76,8 +91,13 @@ In this simple example we will outline the code that is introduced to support a 
 
 ### config/application.rb
 ```ruby
-config.versioncake.supported_version_numbers = (1...4)
-config.versioncake.extraction_strategy       = :query_parameter # for simplicity
+VersionCake.setup do |config|
+  config.resources do |r|
+    r.resource %r{.*}, [], [], (1..4)
+  end
+  config.extraction_strategy = :query_parameter # for simplicity
+  config.missing_version = 4
+end
 ```
 
 Often times with APIs, depending upon the version, different logic needs to be applied. With the following controller code, the initial value of @posts includes all Post entries.
@@ -93,7 +113,7 @@ class PostsController < ApplicationController
     @posts = Post.scoped
 
     # version 3 or greated supports embedding post comments
-    if derived_version >= 3
+    if request_version >= 3
       @posts = @posts.includes(:comments)
     end
   end
@@ -166,7 +186,7 @@ For a given request, if we specify the version number, and that version of the v
 ```
 
 
-When no version is specified, the latest version of the view is rendered.  In this case, views/posts/index.json.v4.jbuilder.
+When no version is specified, the configured `missing_version` will be used to render a view.  In this case, views/posts/index.json.v4.jbuilder.
 
 #### http://localhost:3000/posts.json
 ```javascript
@@ -201,20 +221,28 @@ When no version is specified, the latest version of the view is rendered.  In th
 ## How to use
 
 ### Configuration
-The configuration should be placed in your Rails projects `config/application.rb`. It is also suggested to enable different settings per environment, for example development and test can have extraction strategies that make it easier to develop or write test code.
+The configuration lives in `config/initializers/versioncake.rb`.
 
-#### Supported Versions
-You need to define the supported versions in your Rails application.rb file as `view_versions`. Use this config to set the range of supported API versions that can be served:
+#### Versioned Resources
+Each individual resource uri can be identified by a regular expression. For each one it can be customized to have obsolete, deprecated, supported versions.
 
 ```ruby
-config.versioncake.supported_version_numbers = [1,2,3,4,5] # or (1..5)
+  config.resources do |r|
+    # r.resource uri_regex, obsolete, deprecated, supported
+
+    # version 2 and 3 are still supported on users resource
+    r.resource %r{/users}, [1], [2,3], [4]
+
+    # all other resources only allow v4
+    r.resource %r{.*}, [1,2,3], [], [4]
+  end
 ```
 
 #### Extraction Strategy
 
 You can also define the way to extract the version. The `extraction_strategy` allows you to set one of the default strategies or provide a proc to set your own. You can also pass it a prioritized array of the strategies.
 ```ruby
-config.versioncake.extraction_strategy = :query_parameter # [:http_header, :http_accept_parameter]
+config.extraction_strategy = :query_parameter # [:http_header, :http_accept_parameter]
 ```
 These are the available strategies:
 
@@ -242,14 +270,20 @@ end
 
 When no version is supplied by a client, the version rendered will be the latest version by default. If you want to override this to another version, set the following property:
 ```ruby
-config.versioncake.default_version = 4
+config.missing_version = 4
 ```
 
 #### Version String
 
 The extraction strategies use a default string key of `api_version`, but that can be changed:
 ```ruby
-config.versioncake.version_key = "special_version_parameter_name"
+config.version_key = "special_version_parameter_name"
+```
+
+#### Version String
+If you do not wish to use the magic mapping of the version number to templates it can be disabled:
+```ruby
+config.rails_view_versioning = false
 ```
 
 ### Version your views
@@ -279,7 +313,7 @@ def index
   @posts = Post.scoped
 
   # version 3 or greated supports embedding post comments
-  if derived_version >= 3
+  if request_version >= 3
     @posts = @posts.includes(:comments)
   end
 end
@@ -288,9 +322,19 @@ end
 
 When a client makes a request it will automatically receive the latest supported version of the view. The client can also request for a specific version by one of the strategies configured by ``view_version_extraction_strategy``.
 
-### Unsupported Version Requests
+### Raised exceptions
 
-If a client requests a version that is no longer supported (is not included in the `config.versioncake.supported_version_numbers`), a `VersionCake::UnsupportedVersionError` will be raised. This can be handled using Rails `rescue_from` to return app specific messages to the client.
+These are the types of exceptions VersionCake will raise:
+
+|Exception type|Description|
+|--------------|-----------|
+|VersionCake::UnsupportedVersionError| The version is invalid, too high or too low for the resource.|
+|VersionCake::ObsoleteVersionError|The version is obsolete for the resource.|
+|VersionCake::MissingVersionError|If no `config.missing_version` is specified, this will be raised when no version is in the request.|
+
+### Handling Exceptions
+
+Handling exceptions can simply be done by using Rails `rescue_from` to return app specific messages to the client.
 
 ```ruby
 class ApplicationController < ActionController::Base
@@ -323,7 +367,7 @@ Testing can be painful but here are some easy ways to test different versions of
 Allowing more extraction strategies during testing can be helpful when needing to override the version.
 ```ruby
 # config/environments/test.rb
-config.versioncake.extraction_strategy = [:query_parameter, :request_parameter, :http_header, :http_accept_parameter]
+config.extraction_strategy = [:query_parameter, :request_parameter, :http_header, :http_accept_parameter]
 ```
 
 ### Testing a specific version
@@ -331,7 +375,7 @@ config.versioncake.extraction_strategy = [:query_parameter, :request_parameter, 
 One way to test a specific version for would be to stub the requested version in the before block:
 ```ruby
 before do
-  @controller.stubs(:requested_version).returns(3)
+  @controller.stubs(:request_version).returns(3)
 end
 ```
 
@@ -349,7 +393,7 @@ end
 You can iterate over all of the supported version numbers by accessing the ```AppName::Application.config.versioncake.supported_version_numbers```.
 
 ```ruby
-AppName::Application.config.versioncake.supported_version_numbers.each do |supported_version|
+VersionCake.config.resources.first.supported_versions.each do |supported_version|
   before do
     @controller.stubs(:requested_version).returns(supported_version)
   end
