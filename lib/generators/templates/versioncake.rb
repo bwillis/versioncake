@@ -39,29 +39,3 @@ VersionCake.setup do |config|
     r.resource %r{.*}, [], [], (1..5)
   end
 end
-
-# TODO: Remove!
-
-# Versioned resources are described by a URI pattern
-# versioned_resources = {
-#     * => {
-#         supported: (1..LATEST)
-#     }
-#     %r{users} => {
-#         obsolute: 2,
-#         deprecated: 3,
-#         supported: 4,
-#         rewrite_uri: 'user'
-#     },
-#     %r{user} => {
-#         supported: (5..LATEST)
-#     }
-# }
-#
-# v1/users => 404
-# v2/users => 410 (GONE)
-# v3/users => 'v3/user' with warning
-# v4/users => 'v4/user'
-# v5/users => 404
-# v5/user => 'v5/user'
-# v6/user => 'v6/user'
