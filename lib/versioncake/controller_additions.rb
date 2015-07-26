@@ -7,7 +7,11 @@ module VersionCake
     # set_version is the prepend filter that will determine the version of the
     # requests.
     included do
-      prepend_before_filter :check_version!
+      if respond_to? :prepend_before_action
+        prepend_before_action :check_version!
+      else
+        prepend_before_filter :check_version!
+      end
     end
 
     # The explicit version requested by a client, this may not
