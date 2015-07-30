@@ -52,15 +52,15 @@ The default accept header was changed from 'X-API-Version' to 'API-Version'. If 
 
 ### Configuration changes
 
-Configuration is now done with an initialize-you can generate a default one with `rails g versioncake:install` and then modify the generated file to match your configuration.
+Configuration is now done with an initializer-you can generate a default one with `rails g versioncake:install` and then modify the generated file to match your configuration.
 
 ### Configuration changes
 
 The configuration options for Version Cake have changed:
 
-| Old Name |
-| --------------------------------------- | -------------------------------------------- |
-| config.versioncake.supported_version_numbers | config.resources |
+| Old Name                                     | New Name               |
+| -------------------------------------------- | ---------------------- |
+| config.versioncake.supported_version_numbers | config.resources       |
 | config.versioncake.default_version           | config.missing_version |
 
 ## Upgrade v1.* -> v2.0

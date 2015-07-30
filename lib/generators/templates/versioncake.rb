@@ -33,8 +33,8 @@ VersionCake.setup do |config|
   # specified then it will error?
   # config.missing_version = nil
 
-  # Set the version key that clients will send example: `API-VERSION: 5`
-  # config.version_key = 'version'
+  # Set the version key that clients will send example: `API-VERSION: 5`, api_version=2
+  # config.version_key = 'api_version'
 
   # Enable Rails versioned filename mapping
   # config.rails_view_versioning = true
