@@ -29,9 +29,8 @@ VersionCake.setup do |config|
   # ```
   # config.extraction_strategy = [:http_accept_parameter, :http_header, :request_parameter, :path_parameter, :query_parameter]
 
-  # Version when no version in present in the request. If none is
-  # specified then it will error?
-  # config.missing_version = nil
+  # Version when no version in present in the request. If none is specified then it will error
+  config.missing_version = 5
 
   # Set the version key that clients will send example: `API-VERSION: 5`, api_version=2
   # config.version_key = 'api_version'
