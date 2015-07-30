@@ -14,14 +14,25 @@ describe RendersController, type: :controller do
 
       it { expect(controller.request_version).to eq 1 }
       it { expect(controller.is_latest_version?).to be_falsey }
+      it { expect(controller.is_deprecated_version?).to be_falsey }
       it { expect(response_body).to eq 'template v1' }
     end
 
     context 'with explicity requesting the latest version' do
-      let(:request_version) { 3 }
+      let(:request_version) { 5 }
 
-      it { expect(controller.request_version).to eq 3 }
+      it { expect(controller.request_version).to eq 5 }
       it { expect(controller.is_latest_version?).to be_truthy }
+      it { expect(controller.is_deprecated_version?).to be_falsey }
+      it { expect(response_body).to eq 'template v2' }
+    end
+
+    context 'when requesting a deprecated version' do
+      let(:request_version) { 4 }
+
+      it { expect(controller.request_version).to eq 4 }
+      it { expect(controller.is_latest_version?).to be_falsey }
+      it { expect(controller.is_deprecated_version?).to be_truthy }
       it { expect(response_body).to eq 'template v2' }
     end
 
@@ -51,6 +62,12 @@ describe RendersController, type: :controller do
       before { set_version_context :version_invalid }
 
       it { expect { response_body }.to raise_error VersionCake::UnsupportedVersionError }
+    end
+
+    context 'with an obsolete version' do
+      before { set_version_context :obsolete }
+
+      it { expect { response_body }.to raise_error VersionCake::ObsoleteVersionError }
     end
   end
 end

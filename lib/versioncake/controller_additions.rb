@@ -25,6 +25,11 @@ module VersionCake
       version_context.is_latest_version?
     end
 
+    # A boolean check to determine if the version requested is deprecated.
+    def is_deprecated_version?
+      version_context.result == :deprecated
+    end
+
     protected
 
     def version_context

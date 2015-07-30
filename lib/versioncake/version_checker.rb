@@ -10,12 +10,12 @@ module VersionCake
         :no_version
       elsif !@version.is_a? Integer
         :invalid_format
-      elsif @resource.supported_versions.include? @version
-        :supported
       elsif @resource.obsolete_versions.include? @version
         :obsolete
       elsif @resource.deprecated_versions.include? @version
         :deprecated
+      elsif @resource.supported_versions.include? @version
+        :supported
       elsif @version > @resource.supported_versions.last
         :version_too_high
       elsif @version < @resource.supported_versions.first
