@@ -1,77 +1,73 @@
-require 'spec_helper'
-require 'rails_helper'
+require './spec/rails_helper'
 
 describe RendersController, type: :controller do
-  before { allow_any_instance_of(VersionCake::Configuration).to receive(:default_version).and_return(default_version) }
-  let(:default_version) { 3 }
+  let(:request_options) { {} }
   subject(:response_body) { get :index, request_options; response.body }
 
   context '#index' do
+    render_views
+    before { set_request_version 'renders', request_version }
     before { response_body }
 
-    context 'with no version requested' do
-      render_views
+    context 'when requesting the non latest version' do
+      let(:request_version) { 1 }
 
-      let(:request_options) { {} }
-
-      it { expect(response_body).to eq 'template v2' }
-      it { expect(controller.requested_version).to be_blank }
-      it { expect(controller.derived_version).to eq 3 }
-
-      context 'and the default version is set to 1' do
-        let(:default_version) { 1 }
-
-        it { expect(controller.derived_version).to eq 1 }
-      end
-    end
-
-    context 'with version 1 requested' do
-      let(:request_options) { {'api_version' => '1'} }
-
-      it { expect(controller.requested_version).to eq 1 }
-      it { expect(controller.is_latest_version).to be_falsey }
+      it { expect(controller.request_version).to eq 1 }
+      it { expect(controller.is_latest_version?).to be_falsey }
+      it { expect(controller.is_deprecated_version?).to be_falsey }
+      it { expect(response_body).to eq 'template v1' }
     end
 
     context 'with explicity requesting the latest version' do
-      let(:request_options) { {'api_version' => '3'} }
+      let(:request_version) { 5 }
 
-      it { expect(controller.requested_version).to eq 3 }
-      it { expect(controller.is_latest_version).to be_truthy }
+      it { expect(controller.request_version).to eq 5 }
+      it { expect(controller.is_latest_version?).to be_truthy }
+      it { expect(controller.is_deprecated_version?).to be_falsey }
+      it { expect(response_body).to eq 'template v2' }
+    end
+
+    context 'when requesting a deprecated version' do
+      let(:request_version) { 4 }
+
+      it { expect(controller.request_version).to eq 4 }
+      it { expect(controller.is_latest_version?).to be_falsey }
+      it { expect(controller.is_deprecated_version?).to be_truthy }
+      it { expect(response_body).to eq 'template v2' }
     end
 
     context '#set_version' do
-      let(:request_options) { {'api_version' => '1', 'override_version' => 2} }
+      let(:request_options) { { 'override_version' => 2 } }
+      let(:request_version) { 3 }
 
-      it { expect(controller.derived_version).to eq 2 }
+      it { expect(controller.request_version).to eq 2 }
+      it { expect(response_body).to eq 'template v2' }
     end
   end
 
   context 'errors' do
     context 'with a version larger than the supported versions' do
-      let(:request_options) { {'api_version' => '4'} }
+      before { set_version_context :version_too_high }
 
       it { expect { response_body }.to raise_error VersionCake::UnsupportedVersionError }
     end
 
-    context 'with an available version' do
-      let(:request_options) { {'api_version' => '0'} }
+    context 'with a version lower than the supported versions' do
+      before { set_version_context :version_too_low }
 
       it { expect { response_body }.to raise_error VersionCake::UnsupportedVersionError }
     end
 
     context 'with an invalid version' do
-      let(:request_options) { {'api_version' => 'abc'} }
+      before { set_version_context :version_invalid }
 
       it { expect { response_body }.to raise_error VersionCake::UnsupportedVersionError }
     end
-  end
 
-  context 'when derived_version is called before the before_filter' do
-    before do
-      controller.instance_variable_set('@_lookup_context', double(:versions= => nil))
-      allow(request).to receive(:query_parameters).and_return({api_version: '2'})
+    context 'with an obsolete version' do
+      before { set_version_context :obsolete }
+
+      it { expect { response_body }.to raise_error VersionCake::ObsoleteVersionError }
     end
-
-    it { expect(controller.derived_version).to eq 2 }
   end
 end

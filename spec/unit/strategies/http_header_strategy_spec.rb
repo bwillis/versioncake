@@ -5,14 +5,14 @@ describe VersionCake::HttpHeaderStrategy do
   subject { strategy.extract(request) }
 
   context "a request with an HTTP_X_API_VERSION retrieves the version" do
-    let(:request) { instance_double('Request', headers: {'HTTP_API_VERSION' => '11'}) }
+    let(:request) { instance_double('Request', env: {'HTTP_API_VERSION' => '11'}) }
 
     it { is_expected.to eq 11 }
   end
 
   context "a request without an HTTP_X_API_VERSION returns nil" do
     let(:request) { instance_double('Request', \
-      headers: {'HTTP_ACCEPT' => 'text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c'}) }
+      env: {'HTTP_ACCEPT' => 'text/x-dvi; q=.8; mxb=100000; mxt=5.0, text/x-c'}) }
 
     it { is_expected.to be_nil }
   end

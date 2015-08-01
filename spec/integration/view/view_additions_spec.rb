@@ -1,4 +1,3 @@
-require 'spec_helper'
 require './spec/rails_helper'
 
 describe ActionView::PathResolver do
@@ -35,7 +34,12 @@ describe ActionView::PathResolver do
     end
 
     context 'when in Rails >=4.1' do
-      before { skip unless ActionPack::VERSION::MAJOR == 4 && ActionPack::VERSION::MINOR >= 1 }
+      before do
+        unless (ActionPack::VERSION::MAJOR == 4 && ActionPack::VERSION::MINOR >= 1) ||
+            ActionPack::VERSION::MAJOR > 5
+          skip('Template variants are only available in Rails >=4.1')
+        end
+      end
 
       context 'when handler, format, variant and version are present' do
         let(:template_extension) { 'application.json+tablet.v1.jbuilder' }

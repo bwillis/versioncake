@@ -4,12 +4,14 @@ rvm:
   - 1.9.3
   - 2.0.0
   - 2.1.0
+  - 2.2.0
   - ruby-head
 
 gemfile:
   - gemfiles/rails3.2.gemfile
   - gemfiles/rails4.0.gemfile
   - gemfiles/rails4.1.gemfile
+  - gemfiles/rails4.2.gemfile
 
 matrix:
   exclude:
@@ -17,6 +19,8 @@ matrix:
       gemfile: gemfiles/rails4.0.gemfile
     - rvm: 1.9.2
       gemfile: gemfiles/rails4.1.gemfile
+    - rvm: 1.9.2
+      gemfile: gemfiles/rails4.2.gemfile
 
   allow_failures:
     - rvm: ruby-head

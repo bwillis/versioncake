@@ -5,11 +5,12 @@
 Bug Fixes:
 
 * When an invalid version is received an unsupported exception is raised (#34)
-* Remove deprecated X- from header
+* Remove deprecated X- from header (breaking change)
 
 Enhancements:
 
 * Migrate from test-unit to rspec (#37)
+* Rack based versioning middleware (#36) (breaking changes)
 
 Deprecations:
 
