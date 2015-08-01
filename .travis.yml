@@ -19,6 +19,8 @@ matrix:
       gemfile: gemfiles/rails4.0.gemfile
     - rvm: 1.9.2
       gemfile: gemfiles/rails4.1.gemfile
+    - rvm: 1.9.2
+      gemfile: gemfiles/rails4.2.gemfile
 
   allow_failures:
     - rvm: ruby-head
