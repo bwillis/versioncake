@@ -35,7 +35,7 @@ rails g versioncake:install
 ### Requirements
 
 | Version | Rails 3.2 Support? | Rails 4 Support? | Rails >4.1 Support? | Rails >5 Support? | [Rails API](https://github.com/rails-api/rails-api) 0.2 Support? |
-| ------- |:---------:| -------:| -------:| -------:|
+| -------:|:---------:| -------:| -------:| -------:| -------:|
 | [1.0](CHANGELOG.md#100-march-14-2013) | Yes       | No      | No      | No   | No   |
 | [1.1](CHANGELOG.md#110-may-18-2013)   | Yes       | No      | No      | No   | No   |
 | [1.2](CHANGELOG.md#120-may-26-2013)   | Yes       | Yes     | No      | No   | No   |
