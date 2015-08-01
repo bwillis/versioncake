@@ -6,7 +6,7 @@ describe VersionCake::VersionContextService do
     double('user_resource',
       uri: %r{user},
       supported_versions: [5,6,7],
-      deprecated_versions: [3,4,5],
+      deprecated_versions: [3,4],
       obsolete_versions: [1,2]
     )
   end
