@@ -6,6 +6,7 @@ Bug Fixes:
 
 * When an invalid version is received an unsupported exception is raised (#34)
 * Remove deprecated X- from header (breaking change)
+* Remove warning in Rails 5 (#40) Thanks [Michael Elfassy](https://github.com/elfassy)!
 
 Enhancements:
 
