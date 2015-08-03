@@ -23,7 +23,7 @@ describe VersionCake::Rack::Middleware do
 
       it "test yml test cases" do
         begin
-          response = app.request(method, '/', headers.merge(params: params))
+          response = app.request(method, '/renders', headers.merge(params: params))
           expect(response.body).to(eq(test_response), custom_message(headers, params, method, response.body, test_response))
         rescue => e
           raise custom_message(headers, params, method, response.body, test_response) + ", but it failed with an exception '#{e.message}'"

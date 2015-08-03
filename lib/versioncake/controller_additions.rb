@@ -44,6 +44,8 @@ module VersionCake
     #
     # @return No explicit return, but several attributes are exposed
     def check_version!(override_version=nil)
+      return unless version_context
+      
       case version_context.result
         when :version_invalid, :version_too_high, :version_too_low, :unknown
           raise UnsupportedVersionError.new('Unsupported version error')
