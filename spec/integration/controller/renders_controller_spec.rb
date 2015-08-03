@@ -18,7 +18,7 @@ describe RendersController, type: :controller do
       it { expect(response_body).to eq 'template v1' }
     end
 
-    context 'with explicity requesting the latest version' do
+    context 'when explicitly requesting the latest version' do
       let(:request_version) { 5 }
 
       it { expect(controller.request_version).to eq 5 }
