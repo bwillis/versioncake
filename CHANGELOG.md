@@ -8,7 +8,7 @@ Bug Fixes:
 
 Enhancements:
 
-* None
+* Respond with request version, support for either header or Content-Type (#39)
 
 Deprecations:
 

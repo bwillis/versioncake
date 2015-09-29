@@ -286,6 +286,13 @@ If you do not wish to use the magic mapping of the version number to templates i
 config.rails_view_versioning = false
 ```
 
+#### Response Version
+
+If a client requests a specific version (or does not) and a version applies to the resource you can configure it to be in the response. Use the following configuration:
+```ruby
+config.response_strategy = [:http_content_type, :http_header]
+```
+
 ### Version your views
 
 When a client makes a request to your controller the latest version of the view will be rendered. The latest version is determined by naming the template or partial with a version number that you configured to support.
