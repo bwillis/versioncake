@@ -15,7 +15,13 @@ module VersionCake
       @version_key                   = VERSION_KEY_DEFAULT
       @rails_view_versioning         = true
       self.supported_version_numbers = SUPPORTED_VERSIONS_DEFAULT
-      self.extraction_strategy       = :query_parameter
+      self.extraction_strategy       = [
+          :http_accept_parameter,
+          :http_header,
+          :request_parameter,
+          :path_parameter,
+          :query_parameter
+      ]
     end
 
     def extraction_strategy=(val)

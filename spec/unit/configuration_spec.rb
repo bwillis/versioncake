@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe VersionCake::Configuration do
+  let(:supported_versions) { }
   subject(:config) do
     config = described_class.new
     if supported_versions
@@ -57,5 +58,15 @@ describe VersionCake::Configuration do
     let(:supported_versions) { [4,1,3,9,2,54] }
 
     it { expect(config.latest_version).to eq 54 }
+  end
+
+  context 'by default' do
+    it 'has all extraction strategies' do
+      expect(config.extraction_strategies.map(&:class)).to match_array(
+        VersionCake::ExtractionStrategy.list(
+          :http_accept_parameter, :http_header, :request_parameter, :path_parameter, :query_parameter
+        ).map(&:class)
+      )
+    end
   end
 end
