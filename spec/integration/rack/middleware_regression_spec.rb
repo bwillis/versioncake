@@ -4,8 +4,10 @@ require 'yaml'
 describe VersionCake::Rack::Middleware do
   let(:app) do
     rack = Rack::Builder.new do
-      use VersionCake::Rack::Middleware
-      run lambda { |env| [ 200, {}, [ env['versioncake.context'].version ] ] }
+      config = VersionCake::Configuration.new
+      config.resources { |r| r.resource %r{.*}, [], [], (1..5) }
+      use VersionCake::Rack::Middleware, config
+      run lambda { |env| [ 200, {},[ env['versioncake.context'].version ] ] }
     end
     Rack::MockRequest.new(rack)
   end
@@ -23,7 +25,7 @@ describe VersionCake::Rack::Middleware do
 
       it "test yml test cases" do
         begin
-          response = app.request(method, '/renders', headers.merge(params: params))
+          _response_status, _response_headers, response = app.request(method, '/renders', headers.merge(params: params))
           expect(response.body).to(eq(test_response), custom_message(headers, params, method, response.body, test_response))
         rescue => e
           raise custom_message(headers, params, method, response.body, test_response) + ", but it failed with an exception '#{e.message}'"

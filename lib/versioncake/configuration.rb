@@ -7,7 +7,7 @@ module VersionCake
     SUPPORTED_VERSIONS_DEFAULT = (1..10)
     VERSION_KEY_DEFAULT = 'api_version'
 
-    attr_reader :extraction_strategies, :supported_version_numbers, :versioned_resources
+    attr_reader :extraction_strategies, :response_strategies, :supported_version_numbers, :versioned_resources
     attr_accessor :missing_version, :version_key, :rails_view_versioning
 
     def initialize
@@ -22,12 +22,20 @@ module VersionCake
           :path_parameter,
           :query_parameter
       ]
+      self.response_strategy         = []
     end
 
     def extraction_strategy=(val)
       @extraction_strategies = []
       Array.wrap(val).each do |configured_strategy|
         @extraction_strategies << VersionCake::ExtractionStrategy.lookup(configured_strategy)
+      end
+    end
+
+    def response_strategy=(val)
+      @response_strategies = []
+      Array.wrap(val).each do |configured_strategy|
+        @response_strategies << VersionCake::ResponseStrategy::Base.lookup(configured_strategy)
       end
     end
 

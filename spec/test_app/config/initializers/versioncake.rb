@@ -42,4 +42,6 @@ VersionCake.setup do |config|
     # r.resource uri_regex, obsolete, deprecated, supported
     r.resource %r{renders/*}, [2], [4], (1..5)
   end
+
+  config.response_strategy = [:http_header]
 end

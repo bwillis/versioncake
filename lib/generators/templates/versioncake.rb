@@ -37,4 +37,13 @@ VersionCake.setup do |config|
 
   # Enable Rails versioned filename mapping
   # config.rails_view_versioning = true
+
+  # Response Strategies
+  # Define how (if at all) to include the version in the response. Similar to how to retrieve the
+  # version, you can set where it will be in the response. For example, the `http_header_strategy`
+  # will include it the response header under the key configured in `config.version_key`.
+  #
+  # Defaults to none
+  #
+  # config.response_strategy = [] # [:http_content_type, :http_header]
 end
