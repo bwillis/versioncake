@@ -449,6 +449,10 @@ Thanks to all those who have helped make Version Cake really sweet:
 - [RubyWeekly](http://rubyweekly.com/archive/119.html)
 - [API building tools on Ruby Toolbox](https://www.ruby-toolbox.com/categories/API_Builders)
 
+# Security issues?
+
+If you think you have a security vulnerability, please submit the issue and the details to [https://hackerone.com/versioncake](https://hackerone.com/versioncake)
+
 # Questions?
 
 Create a bug/enhancement/question on github or contact [aantix](https://github.com/aantix) or [bwillis](https://github.com/bwillis) through github.
