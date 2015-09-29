@@ -27,6 +27,12 @@ module VersionCake
       raise Exception, "ExtractionStrategy requires execute to be implemented"
     end
 
+    def self.list(*strategies)
+      strategies.map do |strategy|
+        lookup(strategy)
+      end
+    end
+
     def self.lookup(strategy)
       case strategy
         when String, Symbol

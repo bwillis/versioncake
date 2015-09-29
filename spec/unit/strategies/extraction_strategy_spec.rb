@@ -68,4 +68,11 @@ describe VersionCake::ExtractionStrategy do
       VersionCake::ExtractionStrategy.lookup(:fake_extraction)
     end.to raise_error(Exception)
   end
+
+  describe '.list' do
+    let(:strategies) { :http_header }
+    subject { VersionCake::ExtractionStrategy.list(strategies) }
+
+    it { expect(subject.map(&:class)).to match_array VersionCake::HttpHeaderStrategy }
+  end
 end
