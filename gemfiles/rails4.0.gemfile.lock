@@ -40,7 +40,7 @@ GEM
     mime-types (1.23)
     minitest (4.7.5)
     multi_json (1.7.7)
-    power_assert (0.2.2)
+    power_assert (0.2.4)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -76,7 +76,7 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
-    test-unit (3.0.8)
+    test-unit (3.1.4)
       power_assert
     thor (0.18.1)
     thread_safe (0.1.0)
