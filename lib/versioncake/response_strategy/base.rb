@@ -12,9 +12,9 @@ module VersionCake
       def self.lookup(strategy)
         case strategy
           when String, Symbol
-            strategy_name = "response_strategy/#{strategy}_strategy".camelize
+            strategy_name = "#{strategy}_strategy".camelize
             begin
-              VersionCake.const_get(strategy_name).new
+              VersionCake::ResponseStrategy.const_get(strategy_name).new
             rescue
               raise Exception, "Unknown VersionCake response strategy #{strategy_name}"
             end
