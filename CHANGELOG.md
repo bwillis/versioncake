@@ -8,6 +8,20 @@ Bug Fixes:
 
 Enhancements:
 
+* None
+
+Deprecations:
+
+* None
+
+## 3.1.0 (Sept 29, 2015)
+
+Bug Fixes:
+
+* None
+
+Enhancements:
+
 * Respond with request version, support for either header or Content-Type (#39)
 
 Deprecations:
