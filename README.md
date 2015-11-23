@@ -388,10 +388,10 @@ end
 
 You can also test a specific version through a specific strategy such query_parameter or request_parameter strategies (configured in test environment) like so:
 ```ruby
-# test/functional/renders_controller_test.rb#L47
+# test/integration/renders_integration_test.rb#L47
 test "render version 1 of the partial based on the parameter _api_version" do
-  get :index, "api_version" => "1"
-  assert_equal @response.body, "index.html.v1.erb"
+  get renders_path("api_version" => "1")
+  assert_equal "index.html.v1.erb", @response.body
 end
 ```
 
