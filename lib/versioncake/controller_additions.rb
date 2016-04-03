@@ -45,17 +45,31 @@ module VersionCake
     # @return No explicit return, but several attributes are exposed
     def check_version!(override_version=nil)
       return unless version_context
-      
-      case version_context.result
-        when :version_invalid, :version_too_high, :version_too_low, :unknown
-          raise UnsupportedVersionError.new('Unsupported version error')
-        when :obsolete
-          raise ObsoleteVersionError.new('The version given is obsolete')
-        when :no_version
-          raise MissingVersionError.new('No version was given')
-      end
 
-      if VersionCake.config.rails_view_versioning
+      check_for_version_errors!(version_context.result)
+      configure_rails_view_versioning(version_context)
+    end
+
+    def check_for_version_errors!(result)
+      case result
+      when :version_invalid, :version_too_high, :version_too_low, :unknown
+        raise UnsupportedVersionError.new('Unsupported version error')
+      when :obsolete
+        raise ObsoleteVersionError.new('The version given is obsolete')
+      when :no_version
+        unless VersionCake.config.missing_version_use_unversioned_template
+          raise MissingVersionError.new('No version was given')
+        end
+      end
+    end
+
+    def configure_rails_view_versioning(version_context)
+      return unless VersionCake.config.rails_view_versioning
+
+      if version_context.result == :no_version &&
+        VersionCake.config.missing_version_use_unversioned_template
+        @_lookup_context.versions = nil
+      else
         @_lookup_context.versions = version_context.available_versions.map { |n| :"v#{n}" }
       end
     end
