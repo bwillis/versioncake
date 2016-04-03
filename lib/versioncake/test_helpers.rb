@@ -2,8 +2,8 @@ module VersionCake
   module TestHelpers
     # Test helper the mimics the middleware because we do not
     # have middleware during tests.
-    def set_request_version(resource, version)
-      service = VersionCake::VersionContextService.new(VersionCake.config)
+    def set_request_version(resource, version, config=VersionCake.config)
+      service = VersionCake::VersionContextService.new(config)
       @request.env['versioncake.context'] = service.create_context resource, version
     end
 
