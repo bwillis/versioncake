@@ -7,8 +7,12 @@ module VersionCake
         uri, supported_versions, deprecated_versions, obsolete_versions
     end
 
+    def available_versions
+      (@supported_versions.to_a + @deprecated_versions.to_a).sort
+    end
+
     def latest_version
-      @supported_versions.last
+      available_versions.last
     end
   end
 end
