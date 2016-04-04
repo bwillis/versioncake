@@ -13,8 +13,8 @@ module VersionCake
 
     # Ordered versions that are equal to or lower
     # than the requested version.
-    def supported_versions
-      @resource.supported_versions.sort.reverse.reject { |v| v > @version }
+    def available_versions
+      @resource.available_versions.reverse.reject { |v| v > @version }
     end
   end
 end

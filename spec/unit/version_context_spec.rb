@@ -6,29 +6,30 @@ describe VersionCake::VersionContext do
         latest_version: 8,
         supported_versions: [5,6,7,8],
         deprecated_versions: [4],
+        available_versions: [4,5,6,7,8],
         obsolete_versions: [2,3]
     )
   end
   let(:result) { :supported }
   subject(:context) { described_class.new(version, resource, result) }
 
-  describe '#supported_versions' do
+  describe '#available_versions' do
     let(:version) { 7 }
 
-    it { expect(context.supported_versions).to eq [7,6,5] }
+    it { expect(context.available_versions).to eq [7,6,5,4] }
 
     context 'for a deprecated version' do
       let(:version) { 4 }
       let(:result) { :deprecated }
 
-      it { expect(context.supported_versions).to eq [] }
+      it { expect(context.available_versions).to eq [4] }
     end
 
     context 'for an obsolete version' do
       let(:version) { 2 }
       let(:result) { :obsolete }
 
-      it { expect(context.supported_versions).to eq [] }
+      it { expect(context.available_versions).to eq [] }
     end
   end
 
