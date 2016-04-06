@@ -8,7 +8,7 @@ Bug Fixes:
 
 Enhancements:
 
-* None
+* Support missing version as unversioned template (#43)
 
 Deprecations:
 
