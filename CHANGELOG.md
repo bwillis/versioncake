@@ -1,10 +1,10 @@
 ## Unreleased Changes
 
-[Full Changelog](https://github.com/bwillis/versioncake/compare/v3.0...master)
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v3.1...master)
 
 Bug Fixes:
 
-* None
+* Deprecated versions would not render properly (#47)
 
 Enhancements:
 
