@@ -67,6 +67,14 @@ describe VersionCake::VersionContextService do
         it { expect(context.version).to eq nil }
         it { expect(context.resource).to eq resource_user }
         it { expect(context.result).to eq :no_version }
+
+        context 'when the version is blank' do
+          let(:request) { double(version: '', path: 'users/123') }
+
+          it { expect(context.version).to eq nil }
+          it { expect(context.resource).to eq resource_user }
+          it { expect(context.result).to eq :no_version }
+        end
       end
     end
 

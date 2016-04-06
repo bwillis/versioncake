@@ -9,7 +9,7 @@ module VersionCake
         version
       elsif version.is_a?(String) && /[0-9]+/.match(version)
         version.to_i
-      elsif version.nil? # no version was found
+      elsif version_blank?(version)
         nil
       else
         raise Exception, "Invalid format for version number."
@@ -18,6 +18,10 @@ module VersionCake
 
     def version_key
       VersionCake.config.version_key
+    end
+
+    def version_blank?(version)
+      version.nil? || (version.is_a?(String) && version.length == 0)
     end
 
     # Execute should return a number or a numeric string if it successfully finds a version. 
