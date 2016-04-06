@@ -3,7 +3,7 @@ module VersionCake
 
     def initialize(config)
       @versioned_resources = config.versioned_resources
-      @default_version = config.missing_version
+      @default_version = config.default_version
       @strategies = config.extraction_strategies
     end
 

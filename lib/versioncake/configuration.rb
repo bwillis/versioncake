@@ -7,13 +7,16 @@ module VersionCake
     SUPPORTED_VERSIONS_DEFAULT = (1..10)
     VERSION_KEY_DEFAULT = 'api_version'
 
-    attr_reader :extraction_strategies, :response_strategies, :supported_version_numbers, :versioned_resources
+    attr_reader :extraction_strategies, :response_strategies, :supported_version_numbers,
+      :versioned_resources, :default_version, :missing_version_use_unversioned_template
     attr_accessor :missing_version, :version_key, :rails_view_versioning
 
     def initialize
       @versioned_resources           = []
       @version_key                   = VERSION_KEY_DEFAULT
       @rails_view_versioning         = true
+      @missing_version_use_unversioned_template = true
+      @default_version = nil
       self.supported_version_numbers = SUPPORTED_VERSIONS_DEFAULT
       self.extraction_strategy       = [
           :http_accept_parameter,
@@ -23,6 +26,17 @@ module VersionCake
           :query_parameter
       ]
       self.response_strategy         = []
+    end
+
+    def missing_version=(val)
+      @missing_version = val
+      if @missing_version == :unversioned_template
+        @missing_version_use_unversioned_template = true
+        @default_version = nil
+      else
+        @missing_version_use_unversioned_template = false
+        @default_version = val
+      end
     end
 
     def extraction_strategy=(val)

@@ -29,8 +29,18 @@ VersionCake.setup do |config|
   # ```
   # config.extraction_strategy = [:http_accept_parameter, :http_header, :request_parameter, :path_parameter, :query_parameter]
 
-  # Version when no version in present in the request. If none is specified then it will error
-  config.missing_version = 5
+  # Missing Version
+  # What to use when no version in present in the request.
+  #
+  # Defaults to `:unversioned_template`
+  #
+  # Integer value:
+  #   the version number to use
+  #
+  # `:unversioned_template` value:
+  # If you are using `rails_view_versioning` this will render the "base template" aka
+  # the template without a version number.
+  # config.missing_version = :unversioned_template
 
   # Set the version key that clients will send example: `API-VERSION: 5`, api_version=2
   # config.version_key = 'api_version'

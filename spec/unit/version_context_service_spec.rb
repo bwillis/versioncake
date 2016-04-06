@@ -21,12 +21,13 @@ describe VersionCake::VersionContextService do
   let(:config) do
     double('config',
       versioned_resources: [resource_user, resource_all],
-      missing_version: 9,
+      default_version: default_version,
       extraction_strategies: [
         VersionCake::CustomStrategy.new(lambda{ |req| req.version })
       ]
     )
   end
+  let(:default_version) { 6 }
   let(:service) { described_class.new(config) }
 
   describe '#create_context_from_request' do
@@ -51,6 +52,22 @@ describe VersionCake::VersionContextService do
       it { expect(context.version).to eq 2 }
       it { expect(context.resource).to eq resource_user }
       it { expect(context.result).to eq :obsolete }
+    end
+
+    context 'for a missing version' do
+      let(:request) { double(version: nil, path: 'users/123') }
+
+      it { expect(context.version).to eq 6 }
+      it { expect(context.resource).to eq resource_user }
+      it { expect(context.result).to eq :supported }
+
+      context 'when no default version is configured' do
+        let(:default_version) { nil }
+
+        it { expect(context.version).to eq nil }
+        it { expect(context.resource).to eq resource_user }
+        it { expect(context.result).to eq :no_version }
+      end
     end
   end
 

@@ -6,7 +6,8 @@ describe RendersController, type: :controller do
 
   context '#index' do
     render_views
-    before { set_request_version 'renders', request_version }
+    let(:config) { VersionCake.config }
+    before { set_request_version 'renders', request_version, config }
     before { response_body }
 
     context 'when requesting the non latest version' do
@@ -34,6 +35,28 @@ describe RendersController, type: :controller do
       it { expect(controller.is_latest_version?).to be_falsey }
       it { expect(controller.is_deprecated_version?).to be_truthy }
       it { expect(response_body).to eq 'template v2' }
+    end
+
+    context 'when requesting without a version' do
+      context 'and missing version is configured to unversioned_template' do
+        let(:request_version) { nil }
+
+        # TODO: Restructure
+        # Need a better way to stub/unstub the `VersionCake.config` that generates
+        # the context and is used in the controller.
+        let(:config) do
+          VersionCake.config.tap do |config|
+            config.missing_version = :unversioned_template
+          end
+        end
+        after { VersionCake.config.missing_version = nil }
+        # /TODO
+
+        it { expect(controller.request_version).to eq nil }
+        it { expect(controller.is_latest_version?).to be_falsey }
+        it { expect(controller.is_deprecated_version?).to be_falsey }
+        it { expect(response_body).to eq 'base template' }
+      end
     end
 
     context '#set_version' do
