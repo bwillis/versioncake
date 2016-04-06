@@ -69,6 +69,14 @@ describe VersionCake::VersionContextService do
         it { expect(context.result).to eq :no_version }
       end
     end
+
+    context 'for an invalid version' do
+      let(:request) { double(version: 'asdasd', path: 'users/123') }
+
+      it { expect(context.version).to eq nil }
+      it { expect(context.resource).to eq resource_user }
+      it { expect(context.result).to eq :version_invalid }
+    end
   end
 
   describe '#create_context' do

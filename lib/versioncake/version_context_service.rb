@@ -18,7 +18,7 @@ module VersionCake
       request.execute
 
       result = if request.failed
-        :invalid_version
+        :version_invalid
       else
         check_version(resource, request.version)
       end
