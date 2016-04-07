@@ -5,6 +5,7 @@
 Bug Fixes:
 
 * Deprecated versions would not render properly (#47)
+* Blank `api_version` does not raise `MissingVersionError` (#50)
 
 Enhancements:
 
