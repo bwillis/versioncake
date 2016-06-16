@@ -1,6 +1,7 @@
 module VersionCake
   class VersionContext
-    attr_reader :version, :resource, :result
+    attr_reader :resource, :result
+    attr_accessor :version
 
     def initialize(version, resource, result)
       @version, @resource, @result = version, resource, result

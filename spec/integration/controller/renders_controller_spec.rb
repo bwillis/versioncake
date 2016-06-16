@@ -60,11 +60,11 @@ describe RendersController, type: :controller do
     end
 
     context '#set_version' do
-      let(:request_options) { { 'override_version' => 2 } }
+      let(:request_options) { { 'override_version' => 1 } }
       let(:request_version) { 3 }
 
-      it { expect(controller.request_version).to eq 2 }
-      it { expect(response_body).to eq 'template v2' }
+      it { expect(controller.request_version).to eq 1 }
+      it { expect(response_body).to eq 'template v1' }
     end
   end
 

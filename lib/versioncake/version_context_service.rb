@@ -34,6 +34,12 @@ module VersionCake
       VersionCake::VersionContext.new(version, resource, result)
     end
 
+    def create_context_from_context(context, version)
+      result = check_version(context.resource, version)
+
+      VersionCake::VersionContext.new(version, context.resource, result)
+    end
+
     private
 
     def check_version(resource, version)
