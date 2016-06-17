@@ -114,4 +114,34 @@ describe VersionCake::VersionContextService do
       it { expect(context.result).to eq :obsolete }
     end
   end
+
+  describe '#create_context_from_context' do
+    let(:uri) { 'users/21' }
+    let(:existing_version) { 1 }
+    let(:existing_context) { service.create_context(uri, existing_version) }
+    let(:version) { 5 }
+    subject(:context) { service.create_context_from_context(existing_context, version) }
+
+    it { expect(context.version).to eq 5 }
+    it { expect(context.resource).to eq resource_user }
+    it { expect(context.result).to eq :supported }
+
+    context 'for a deprecated version' do
+      let(:uri) { 'posts/21' }
+      let(:version) { 5 }
+
+      it { expect(context.version).to eq 5 }
+      it { expect(context.resource).to eq resource_all }
+      it { expect(context.result).to eq :deprecated }
+    end
+
+    context 'for an obsolete version' do
+      let(:uri) { 'posts/21' }
+      let(:version) { 2 }
+
+      it { expect(context.version).to eq 2 }
+      it { expect(context.resource).to eq resource_all }
+      it { expect(context.result).to eq :obsolete }
+    end
+  end
 end

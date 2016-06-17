@@ -75,7 +75,11 @@ module VersionCake
     end
 
     def set_version(version)
+      service = VersionCake::VersionContextService.new(VersionCake.config)
+      request.env['versioncake.context'] = service.create_context_from_context(version_context, version)
       @request_version = version
+
+      check_version!
     end
   end
 end
