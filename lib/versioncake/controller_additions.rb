@@ -68,9 +68,9 @@ module VersionCake
 
       if version_context.result == :no_version &&
         VersionCake.config.missing_version_use_unversioned_template
-        @_lookup_context.versions = nil
+        lookup_context.versions = nil
       else
-        @_lookup_context.versions = version_context.available_versions.map { |n| :"v#{n}" }
+        lookup_context.versions = version_context.available_versions.map { |n| :"v#{n}" }
       end
     end
 
