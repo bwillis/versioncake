@@ -1,6 +1,20 @@
 ## Unreleased Changes
 
-[Full Changelog](https://github.com/bwillis/versioncake/compare/v3.1...master)
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v3.2...master)
+
+Bug Fixes:
+
+* None
+
+Enhancements:
+
+* None
+
+Deprecations:
+
+* None
+
+## 3.2.0 (Aug 8, 2015)
 
 Bug Fixes:
 
