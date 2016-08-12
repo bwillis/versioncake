@@ -5,6 +5,6 @@ source "https://rubygems.org"
 gem "actionpack", "~> 4.0.0"
 gem "activesupport", "~> 4.0.0"
 gem "railties", "~> 4.0.0"
-gem "test-unit", "~> 3.0"
+gem "test-unit", "~>3.0"
 
 gemspec :path => "../"

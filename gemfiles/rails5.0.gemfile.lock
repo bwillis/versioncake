@@ -1,5 +1,5 @@
 PATH
-  remote: .
+  remote: ../
   specs:
     versioncake (3.2.0)
       actionpack (>= 3.2)
@@ -107,8 +107,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionpack (~> 5.0.0)
+  activesupport (~> 5.0.0)
   appraisal
   coveralls
+  railties (~> 5.0.0)
   rake
   rspec
   rspec-rails
