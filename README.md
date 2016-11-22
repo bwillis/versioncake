@@ -129,14 +129,14 @@ Notice the version numbers are denoted by the "v{version number}" extension with
 
 #### views/posts/index.json.v1.jbuilder
 ```ruby
-json.array!(@posts) do |json, post|
+json.array!(@posts) do |post|
     json.(post, :id, :title)
 end
 ```
 
 #### views/posts/index.json.v4.jbuilder
 ```ruby
-json.array!(@posts) do |json, post|
+json.array!(@posts) do |post|
     json.(post, :id, :title)
     json.comments post.comments, :id, :text
 end
