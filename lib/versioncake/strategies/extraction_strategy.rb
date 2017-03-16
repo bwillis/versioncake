@@ -5,7 +5,7 @@ module VersionCake
 
     def extract(request)
       version = execute(request)
-      if version.is_a?(Fixnum)
+      if version.is_a?(Integer)
         version
       elsif version.is_a?(String) && /[0-9]+/.match(version)
         version.to_i
