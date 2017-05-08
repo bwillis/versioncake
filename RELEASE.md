@@ -3,7 +3,7 @@
 Keeping releases consistent is important so here are the steps to follow when pushing a new version.
 
 1. Bump [lib/versioncake/version.rb](https://github.com/bwillis/versioncake/blob/master/lib/versioncake/version.rb) to the next major.minor version
-2. Make sure all tests are passing ```bundle && rake && rake appraisal spec```
+2. Make sure all tests are passing ```bundle && bundle exec rake && bundle exec rake appraisal spec```
 3. Smoke test in 350-rest-api-versioning/store-after-versioncake
 
  Verify:

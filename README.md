@@ -432,6 +432,7 @@ Thanks to all those who have helped make Version Cake really sweet:
 * [David Butler](https://github.com/dwbutler)
 * [Jeroen K.](https://github.com/jrnkntl)
 * [Masaya Myojin](https://github.com/mmyoji)
+* [John Hawthorn](https://github.com/jhawthorn)
 
 # Related Material
 
