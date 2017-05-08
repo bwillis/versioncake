@@ -47,7 +47,7 @@ module VersionCake
       return unless version_context
 
       check_for_version_errors!(version_context.result)
-      configure_rails_view_versioning(version_context)
+      configure_rails_view_versioning(version_context) if @_lookup_context.respond_to?(:versions)
     end
 
     def check_for_version_errors!(result)
