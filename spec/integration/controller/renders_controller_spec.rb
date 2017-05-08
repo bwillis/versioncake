@@ -1,8 +1,7 @@
 require './spec/rails_helper'
 
 describe RendersController, type: :controller do
-  let(:request_options) { {} }
-  subject(:response_body) { get :index, request_options; response.body }
+  subject(:response_body) { get :index; response.body }
 
   context '#index' do
     render_views
@@ -60,7 +59,12 @@ describe RendersController, type: :controller do
     end
 
     context '#set_version' do
-      let(:request_options) { { 'override_version' => 1 } }
+      params_style = if ActionPack::VERSION::MAJOR >= 5
+        { params: { override_version: 1 } }
+      else
+        { override_version: 1 }
+      end
+      subject(:response_body) { get :index, params_style; response.body }
       let(:request_version) { 3 }
 
       it { expect(controller.request_version).to eq 1 }

@@ -6,4 +6,4 @@ gem "actionpack", "~> 4.1.0"
 gem "activesupport", "~> 4.1.0"
 gem "railties", "~> 4.1.0"
 
-gemspec :path => "../"
+gemspec path: "../"
