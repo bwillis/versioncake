@@ -14,7 +14,7 @@ Deprecations:
 
 * None
 
-## 3.2.0 (Aug 8, 2015)
+## 3.2.0 (Aug 8, 2016)
 
 Bug Fixes:
 
