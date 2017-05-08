@@ -6,28 +6,15 @@ require 'action_view'
 ActionView::LookupContext.register_detail(:versions){ [] }
 
 ActionView::PathResolver.class_eval do
-  # not sure why we are doing this yet, but looks like a good idea
-  if ActionPack::VERSION::MAJOR >= 4 && ActionPack::VERSION::MINOR >= 1 || ActionPack::VERSION::MAJOR >= 5
-    ActionView::PathResolver::EXTENSIONS.replace({
-                                                     locale: ".",
-                                                     formats: ".",
-                                                     versions: ".",
-                                                     variants: "+",
-                                                     handlers: "."
-                                                 })
+  ActionView::PathResolver::EXTENSIONS.replace({
+                                                   locale: ".",
+                                                   formats: ".",
+                                                   versions: ".",
+                                                   variants: "+",
+                                                   handlers: "."
+                                               })
 
-    def initialize(pattern = nil)
-      @pattern = pattern || ":prefix/:action{.:locale,}{.:formats,}{+:variants,}{.:versions,}{.:handlers,}"
-      super()
-    end
-  else
-    ActionView::PathResolver::EXTENSIONS.replace [:locale, :formats, :versions, :handlers]
-
-    # The query builder has the @details from the lookup_context and will
-    # match the detail name to the string in the pattern, so we must append
-    # it to the default pattern
-    ActionView::PathResolver::DEFAULT_PATTERN.replace ":prefix/:action{.:locale,}{.:formats,}{.:versions,}{.:handlers,}"
-  end
+  ActionView::PathResolver::DEFAULT_PATTERN.replace ":prefix/:action{.:locale,}{.:formats,}{+:variants,}{.:versions,}{.:handlers,}"
 
   # The default extract handler expects that the handler is the last extension and
   # the format is the next one. Since we are replacing the DEFAULT_PATTERN, we need to
