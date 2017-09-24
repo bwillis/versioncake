@@ -252,7 +252,7 @@ Strategy | Description | Example
 :path_parameter | version in the url path parameter | `api/v:api_version/`
 :request_parameter | version that is sent in the body of the request | Good for testing.
 :http_header | Api version HTTP header | `API-Version: 1`
-:http_accept_parameter | HTTP Accept header | `Accept: application/xml; version=1` [why do this?](http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned)
+:http_accept_parameter | HTTP Accept header | `Accept: application/xml; api_version=1` [why do this?](http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned)
 custom | takes the request object and must return an integer | lambda {&#124;request&#124; request.headers["HTTP_X_MY_VERSION"].to_i } or class ExtractorStrategy; def execute(request);end;end
 
 If you use the path_parameter strategy with resources routes, you will want to setup your routes.rb config file to capture the api version.  You can do that in a few ways.  If you have just a few api routes you might specify the path directly like this:
