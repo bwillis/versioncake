@@ -1,10 +1,24 @@
 ## Unreleased Changes
 
-[Full Changelog](https://github.com/bwillis/versioncake/compare/v3.3...master)
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v3.4...master)
 
 Bug Fixes:
 
 * None
+
+Enhancements:
+
+* None
+
+Deprecations:
+
+* None
+
+## 3.4.0 (March 4, 2018)
+
+Bug Fixes:
+
+* don't replace frozen strings to support Rails v5.2 (#72) thanks [Bartosz Bonisławski](https://github.com/bbonislawski)
 
 Enhancements:
 
