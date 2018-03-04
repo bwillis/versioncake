@@ -34,15 +34,16 @@ rails g versioncake:install
 
 ### Requirements
 
-| Version | Rails 3.2 Support? | Rails 4 Support? | Rails >4.1 Support? | Rails >5 Support? | [Rails API](https://github.com/rails-api/rails-api) 0.2 Support? |
+| Version | Rails 3.2 Support? | Rails 4 Support? | Rails >4.1 Support? | Rails >5 Support? | Rails >5.2 Support? | [Rails API](https://github.com/rails-api/rails-api) 0.2 Support? |
 | -------:|:---------:| -------:| -------:| -------:| -------:|
-| [1.0](CHANGELOG.md#100-march-14-2013) | Yes       | No      | No      | No   | No   |
-| [1.1](CHANGELOG.md#110-may-18-2013)   | Yes       | No      | No      | No   | No   |
-| [1.2](CHANGELOG.md#120-may-26-2013)   | Yes       | Yes     | No      | No   | No   |
-| [1.3](CHANGELOG.md#130-sept-26-2013)  | Yes       | Yes     | No      | No   | No   |
-| [>2.0](CHANGELOG.md#200-feb-6-2014)   | Yes       | Yes     | Yes     | No   | No   |
-| [>2.4](CHANGELOG.md#200-feb-6-2014)   | Yes       | Yes     | Yes     | No   | Yes  |
-| [>3.0](CHANGELOG.md)                  | Yes       | Yes     | Yes     | Yes  | Yes  |
+| [1.0](CHANGELOG.md#100-march-14-2013) | Yes       | No      | No      | No   | No  | No   |
+| [1.1](CHANGELOG.md#110-may-18-2013)   | Yes       | No      | No      | No   | No  | No   |
+| [1.2](CHANGELOG.md#120-may-26-2013)   | Yes       | Yes     | No      | No   | No  | No   |
+| [1.3](CHANGELOG.md#130-sept-26-2013)  | Yes       | Yes     | No      | No   | No  | No   |
+| [>2.0](CHANGELOG.md#200-feb-6-2014)   | Yes       | Yes     | Yes     | No   | No  | No   |
+| [>2.4](CHANGELOG.md#200-feb-6-2014)   | Yes       | Yes     | Yes     | No   | No  | Yes  |
+| [>3.0](CHANGELOG.md)                  | Yes       | Yes     | Yes     | Yes  | No  | Yes  |
+| [>3.3](CHANGELOG.md)                  | Yes       | Yes     | Yes     | Yes  | Yes | Yes  |
 
 ## Upgrade v2.0 -> v3.0
 
