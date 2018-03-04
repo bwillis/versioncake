@@ -435,6 +435,7 @@ Thanks to all those who have helped make Version Cake really sweet:
 * [Masaya Myojin](https://github.com/mmyoji)
 * [John Hawthorn](https://github.com/jhawthorn)
 * [Ersin Akinci](https://github.com/earksiinni)
+* [Bartosz Bonisławski](https://github.com/bbonislawski)
 
 # Related Material
 
