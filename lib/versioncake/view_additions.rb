@@ -16,7 +16,10 @@ ActionView::PathResolver.class_eval do
                                                      handlers: "."
                                                  })
 
-    ActionView::PathResolver::DEFAULT_PATTERN.replace ":prefix/:action{.:locale,}{.:formats,}{+:variants,}{.:versions,}{.:handlers,}"
+    def initialize(pattern = nil)
+      @pattern = pattern || ":prefix/:action{.:locale,}{.:formats,}{+:variants,}{.:versions,}{.:handlers,}"
+      super()
+    end
   else
     ActionView::PathResolver::EXTENSIONS.replace [:locale, :formats, :versions, :handlers]
 
