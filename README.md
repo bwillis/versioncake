@@ -313,7 +313,7 @@ If you start supporting a newer version, v3 for instance, you do not have to cop
 
 ### Controller
 
-You don't need to do anything special in your controller, but if you find that you want to perform some tasks for a specific version you can use `requested_version` and `latest_version`. This may be updated in the [near future](https://github.com/bwillis/versioncake/issues/1).
+You don't need to do anything special in your controller, but if you find that you want to perform some tasks for a specific version you can use `request_version` and `version_context.resource.latest_version`. This may be updated in the [near future](https://github.com/bwillis/versioncake/issues/1).
 ```ruby
 def index
   # shared code for all versions
@@ -355,7 +355,7 @@ class ApplicationController < ActionController::Base
   def render_unsupported_version
     headers['API-Version-Supported'] = 'false'
     respond_to do |format|
-      format.json { render json: {message: "You requested an unsupported version (#{requested_version})"}, status: :unprocessable_entity }
+      format.json { render json: {message: "You requested an unsupported version (#{request_version})"}, status: :unprocessable_entity }
     end
   end
 
@@ -402,7 +402,7 @@ You can iterate over all of the supported version numbers by accessing the ```Ap
 ```ruby
 VersionCake.config.resources.first.supported_versions.each do |supported_version|
   before do
-    @controller.stubs(:requested_version).returns(supported_version)
+    @controller.stubs(:request_version).returns(supported_version)
   end
 
   test "all versions render the correct template" do
