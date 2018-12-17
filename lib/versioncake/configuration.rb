@@ -5,7 +5,7 @@ module VersionCake
   class Configuration
     VERSION_KEY_DEFAULT = 'api_version'
 
-    attr_reader :extraction_strategies, :response_strategies, :supported_version_numbers,
+    attr_reader :extraction_strategies, :response_strategies,
       :versioned_resources, :default_version, :missing_version_use_unversioned_template
     attr_accessor :missing_version, :version_key, :rails_view_versioning
 
