@@ -397,10 +397,10 @@ end
 
 ### Testing all supported versions
 
-You can iterate over all of the supported version numbers by accessing the ```AppName::Application.config.versioncake.supported_version_numbers```.
+You can iterate over all of the supported version numbers by accessing the ```VersionCake.config.versioned_resources.first.available_versions```.
 
 ```ruby
-VersionCake.config.resources.first.supported_versions.each do |supported_version|
+VersionCake.config.versioned_resources.first.available_versions.each do |supported_version|
   before do
     @controller.stubs(:request_version).returns(supported_version)
   end
@@ -435,6 +435,7 @@ Thanks to all those who have helped make Version Cake really sweet:
 * [John Hawthorn](https://github.com/jhawthorn)
 * [Ersin Akinci](https://github.com/earksiinni)
 * [Bartosz Bonisławski](https://github.com/bbonislawski)
+* [Harry Lascelles](https://github.com/hlascelles)
 
 # Related Material
 
