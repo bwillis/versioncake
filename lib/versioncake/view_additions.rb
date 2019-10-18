@@ -5,6 +5,7 @@ require 'action_view'
 # the resolver.
 ActionView::LookupContext.register_detail(:versions){ [] }
 
+=begin
 ActionView::PathResolver.class_eval do
   # not sure why we are doing this yet, but looks like a good idea
   if ActionPack::VERSION::MAJOR >= 4 && ActionPack::VERSION::MINOR >= 1 || ActionPack::VERSION::MAJOR >= 5
@@ -86,3 +87,4 @@ ActionView::Template.class_eval do
     inspect.gsub(/[^a-z0-9_]/, '_')
   end
 end
+=end
