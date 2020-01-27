@@ -7,7 +7,18 @@ ActionView::LookupContext.register_detail(:versions){ [] }
 
 ActionView::PathResolver.class_eval do
   # not sure why we are doing this yet, but looks like a good idea
-  if ActionPack::VERSION::MAJOR >= 4 && ActionPack::VERSION::MINOR >= 1 || ActionPack::VERSION::MAJOR >= 5
+  if ActionPack::VERSION::MAJOR >= 6
+    ActionView::PathResolver::EXTENSIONS.replace({
+      locale: ".",
+      formats: ".",
+      versions: ".",
+      variants: "+",
+      handlers: "."
+    })
+    Kernel::silence_warnings {
+      ActionView::PathResolver::DEFAULT_PATTERN = ":prefix/:action{.:locale,}{.:formats,}{.:versions,}{+:variants,}{.:handlers,}"
+    }
+  elsif ActionPack::VERSION::MAJOR >= 4 && ActionPack::VERSION::MINOR >= 1 || ActionPack::VERSION::MAJOR >= 5
     ActionView::PathResolver::EXTENSIONS.replace({
                                                      locale: ".",
                                                      formats: ".",
