@@ -4,7 +4,7 @@ module VersionCake
     def execute(request)
       version = nil
       request.path.split('/').find do |part|
-        next unless match = part.match(%r{v(?<version>\d+)})
+        next unless match = part.match(%r{\Av(?<version>\d+)\z})
         version = match[:version]
         break
       end
