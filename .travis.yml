@@ -7,6 +7,3 @@ rvm:
 
 gemfile:
   - gemfiles/rails5.0.gemfile
-
-  allow_failures:
-    - rvm: ruby-head
