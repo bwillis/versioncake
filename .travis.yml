@@ -1,19 +1,12 @@
 language: ruby
 
 rvm:
-  - 2.2.0
   - 2.2.2
   - 2.3.3
   - ruby-head
 
 gemfile:
-  - gemfiles/rails4.2.gemfile
   - gemfiles/rails5.0.gemfile
-
-matrix:
-  exclude:
-    - rvm: 2.2.0
-      gemfile: gemfiles/rails5.0.gemfile
 
   allow_failures:
     - rvm: ruby-head
