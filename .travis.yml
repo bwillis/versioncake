@@ -1,10 +1,11 @@
 language: ruby
 
-before_install: gem install bundler
+before_install: gem install bundler && bundle update --bundler
 
 rvm:
-  - 2.2.2
   - 2.3.3
+  - 2.4.7
+  - 2.5.6
   - ruby-head
 
 gemfile:
