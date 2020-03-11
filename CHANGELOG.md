@@ -4,15 +4,15 @@
 
 Bug Fixes:
 
-* None
+* Path versions could parse incorrect version in some circumstances (#83) thanks [Luke Abel](https://github.com/llhhaa)
 
 Enhancements:
 
-* None
+* Rails 6 support (#81) thanks [Thomas "Teflon Ted" Davis](https://github.com/trak3r)
 
 Deprecations:
 
-* None
+* Remove Rails v3/v4 and Ruby <v2.3 support
 
 ## 3.4.0 (March 4, 2018)
 
