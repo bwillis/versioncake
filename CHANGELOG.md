@@ -1,6 +1,20 @@
 ## Unreleased Changes
 
-[Full Changelog](https://github.com/bwillis/versioncake/compare/v3.4...master)
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v4.0...master)
+
+Bug Fixes:
+
+* None
+
+Enhancements:
+
+* None
+
+Deprecations:
+
+* None
+
+## 4.0.0 (March 10, 2020)
 
 Bug Fixes:
 
