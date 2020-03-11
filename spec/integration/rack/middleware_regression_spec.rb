@@ -27,7 +27,7 @@ describe VersionCake::Rack::Middleware do
 
       it "test yml test cases" do
         begin
-          _response_status, _response_headers, response = app.request(method, '/renders', headers.merge(params: params))
+          response = app.request(method, '/renders', headers.merge(params: params))
           expect(response.body).to(eq(test_response), custom_message(headers, params, method, response.body, test_response))
         rescue => e
           raise custom_message(headers, params, method, response.body, test_response) + ", but it failed with an exception '#{e.message}'"
@@ -53,7 +53,7 @@ describe VersionCake::Rack::Middleware do
 
     context 'and the request does not contain a version' do
       it 'does not include a version (rails will convert nil => unversioned template)' do
-        _response_status, _response_headers, response = app.request('get', '/renders')
+        response = app.request('get', '/renders')
         expect(response.body).to eq 'version is ' # nil
       end
     end
