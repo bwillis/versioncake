@@ -113,7 +113,7 @@ DEPENDENCIES
   appraisal (~> 2.2)
   coveralls (~> 0.8)
   railties (~> 5.2.0)
-  rake (> 11.0)
+  rake (> 12.0)
   rspec (~> 3.6)
   rspec-rails (~> 3.6)
   versioncake!

@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'appraisal', '~> 2.2'
   s.add_development_dependency 'coveralls', '~> 0.8'
-  s.add_development_dependency 'rake', '> 11.0'
+  s.add_development_dependency 'rake', '> 12.0'
 
   s.add_development_dependency 'rspec', '~> 3.6'
   s.add_development_dependency 'rspec-rails', '~> 3.6'
