@@ -9,3 +9,9 @@ appraise "rails5.2" do
   gem('activesupport',  '~> 5.2.0')
   gem('railties',       '~> 5.2.0')
 end
+
+appraise "rails6.0" do
+  gem('actionpack',     '~> 5.2.0')
+  gem('activesupport',  '~> 5.2.0')
+  gem('railties',       '~> 5.2.0')
+end

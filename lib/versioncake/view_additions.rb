@@ -6,16 +6,30 @@ require 'action_view'
 ActionView::LookupContext.register_detail(:versions){ [] }
 
 ActionView::PathResolver.class_eval do
-  ActionView::PathResolver::EXTENSIONS.replace({
-                                                   locale: ".",
-                                                   formats: ".",
-                                                   versions: ".",
-                                                   variants: "+",
-                                                   handlers: "."
-                                               })
-  def initialize(pattern = nil)
-    @pattern = pattern || ":prefix/:action{.:locale,}{.:formats,}{+:variants,}{.:versions,}{.:handlers,}"
-    super()
+  if ActionPack::VERSION::MAJOR >= 6
+    ActionView::PathResolver::EXTENSIONS.replace({
+      locale: ".",
+      formats: ".",
+      versions: ".",
+      variants: "+",
+      handlers: "."
+    })
+    Kernel::silence_warnings {
+      ActionView::PathResolver::DEFAULT_PATTERN = ":prefix/:action{.:locale,}{.:formats,}{.:versions,}{+:variants,}{.:handlers,}"
+    }
+  elsif ActionPack::VERSION::MAJOR >= 4 && ActionPack::VERSION::MINOR >= 1 || ActionPack::VERSION::MAJOR >= 5
+    ActionView::PathResolver::EXTENSIONS.replace({
+                                                     locale: ".",
+                                                     formats: ".",
+                                                     versions: ".",
+                                                     variants: "+",
+                                                     handlers: "."
+                                                 })
+
+    def initialize(pattern = nil)
+      @pattern = pattern || ":prefix/:action{.:locale,}{.:formats,}{+:variants,}{.:versions,}{.:handlers,}"
+      super()
+    end
   end
 
   # The default extract handler expects that the handler is the last extension and
