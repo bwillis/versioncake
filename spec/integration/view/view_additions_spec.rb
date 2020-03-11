@@ -33,19 +33,10 @@ describe ActionView::PathResolver do
       it { expect(template_format).to eq 'application/json' }
     end
 
-    context 'when in Rails >=4.1' do
-      before do
-        unless (ActionPack::VERSION::MAJOR == 4 && ActionPack::VERSION::MINOR >= 1) ||
-            ActionPack::VERSION::MAJOR > 5
-          skip('Template variants are only available in Rails >=4.1')
-        end
-      end
+    context 'when handler, format, variant and version are present' do
+      let(:template_extension) { 'application.json+tablet.v1.jbuilder' }
 
-      context 'when handler, format, variant and version are present' do
-        let(:template_extension) { 'application.json+tablet.v1.jbuilder' }
-
-        it { expect(template_format).to eq 'application/json' }
-      end
+      it { expect(template_format).to eq 'application/json' }
     end
   end
 end
