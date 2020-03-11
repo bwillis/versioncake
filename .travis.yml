@@ -10,3 +10,8 @@ rvm:
 
 gemfile:
   - gemfiles/rails5.0.gemfile
+
+matrix:
+  exclude:
+    - rvm: ruby-head
+      gemfile: gemfiles/rails5.0.gemfile
