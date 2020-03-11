@@ -1,11 +1,11 @@
 PATH
   remote: ..
   specs:
-    versioncake (3.4.0)
-      actionpack (>= 5.0)
-      activesupport (>= 5.0)
-      railties (>= 5.0)
-      tzinfo
+    versioncake (4.0.0)
+      actionpack (~> 5.0)
+      activesupport (~> 5.0)
+      railties (~> 5.0)
+      tzinfo (~> 1.2)
 
 GEM
   remote: https://rubygems.org/
@@ -110,12 +110,12 @@ PLATFORMS
 DEPENDENCIES
   actionpack (~> 5.2.0)
   activesupport (~> 5.2.0)
-  appraisal
-  coveralls
+  appraisal (~> 2.2)
+  coveralls (~> 0.8)
   railties (~> 5.2.0)
-  rake
-  rspec
-  rspec-rails
+  rake (> 11.0)
+  rspec (~> 3.6)
+  rspec-rails (~> 3.6)
   versioncake!
 
 BUNDLED WITH
