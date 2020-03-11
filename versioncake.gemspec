@@ -19,16 +19,16 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.9.2'
 
-  s.add_dependency('actionpack',    '>= 5.0')
-  s.add_dependency('activesupport', '>= 5.0')
-  s.add_dependency('railties',      '>= 5.0')
-  s.add_dependency('tzinfo')
+  s.add_dependency('actionpack',    '~> 5.0')
+  s.add_dependency('activesupport', '~> 5.0')
+  s.add_dependency('railties',      '~> 5.0')
+  s.add_dependency('tzinfo',        '~> 1.2')
 
-  s.add_development_dependency 'appraisal'
-  s.add_development_dependency 'coveralls'
-  s.add_development_dependency 'rake'
+  s.add_development_dependency 'appraisal', '~> 2.2'
+  s.add_development_dependency 'coveralls', '~> 0.8'
+  s.add_development_dependency 'rake', '~> 13.0'
 
-  s.add_development_dependency 'rspec'
-  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'rspec', '~> 3.6'
+  s.add_development_dependency 'rspec-rails', '~> 3.6'
 
 end
