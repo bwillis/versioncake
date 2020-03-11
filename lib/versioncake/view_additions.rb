@@ -13,8 +13,10 @@ ActionView::PathResolver.class_eval do
                                                    variants: "+",
                                                    handlers: "."
                                                })
-
-  ActionView::PathResolver::DEFAULT_PATTERN.replace ":prefix/:action{.:locale,}{.:formats,}{+:variants,}{.:versions,}{.:handlers,}"
+  def initialize(pattern = nil)
+    @pattern = pattern || ":prefix/:action{.:locale,}{.:formats,}{+:variants,}{.:versions,}{.:handlers,}"
+    super()
+  end
 
   # The default extract handler expects that the handler is the last extension and
   # the format is the next one. Since we are replacing the DEFAULT_PATTERN, we need to
