@@ -1,6 +1,6 @@
 ## Unreleased Changes
 
-[Full Changelog](https://github.com/bwillis/versioncake/compare/v3.4...master)
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v4.0...master)
 
 Bug Fixes:
 
@@ -13,6 +13,20 @@ Enhancements:
 Deprecations:
 
 * None
+
+## 4.0.0 (March 10, 2020)
+
+Bug Fixes:
+
+* Path versions could parse incorrect version in some circumstances (#83) thanks [Luke Abel](https://github.com/llhhaa)
+
+Enhancements:
+
+* Rails 6 support (#81) thanks [Thomas "Teflon Ted" Davis](https://github.com/trak3r)
+
+Deprecations:
+
+* Remove Rails v3/v4 and Ruby <v2.3 support
 
 ## 3.4.0 (March 4, 2018)
 
