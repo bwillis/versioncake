@@ -11,7 +11,19 @@ Enhancements:
 * None
 
 Deprecations:
+* None
 
+## 4.0.1 (March 11, 2020)
+
+Bug Fixes:
+
+* Dependencies not set properly for Rails 6 (#87)
+
+Enhancements:
+
+* None
+
+Deprecations:
 * None
 
 ## 4.0.0 (March 10, 2020)
