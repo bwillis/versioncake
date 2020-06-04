@@ -83,9 +83,3 @@ module VersionCake
     end
   end
 end
-
-ActionController::Base.send(:include, VersionCake::ControllerAdditions)
-
-if defined?(ActionController::API)
-  ActionController::API.send(:include, VersionCake::ControllerAdditions)
-end

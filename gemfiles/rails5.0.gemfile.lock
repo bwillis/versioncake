@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    versioncake (4.0.1)
+    versioncake (4.0.2)
       actionpack (> 5.0)
       activesupport (> 5.0)
       railties (> 5.0)
