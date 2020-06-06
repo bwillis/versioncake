@@ -436,6 +436,7 @@ Thanks to all those who have helped make Version Cake really sweet:
 * [Ersin Akinci](https://github.com/earksiinni)
 * [Bartosz Bonisławski](https://github.com/bbonislawski)
 * [Harry Lascelles](https://github.com/hlascelles)
+* [James Carscadden](https://github.com/JamesCarscadden)
 
 # Related Material
 
