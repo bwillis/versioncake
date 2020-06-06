@@ -13,6 +13,20 @@ Enhancements:
 Deprecations:
 * None
 
+## 4.0.2 (June 5, 2020)
+
+Bug Fixes:
+
+* Responses error in Rails API only (#76) thanks [JamesCarscadden](https://github.com/JamesCarscadden)
+
+Enhancements:
+
+* None
+
+Deprecations:
+
+* None
+
 ## 4.0.1 (March 11, 2020)
 
 Bug Fixes:
