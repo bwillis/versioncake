@@ -26,6 +26,7 @@ if defined?(Rails)
   require 'versioncake/controller_additions'
   require 'versioncake/view_additions'
   require 'versioncake/engine'
+  require 'versioncake/railtie'
 end
 
 module VersionCake
@@ -39,3 +40,4 @@ module VersionCake
     yield self.config
   end
 end
+
