@@ -1,6 +1,6 @@
 ![Version Cake](https://raw.github.com/alicial/versioncake/master/images/versioncake-logo450x100.png)
 
-[![Build Status](https://secure.travis-ci.org/bwillis/versioncake.png?branch=master)](http://travis-ci.org/bwillis/versioncake)
+![Ruby](https://github.com/bwillis/versioncake/workflows/Ruby/badge.svg?branch=master)
 [![Code Climate](https://codeclimate.com/github/bwillis/versioncake.png)](https://codeclimate.com/github/bwillis/versioncake)
 [![Coverage Status](https://coveralls.io/repos/bwillis/versioncake/badge.png?branch=master)](https://coveralls.io/r/bwillis/versioncake)
 [![Gem Version](https://badge.fury.io/rb/versioncake.png)](http://badge.fury.io/rb/versioncake)
