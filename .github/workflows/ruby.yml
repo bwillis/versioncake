@@ -21,18 +21,18 @@ jobs:
     strategy:
       matrix:
         ruby: 
-          - '2.3.3'
-          - '2.4.7'
-          - '2.5.6'
+          - 2.3.3
+          - 2.4.7
+          - 2.5.6
         gemfile:
-         - 'gemfiles/rails5.0.gemfile'
-         - 'gemfiles/rails5.2.gemfile'
-         - 'gemfiles/rails6.0.gemfile'
+         - gemfiles/rails5.0.gemfile
+         - gemfiles/rails5.2.gemfile
+         - gemfiles/rails6.0.gemfile
         exclude:
-          - ruby: "2.3.3"
-            gemfile: "gemfiles/rails6.0.gemfile"
-          - ruby: "2.4.7"
-            gemfile: "gemfiles/rails6.0.gemfile"
+          - ruby: 2.3.3
+            gemfile: gemfiles/rails6.0.gemfile
+          - ruby: 2.4.7
+            gemfile: gemfiles/rails6.0.gemfile
 
     steps:
     - uses: actions/checkout@v2
@@ -46,4 +46,4 @@ jobs:
     - name: Install dependencies
       run: bundle install --gemfile=${{matrix.gemfile}}
     - name: Run tests
-      run: bundle exec rake
+      run: bundle exec --gemfile=${{matrix.gemfile}} rake
