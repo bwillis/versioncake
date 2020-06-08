@@ -46,7 +46,7 @@ GEM
     erubi (1.9.0)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
-    json (2.1.0)
+    json (2.3.0)
     loofah (2.5.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
