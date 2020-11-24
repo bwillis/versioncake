@@ -43,7 +43,7 @@ module VersionCake
     private
 
     def check_version(resource, version)
-      VersionCake::VersionChecker.new(resource, version).execute
+      VersionCake::VersionChecker.new(version, resource).execute
     end
 
     def find_resource(uri)
