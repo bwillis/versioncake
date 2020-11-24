@@ -2,7 +2,8 @@ module VersionCake
   class VersionChecker
     attr_reader :result
     def initialize(version, resource)
-      @version, @resource = resource, version
+      @version = version
+      @resource = resource
     end
 
     def execute

@@ -10,7 +10,7 @@ describe VersionCake::VersionChecker do
   end
   let(:version) { }
   subject do
-    checker = VersionCake::VersionChecker.new(resource, version)
+    checker = VersionCake::VersionChecker.new(version, resource)
     checker.execute
   end
 
