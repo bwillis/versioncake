@@ -82,6 +82,12 @@ ActionView::PathResolver.class_eval do
     format
   end
 end
+else # >= Rails 7
+  ActionView::FileSystemResolver.class_eval do
+    #
+    # FIXME: do the rails 7 stuff here...
+    #
+  end
 end
 
 ActionView::Template.class_eval do
