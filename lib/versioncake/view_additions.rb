@@ -5,6 +5,7 @@ require 'action_view'
 # the resolver.
 ActionView::LookupContext.register_detail(:versions){ [] }
 
+if ActionPack::VERSION::MAJOR < 7
 ActionView::PathResolver.class_eval do
   if ActionPack::VERSION::MAJOR >= 6
     ActionView::PathResolver::EXTENSIONS.replace({
@@ -80,6 +81,7 @@ ActionView::PathResolver.class_eval do
     end
     format
   end
+end
 end
 
 ActionView::Template.class_eval do
