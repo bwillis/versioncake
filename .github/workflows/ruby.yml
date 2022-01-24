@@ -19,6 +19,7 @@ jobs:
          - gemfiles/rails5.0.gemfile
          - gemfiles/rails5.2.gemfile
          - gemfiles/rails6.0.gemfile
+         - gemfiles/rails7.0.gemfile
 
     steps:
     - uses: actions/checkout@v2
