@@ -1,6 +1,6 @@
 require './spec/rails_helper'
 
-if ActionPack::VERSION::MAJOR < 7
+if ActionPack::VERSION::MAJOR == 7
   describe ActionView::PathResolver do
     let(:resolver) { ActionView::PathResolver.new }
 
