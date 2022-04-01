@@ -58,7 +58,7 @@ ActionView::TemplateDetails::Requested.class_eval do
     @formats_idx  = build_idx_hash(formats)
     @versions_idx  = build_idx_hash(versions)
     if variants == :any
-      @variants_idx = ANY_HASH
+      @variants_idx = ActionView::TemplateDetails::Requested::ANY_HASH
     else
       @variants_idx = build_idx_hash(variants)
     end
