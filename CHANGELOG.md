@@ -13,12 +13,24 @@ Enhancements:
 Deprecations:
 * None
 
+## 4.1.1 (April 1, 2022)
+
+Bug Fixes:
+
+* Rails 7 bug (#117)
+
+Enhancements:
+
+* None
+
+Deprecations:
+* None
+
 ## 4.1.0 (March 31, 2022)
 
 Bug Fixes:
 
 * FronzeError bug in content type strategy (#100)
-* 
 
 Enhancements:
 
