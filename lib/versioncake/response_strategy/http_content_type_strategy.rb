@@ -4,8 +4,10 @@ module VersionCake
       def execute(context, _status, headers, _response)
         return if headers['Content-Type'].nil?
 
-        headers['Content-Type'] << ';' unless headers['Content-Type'].end_with? ';'
-        headers['Content-Type'] << " #{version_key}=#{context.version.to_s}"
+        content_type = headers['Content-Type']
+        content_type << ';' unless headers['Content-Type'].end_with?(';')
+
+        headers['Content-Type'] = "#{content_type} #{version_key}=#{context.version.to_s}"
       end
     end
   end
