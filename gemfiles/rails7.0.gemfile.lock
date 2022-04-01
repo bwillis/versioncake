@@ -51,8 +51,10 @@ GEM
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     method_source (1.0.0)
+    mini_portile2 (2.7.1)
     minitest (5.15.0)
-    nokogiri (1.13.1-x86_64-darwin)
+    nokogiri (1.13.1)
+      mini_portile2 (~> 2.7.0)
       racc (~> 1.4)
     racc (1.6.0)
     rack (2.2.3)
@@ -122,4 +124,4 @@ DEPENDENCIES
   versioncake!
 
 BUNDLED WITH
-   1.17.2
+   2.2.15
