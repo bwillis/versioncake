@@ -60,13 +60,13 @@ describe VersionCake::ExtractionStrategy do
   it "it fails to create a custom strategy for a proc with no parameters" do
     expect do
       VersionCake::ExtractionStrategy.lookup(lambda{})
-    end.to raise_error(Exception)
+    end.to raise_error(VersionCake::ExtractionStrategy::InvalidStrategyError)
   end
 
   it "it raises error when no strategy is found" do
     expect do
       VersionCake::ExtractionStrategy.lookup(:fake_extraction)
-    end.to raise_error(Exception)
+    end.to raise_error(VersionCake::ExtractionStrategy::InvalidStrategyError)
   end
 
   describe '.list' do

@@ -24,12 +24,5 @@ describe VersionCake::VersionedRequest do
       it { expect(versioned_request.version).to be_nil }
       it { expect(versioned_request.failed).to be_falsey }
     end
-
-    context 'with a strategy failure' do
-      let(:strategies) { [ lambda { raise 'Failed extraction' } ] }
-
-      it { expect(versioned_request.version).to be_nil }
-      it { expect(versioned_request.failed).to be_truthy }
-    end
   end
 end

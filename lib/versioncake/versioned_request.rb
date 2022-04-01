@@ -15,7 +15,7 @@ module VersionCake
         else
           @version = extracted_version
         end
-      rescue Exception
+      rescue VersionCake::ExtractionStrategy::InvalidVersionError
         @failed = true
       end
     end
