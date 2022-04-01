@@ -1,6 +1,6 @@
 ## Unreleased Changes
 
-[Full Changelog](https://github.com/bwillis/versioncake/compare/v4.0...master)
+[Full Changelog](https://github.com/bwillis/versioncake/compare/v4.1...master)
 
 Bug Fixes:
 
@@ -9,6 +9,21 @@ Bug Fixes:
 Enhancements:
 
 * None
+
+Deprecations:
+* None
+
+## 4.1.0 (March 31, 2022)
+
+Bug Fixes:
+
+* FronzeError bug in content type strategy (#100)
+* 
+
+Enhancements:
+
+* Rails 7 support (#108)
+* Raise (and catch) more specific exceptions (#105)
 
 Deprecations:
 * None
