@@ -418,7 +418,6 @@ end
 
 Thanks to all those who have helped make Version Cake really sweet:
 
-* [Manilla](https://github.com/manilla)
 * [Alicia](https://github.com/alicial)
 * [Rohit](https://github.com/rg)
 * [Sevag](https://github.com/sevagf)
@@ -427,25 +426,20 @@ Thanks to all those who have helped make Version Cake really sweet:
 * [Michael Elfassy](https://github.com/elfassy)
 * [Kelley Reynolds](https://github.com/kreynolds)
 * [Washington L Braga Jr](https://github.com/huoxito)
-* [mbradshawabs](https://github.com/mbradshawabs)
+* mbradshawabs
 * [Richard Nuno](https://github.com/richardnuno)
 * [Andres Camacho](https://github.com/andresfcamacho)
 * [Yukio Mizuta](https://github.com/untidy-hair)
 * [David Butler](https://github.com/dwbutler)
-* [Jeroen K.](https://github.com/jrnkntl)
+* Jeroen K.
 * [Masaya Myojin](https://github.com/mmyoji)
 * [John Hawthorn](https://github.com/jhawthorn)
-* [Ersin Akinci](https://github.com/earksiinni)
+* Ersin Akinci
 * [Bartosz Bonisławski](https://github.com/bbonislawski)
 * [Harry Lascelles](https://github.com/hlascelles)
 * [James Carscadden](https://github.com/JamesCarscadden)
 
 # Related Material
-
-## Usages
-
-- [Manilla](https://manilla.com) (original use case)
-- [Spree](http://spreecommerce.com/) and the [pull request](https://github.com/spree/spree/pull/2209)
 
 ## Libraries
 
@@ -459,7 +453,6 @@ Thanks to all those who have helped make Version Cake really sweet:
 - [Steve Klabnik on how to version in a resful way](http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http#i_want_my_api_to_be_versioned)
 - [Rails API project disucssion on versioning](https://github.com/rails-api/rails-api/issues/8)
 - [Railscast on versioning](http://railscasts.com/episodes/350-rest-api-versioning)
-- [Ruby5 on versioncake](http://ruby5.envylabs.com/episodes/310-episode-306-september-18th-2012/stories/2704-version-cake)
 - [Rails core discussion](https://groups.google.com/forum/#!msg/rubyonrails-core/odwmEYYIum0/9POep66BvoMJ)
 - [RubyWeekly](http://rubyweekly.com/archive/119.html)
 - [API building tools on Ruby Toolbox](https://www.ruby-toolbox.com/categories/API_Builders)
